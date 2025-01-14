@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:match/controllers/colors_controller.dart';
 import 'package:match/controllers/match_controller.dart';
 import 'package:match/controllers/puzzle_controller.dart';
-import 'package:match/screens/puzzle/puzzle_screen.dart';
+import 'package:match/screens/colors_game/colors_screen.dart';
+import 'package:match/screens/puzzle_game/puzzle_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:match/utils/theme.dart'; // Import the theme
 
@@ -29,10 +31,13 @@ class MainApp extends StatelessWidget {
         ChangeNotifierProvider<PuzzleController>(
             create: (_) => PuzzleController(),
         ),
+        ChangeNotifierProvider<ColorsController>(
+            create: (_) => ColorsController(),
+        ),
       ],
       child: MaterialApp(
         theme: appTheme, // Use the theme
-        home:  PuzzleScreen()
+        home:   ColorsGameScreen()
         
       ),
     );

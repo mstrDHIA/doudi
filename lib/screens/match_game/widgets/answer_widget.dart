@@ -67,7 +67,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
             child: const CircleAvatar(
             
               child: Center(
-                child: const Icon(Icons.add,
+                child: Icon(Icons.add,
                 size: 20,
                 )
               ),

@@ -23,28 +23,31 @@ class _AnswerWidgetState extends State<AnswerWidget> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Row(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     
         children: [
+
           InkWell(
             onTap: (){
-             widget.matchController.reduceNum(index:index);
+              widget.matchController.addNum(index:index);
             },
             child: const CircleAvatar(
-             
+            
               child: Center(
-                child: Icon(Icons.remove,
+                child: Icon(Icons.add,
                 size: 20,
                 )
               ),
             ),
           ),
+          
+          SizedBox(height: 10,),
           Consumer<MatchController>(
             builder: (context,matchController,child) {
               return Container(
-                height: MediaQuery.of(context).size.width/5,
-                width: MediaQuery.of(context).size.width/5,
+                height: MediaQuery.of(context).size.width/10,
+                width: MediaQuery.of(context).size.width/10,
                 decoration: BoxDecoration(
                   color: (widget.matchController.isValidating)?(widget.matchController.answers[index]==widget.matchController.numbers[index])?Colors.green:Colors.red:Colors.white,
                   borderRadius: BorderRadius.circular(10),
@@ -60,14 +63,15 @@ class _AnswerWidgetState extends State<AnswerWidget> {
               );
             }
           ),
+          SizedBox(height: 10,),
           InkWell(
             onTap: (){
-              widget.matchController.addNum(index:index);
+             widget.matchController.reduceNum(index:index);
             },
             child: const CircleAvatar(
-            
+             
               child: Center(
-                child: Icon(Icons.add,
+                child: Icon(Icons.remove,
                 size: 20,
                 )
               ),

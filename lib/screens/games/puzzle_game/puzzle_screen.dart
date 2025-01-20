@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:match/controllers/puzzle_controller.dart';
-import 'package:match/screens/puzzle_game/widgets/puzzle_widgets.dart';
+import 'package:match/screens/games/puzzle_game/widgets/puzzle_widgets.dart';
 
 class PuzzleScreen extends StatefulWidget {
   const PuzzleScreen({super.key});
@@ -24,7 +24,18 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
               ),
             ),
           ),
+
           // Foreground content
+          Positioned(
+                      top: 20,
+                      left: 20,
+                      child: GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: CircleAvatar(child: Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: Image.asset("assets/icons/back.png",width: 50,height: 50,),
+                        )),
+                      )),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

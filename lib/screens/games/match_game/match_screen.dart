@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:match/controllers/match_controller.dart';
-import 'package:match/screens/match_game/widgets/answer_widget.dart';
+import 'package:match/screens/games/match_game/widgets/answer_widget.dart';
 import 'package:provider/provider.dart';
 
 class MatchScreen extends StatefulWidget{
@@ -22,15 +22,16 @@ late MatchController matchController;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: GridView.builder(
         itemCount: matchController.questionNumber*2,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,), 
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 6,), 
         itemBuilder: (BuildContext context, int index) { 
           if(index%2!=0){
-            return AnswerWidget(matchController: matchController,index:index~/2);
+            return Center(child: AnswerWidget(matchController: matchController,index:index~/2));
           }
           else {
-            return Image.asset(matchController.gameQuestions[index~/2]);
+            return Center(child: Image.asset(matchController.gameQuestions[index~/2]));
           }
           
          },

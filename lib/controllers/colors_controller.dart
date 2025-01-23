@@ -5,6 +5,7 @@ class ColorsController extends ChangeNotifier{
 
 
   changeColor(int index){
+    print(index);
     if(index<4){
       index++;
     }

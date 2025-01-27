@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:match/controllers/click_controller.dart';
 import 'package:match/screens/games/click_game/widgets/click_game_widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:stroke_text/stroke_text.dart';
 
 class ClickGameScreen extends StatefulWidget{
+  const ClickGameScreen({super.key});
+
   @override
   State<ClickGameScreen> createState() => _ClickGameScreenState();
 }
@@ -63,12 +64,12 @@ class _ClickGameScreenState extends State<ClickGameScreen> {
                           child: Image.asset("assets/icons/back.png",width: 50,height: 50,),
                         )),
                       )),
-              Positioned(child: Text("اضغط على الرقم 1",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),top: 30,right: 30,),
+              const Positioned(top: 30,right: 30,child: Text("اضغط على الرقم 1",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),),
              
               if (clickController.showOverlay&&clickController.randomNumber==1)
                 Container(
                   color: Colors.green.withOpacity(0.5),
-                  child: Center(
+                  child: const Center(
                     child: Icon(
                       Icons.check_circle,
                       color: Colors.white,
@@ -79,7 +80,7 @@ class _ClickGameScreenState extends State<ClickGameScreen> {
               if (clickController.showOverlay&&clickController.randomNumber!=1)
                 Container(
                   color: Colors.red.withOpacity(0.5),
-                  child: Center(
+                  child: const Center(
                     child: Icon(
                       Icons.cancel,
                       color: Colors.white,

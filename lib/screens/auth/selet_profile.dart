@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:match/screens/auth/login/login_screen.dart';
-import 'package:match/screens/home/home_screen.dart';
-import 'package:match/screens/numbers/numbers_menu.dart';
+// import 'package:match/screens/home/home_screen.dart';
+// import 'package:match/screens/numbers/numbers_menu.dart';
 
 class SelectProfileScreen extends StatelessWidget {
   List<String> profileOption=["parent","child","QRcode"];
+
+  SelectProfileScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +25,7 @@ class SelectProfileScreen extends StatelessWidget {
           child: Container(
             width: MediaQuery.sizeOf(context).width * 0.6,
             height: MediaQuery.sizeOf(context).height * 0.8,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white
             ),
             child: Column(
@@ -32,8 +34,8 @@ class SelectProfileScreen extends StatelessWidget {
                 Column(
                   children: [
                     Center(child: Image.asset("assets/images/worm.png",scale: 3,)),
-                    SizedBox(height: 10,),
-                    Text(
+                    const SizedBox(height: 10,),
+                    const Text(
 
                   'Doudi',
                   style: TextStyle(
@@ -41,8 +43,8 @@ class SelectProfileScreen extends StatelessWidget {
                     color: Colors.green,
                   ),
                 ),
-                SizedBox(height: 5,),
-                Text('Apprendre en s\'amusant',
+                const SizedBox(height: 5,),
+                const Text('Apprendre en s\'amusant',
                   style: TextStyle(
                     fontSize: 24,
                     color: Colors.black,
@@ -57,7 +59,7 @@ class SelectProfileScreen extends StatelessWidget {
                       GestureDetector(
                         onTap:(){
                           if(profileOption[i]=="child"){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
                           }
                         },
                         child: Column(
@@ -76,7 +78,7 @@ class SelectProfileScreen extends StatelessWidget {
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Center(child: Text(profileOption[i],style: TextStyle(color: Colors.white),)),
+                                  child: Center(child: Text(profileOption[i],style: const TextStyle(color: Colors.white),)),
                                 )),
                             ),
                           ],

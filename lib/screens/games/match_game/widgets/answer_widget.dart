@@ -42,7 +42,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
             ),
           ),
           
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
           Consumer<MatchController>(
             builder: (context,matchController,child) {
               return Container(
@@ -63,7 +63,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
               );
             }
           ),
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
           InkWell(
             onTap: (){
              widget.matchController.reduceNum(index:index);

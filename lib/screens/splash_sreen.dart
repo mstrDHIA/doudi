@@ -123,6 +123,8 @@ import 'package:flutter/material.dart';
 import 'package:match/screens/auth/login/welome_sreen.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -183,7 +185,7 @@ _sizeController = AnimationController(
     ]).animate(_sizeController);
 
     _finalSizeController = AnimationController(
-      duration: const Duration(milliseconds: 1),
+      duration: const Duration(microseconds: 1),
       vsync: this,
     );
 
@@ -245,9 +247,9 @@ _sizeController = AnimationController(
         });
         // _opacityController.forward();
         // Navigate to the next screen after a delay
-        Future.delayed(Duration(seconds: 2), () {
+        Future.delayed(const Duration(seconds: 2), () {
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => WelcomeScreen()), // Replace with your next screen
+            MaterialPageRoute(builder: (context) => const WelcomeScreen()), // Replace with your next screen
           );
         });
       }
@@ -290,7 +292,7 @@ _sizeController = AnimationController(
           Center(
             child: coverScreen
                 ? Container(
-                  decoration: BoxDecoration(gradient:LinearGradient(
+                  decoration: const BoxDecoration(gradient:LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
@@ -346,7 +348,7 @@ _sizeController = AnimationController(
                   child: Container(
                     width: last_size,
                     height: last_size,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       // color: Colors.green,
                      gradient:LinearGradient(
             begin: Alignment.topLeft,
@@ -395,9 +397,11 @@ _sizeController = AnimationController(
 }
 
 class NextScreen extends StatelessWidget {
+  const NextScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Text('Next Screen'),
       ),

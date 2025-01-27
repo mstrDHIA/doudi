@@ -101,7 +101,7 @@ class _PuzzleBoxState extends State<PuzzleBox> {
               :  Center(
                   child: Text(
                     index.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 30,
                       color: Colors.black,
                     ),
@@ -176,7 +176,7 @@ class _PuzzlePiecesState extends State<PuzzlePieces> {
       height: MediaQuery.sizeOf(context).height * 0.6,
       
       child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:match/screens/games/colors_game/widgets/colors_widgets.dart';
-import 'package:stroke_text/stroke_text.dart';
 
 class ColorsGameScreen extends StatefulWidget{
+  const ColorsGameScreen({super.key});
+
   @override
   State<ColorsGameScreen> createState() => _ColorsGameScreenState();
 }

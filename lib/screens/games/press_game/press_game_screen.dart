@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:stroke_text/stroke_text.dart';
 
 class PressGameScreen extends StatefulWidget {
+  const PressGameScreen({super.key});
+
   @override
   State<PressGameScreen> createState() => _PressGameScreenState();
 }
@@ -64,7 +66,7 @@ class _PressGameScreenState extends State<PressGameScreen> {
                       strokeWidth: 3,
                       strokeColor: Colors.black,
                     )),
-                    Positioned(child:  Text("اضغط على الشاشة مرة واحدة",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),top: 20,right: 20,),
+                    const Positioned(top: 20,right: 20,child:  Text("اضغط على الشاشة مرة واحدة",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),),
               ],
             ),
           );

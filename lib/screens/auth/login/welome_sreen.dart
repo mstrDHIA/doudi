@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:match/screens/auth/selet_profile.dart';
-import 'package:match/screens/home/home_screen.dart';
-import 'package:match/screens/numbers/numbers_menu.dart';
+// import 'package:match/screens/home/home_screen.dart';
+// import 'package:match/screens/numbers/numbers_menu.dart';
 
 class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +24,7 @@ class WelcomeScreen extends StatelessWidget {
           child: Container(
             width: MediaQuery.sizeOf(context).width * 0.6,
             height: MediaQuery.sizeOf(context).height * 0.8,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white
             ),
             child: Column(
@@ -31,8 +33,8 @@ class WelcomeScreen extends StatelessWidget {
                 Column(
                   children: [
                     Center(child: Image.asset("assets/images/worm.png",scale: 3,)),
-                    SizedBox(height: 10,),
-                    Text(
+                    const SizedBox(height: 10,),
+                    const Text(
 
                   'Doudi',
                   style: TextStyle(
@@ -40,8 +42,8 @@ class WelcomeScreen extends StatelessWidget {
                     color: Colors.green,
                   ),
                 ),
-                SizedBox(height: 5,),
-                Text('Apprendre en s\'amusant',
+                const SizedBox(height: 5,),
+                const Text('Apprendre en s\'amusant',
                   style: TextStyle(
                     fontSize: 24,
                     color: Colors.black,
@@ -62,12 +64,12 @@ class WelcomeScreen extends StatelessWidget {
                           color: Colors.green,
                           borderRadius: BorderRadius.circular(50),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Center(child: Text('commencer',style: TextStyle(color: Colors.white),)),
                         )),
                     ),
-                      SizedBox(height: 10,),
+                      const SizedBox(height: 10,),
                       Container(
                   width: MediaQuery.sizeOf(context).width * 0.2,
                   decoration: BoxDecoration(
@@ -75,8 +77,8 @@ class WelcomeScreen extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(50),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Center(child: Text('Je n\'est pas de compte',style: TextStyle(color: Colors.green),)),
                   ))
                   ],

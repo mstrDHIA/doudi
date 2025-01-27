@@ -29,7 +29,7 @@ class HomeItem extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Text(txt,style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
+                child: Text(txt,style: const TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
               ))
           ],
         ),

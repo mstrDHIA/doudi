@@ -1,9 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:match/screens/auth/selet_profile.dart';
-import 'package:match/screens/home/home_screen.dart';
-import 'package:match/screens/numbers/numbers_menu.dart';
+import 'package:match/controllers/auth_controller.dart';
+// import 'package:match/screens/auth/selet_profile.dart';
+// import 'package:match/screens/home/home_screen.dart';
+// import 'package:match/screens/numbers/numbers_menu.dart';
+import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  late AuthController authController;
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  @override
+  void initState() {
+    authController=Provider.of<AuthController>(context,listen: false);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +39,7 @@ class LoginScreen extends StatelessWidget {
           child: Container(
             width: MediaQuery.sizeOf(context).width * 0.6,
             height: MediaQuery.sizeOf(context).height * 0.8,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white
             ),
             child: Column(
@@ -31,8 +48,8 @@ class LoginScreen extends StatelessWidget {
                 Column(
                   children: [
                     Center(child: Image.asset("assets/images/worm.png",scale: 3,)),
-                    SizedBox(height: 10,),
-                    Text(
+                    const SizedBox(height: 10,),
+                    const Text(
 
                   'Doudi',
                   style: TextStyle(
@@ -40,33 +57,35 @@ class LoginScreen extends StatelessWidget {
                     color: Colors.green,
                   ),
                 ),
-                SizedBox(height: 5,),
+                const SizedBox(height: 5,),
                 Column(
                   children: [
-                    Container(
+                    SizedBox(
                       width: MediaQuery.sizeOf(context).width * 0.4,
                       height: 40,
                       child: TextFormField(
+                        controller: usernameController,
                         // style: TextStyle(fontSize: 2),
                         decoration: InputDecoration(
                           labelText: "Nom d'utilisateur",
-                          labelStyle: TextStyle(color: Colors.green),
+                          labelStyle: const TextStyle(color: Colors.green),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50),
                           ),
                         ),
                       ),
                       ),
-                      SizedBox(height: 10,),
-                      Container(
+                      const SizedBox(height: 10,),
+                      SizedBox(
                       width: MediaQuery.sizeOf(context).width * 0.4,
                       height: 40,
                       child: TextFormField(
+                        controller: passwordController,
                         // style: TextStyle(fontSize: 2),
                         obscureText: true,
                         decoration: InputDecoration(
                           labelText: "Mot de passe",
-                          labelStyle: TextStyle(color: Colors.green),
+                          labelStyle: const TextStyle(color: Colors.green),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50),
                           ),
@@ -82,7 +101,8 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>NumbersMenuScreen()));
+                        authController.login(usernameController.text, passwordController.text,context);
+                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>NumbersMenuScreen()));
                       },
                       child: Container(
                         width: MediaQuery.sizeOf(context).width * 0.2,
@@ -90,14 +110,14 @@ class LoginScreen extends StatelessWidget {
                           color: Colors.green,
                           borderRadius: BorderRadius.circular(50),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Center(child: Text('Login',style: TextStyle(color: Colors.white),)),
                         )),
                     ),
-                      Container(
+                      SizedBox(
                         width: MediaQuery.sizeOf(context).width * 0.2,
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Text("Mot de passe oubliee?",style: TextStyle(color: Colors.green,decoration: TextDecoration.underline),

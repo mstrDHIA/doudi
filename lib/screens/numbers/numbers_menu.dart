@@ -3,6 +3,8 @@ import 'package:match/screens/home/home_screen.dart';
 
 class NumbersMenuScreen extends StatelessWidget{
   final List<String> numbers = ["assets/images/number1.png","assets/images/number2.png","assets/images/number3.png","assets/images/number4.png","assets/images/number5.png","assets/images/number6.png","assets/images/number7.png","assets/images/number8.png","assets/images/number9.png","assets/images/number0.png"];
+
+   NumbersMenuScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,25 +36,25 @@ class NumbersMenuScreen extends StatelessWidget{
                       //     child: Image.asset("assets/icons/back.png",width: 50,height: 50,),
                       //   )),
                       // )),
-                          Container(
+                          SizedBox(
                             width: MediaQuery.of(context).size.width,
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Container(
+                                SizedBox(
                                   
                                   width: MediaQuery.of(context).size.width*0.8,
                                   child: Center(
                                     child: GridView.builder(
                                       
                                       shrinkWrap: true,
-                                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5),
+                                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5),
                                     itemCount: 10,
                                      itemBuilder: (BuildContext context, int index) { 
                                         return Center(child: GestureDetector(
                                           onTap: (){
-                                            Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+                                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
                                           },
                                           child: Image.asset(numbers[index])));
                                       },),

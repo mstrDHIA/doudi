@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class WritingGameScreen extends StatefulWidget {
+  const WritingGameScreen({super.key});
+
   @override
   _WritingGameScreenState createState() => _WritingGameScreenState();
 }
@@ -22,7 +24,7 @@ class _WritingGameScreenState extends State<WritingGameScreen> {
           // Blueprint of the number 1
           Center(
             child: CustomPaint(
-              size: Size(200, 400),
+              size: const Size(200, 400),
               painter: NumberOnePainter(),
             ),
           ),

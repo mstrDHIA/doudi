@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class ColoringGameScreen extends StatefulWidget {
+  const ColoringGameScreen({super.key});
+
   @override
   _ColoringGameScreenState createState() => _ColoringGameScreenState();
 }
@@ -14,7 +16,7 @@ class _ColoringGameScreenState extends State<ColoringGameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Coloring Game'),
+        title: const Text('Coloring Game'),
       ),
       body: Stack(
         children: [
@@ -38,9 +40,9 @@ class _ColoringGameScreenState extends State<ColoringGameScreen> {
               points.add(null);
             },
             child: CustomPaint(
-              child:Center(child: Image.asset("assets/images/number/color1.png")), 
               size: Size.infinite,
               painter: ColoringPainter(points),
+              child:Center(child: Image.asset("assets/images/number/color1.png")),
             ),
             
           ),

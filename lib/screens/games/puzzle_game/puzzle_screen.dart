@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:match/controllers/puzzle_controller.dart';
 import 'package:match/screens/games/puzzle_game/widgets/puzzle_widgets.dart';
 
 class PuzzleScreen extends StatefulWidget {
@@ -36,13 +35,13 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                           child: Image.asset("assets/icons/back.png",width: 50,height: 50,),
                         )),
                       )),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               
               PuzzlePieces(),
-              const SizedBox(width: 20),
-              const PuzzleHolder(),
+              SizedBox(width: 20),
+              PuzzleHolder(),
 
             ],
           ),

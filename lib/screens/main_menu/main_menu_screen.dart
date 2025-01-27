@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:match/screens/games/click_game/click_screen.dart';
 import 'package:match/screens/games/colors_game/colors_screen.dart';
 import 'package:match/screens/games/count_game/count_game_screen.dart';
-import 'package:match/screens/games/match_game/match_screen.dart';
 import 'package:match/screens/games/press_game/press_game_screen.dart';
 import 'package:match/screens/games/puzzle_game/puzzle_screen.dart';
 
@@ -17,34 +16,36 @@ class MainMenuScreen extends StatelessWidget{
     {
       'title':'Press',
       'icon':Icons.ads_click,
-      'widget':PressGameScreen(),
+      'widget':const PressGameScreen(),
       'route':'/press'
     },
     {
       'title':'Puzzle',
       'icon':Icons.question_answer,
-      'widget':PuzzleScreen(),
+      'widget':const PuzzleScreen(),
       'route':'/puzzle'
     },
     {
       'title':'Count',
       'icon':Icons.numbers,
-      'widget':CountGameScreen(),
+      'widget':const CountGameScreen(),
       'route':'/count'
     },
     {
       'title':'Colors',
       'icon':Icons.color_lens,
-      'widget':ColorsGameScreen(),
+      'widget':const ColorsGameScreen(),
       'route':'/colors'
     },
     {
       'title':'Click',
       'icon':Icons.ads_click,
-      'widget':ClickGameScreen(),
+      'widget':const ClickGameScreen(),
       'route':'/click'
     },
   ];
+
+  MainMenuScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +61,7 @@ class MainMenuScreen extends StatelessWidget{
             ),
           ),
           // Foreground content
-          GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,
+          GridView.builder(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,
           childAspectRatio: 1, crossAxisSpacing: 40, mainAxisSpacing: 10,
         
           ), itemBuilder: (context,index)=>
@@ -76,7 +77,7 @@ class MainMenuScreen extends StatelessWidget{
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                    Icon(menuItems[index]['icon']),
-                   SizedBox(height: 10,),
+                   const SizedBox(height: 10,),
                   Text(menuItems[index]['title']),
                 ],
               )),

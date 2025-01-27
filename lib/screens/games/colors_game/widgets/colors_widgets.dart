@@ -46,11 +46,11 @@ class _ColorCircleState extends State<ColorCircle> {
       child: Consumer<ColorsController>(
         builder: (context,colorsController,child) {
           return CircleAvatar(
+            radius: 35,
+            backgroundColor: colorsController.colors[colorIndex],
             child: Container(
               decoration: BoxDecoration(border: Border.all(color: Colors.black),borderRadius: BorderRadius.circular(50)), 
             ),
-            radius: 35,
-            backgroundColor: colorsController.colors[colorIndex],
           );
         }
       ),
@@ -73,7 +73,7 @@ class ColorUnit extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        StrokeText(text: '1',strokeColor: Colors.black,textColor: colors[Random().nextInt(4)],textStyle: TextStyle(fontSize: 80),strokeWidth: 2,),
+        StrokeText(text: '1',strokeColor: Colors.black,textColor: colors[Random().nextInt(4)],textStyle: const TextStyle(fontSize: 80),strokeWidth: 2,),
         ColorCircle(index: index),
       ],
     );

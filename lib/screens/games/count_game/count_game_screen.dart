@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:stroke_text/stroke_text.dart';
 
 class CountGameScreen extends StatelessWidget {
+  const CountGameScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +35,7 @@ class CountGameScreen extends StatelessWidget {
                         Positioned(
                           top: MediaQuery.of(context).size.height/2-100,
                           child: Image.asset("assets/images/worm.png")),
-                          Positioned(child:   Text("كم من تفاحة في الصورة",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),top: 30,right: 30,),
+                          const Positioned(top: 30,right: 30,child:   Text("كم من تفاحة في الصورة",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),),
                           Center(child: Image.asset("assets/images/apple.png"),),
                           Positioned(
                             left: MediaQuery.of(context).size.width/2-(4*(MediaQuery.of(context).size.width/12)+30)/2,
@@ -48,8 +50,8 @@ class CountGameScreen extends StatelessWidget {
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(10)
                                   ),
-                                  child: Center(child: StrokeText(text:"1",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 50),strokeWidth: 2,))),
-                                  SizedBox(width: 10,),
+                                  child: const Center(child: StrokeText(text:"1",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 50),strokeWidth: 2,))),
+                                  const SizedBox(width: 10,),
                                   Container(
                                   width: MediaQuery.of(context).size.width/12,
                                   height: MediaQuery.of(context).size.width/12,
@@ -57,8 +59,8 @@ class CountGameScreen extends StatelessWidget {
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(10)
                                   ),
-                                  child: Center(child: StrokeText(text:"2",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 50),strokeWidth: 2,))),
-                                  SizedBox(width: 10,),
+                                  child: const Center(child: StrokeText(text:"2",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 50),strokeWidth: 2,))),
+                                  const SizedBox(width: 10,),
                                   Container(
                                   width: MediaQuery.of(context).size.width/12,
                                   height: MediaQuery.of(context).size.width/12,
@@ -66,8 +68,8 @@ class CountGameScreen extends StatelessWidget {
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(10)
                                   ),
-                                  child: Center(child: StrokeText(text:"3",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 50),strokeWidth: 2,))),
-                                  SizedBox(width: 10,),
+                                  child: const Center(child: StrokeText(text:"3",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 50),strokeWidth: 2,))),
+                                  const SizedBox(width: 10,),
                                   Container(
                                   width: MediaQuery.of(context).size.width/12,
                                   height: MediaQuery.of(context).size.width/12,
@@ -75,7 +77,7 @@ class CountGameScreen extends StatelessWidget {
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(10)
                                   ),
-                                  child: Center(child: StrokeText(text:"4",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 50),strokeWidth: 2,))),
+                                  child: const Center(child: StrokeText(text:"4",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 50),strokeWidth: 2,))),
                                 // StrokeText(text:"2",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 80),strokeWidth: 2,),
                                 // StrokeText(text:"3",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 80),strokeWidth: 2,),
                                 // StrokeText(text:"4",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 80),strokeWidth: 2,), 

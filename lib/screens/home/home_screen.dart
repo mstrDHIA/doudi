@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:match/screens/games/coloring_game/coloring_game_screen.dart';
-import 'package:match/screens/games/games_list.dart';
 import 'package:match/screens/games/writing_game/writing_game_screen.dart';
 import 'package:match/screens/home/widgets/home_widgets.dart';
-import 'package:match/screens/numbers/numbers_menu.dart';
+import 'package:match/screens/main_menu/main_menu_screen.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,18 +46,19 @@ class HomeScreen extends StatelessWidget {
       HomeItem(top: MediaQuery.of(context).size.height/3,
       left: MediaQuery.of(context).size.width/2.3,
       img: "assets/images/olors.png",
-      Route: ColoringGameScreen(),
+      Route: const ColoringGameScreen(),
       txt: "الالوان",),
 
       HomeItem(top: MediaQuery.of(context).size.height/5,
       left: MediaQuery.of(context).size.width/1.65,
       img: "assets/images/writing.png",
-      Route: WritingGameScreen(),
+      Route: const WritingGameScreen(),
       txt: "الكتابة",),
       HomeItem(top: MediaQuery.of(context).size.height/2.5,
       left: MediaQuery.of(context).size.width/1.3,
       img: "assets/images/games.png",
-      Route: GamesList(),
+      Route: MainMenuScreen(), 
+      // GamesList(),
       txt: "الالعاب",),
       
         ],

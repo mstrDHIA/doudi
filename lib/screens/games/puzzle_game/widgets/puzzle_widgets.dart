@@ -1,6 +1,8 @@
 // ignore_for_file: avoid_unnecessary_containers, library_private_types_in_public_api, no_logic_in_create_state
 
 import 'package:flutter/material.dart';
+import 'package:match/controllers/menu_controller.dart';
+import 'package:provider/provider.dart';
 List<String> acceptedImages = [
   '',
   '',
@@ -161,14 +163,33 @@ class PuzzlePieces extends StatefulWidget {
   _PuzzlePiecesState createState() => _PuzzlePiecesState();
 }
 final List<String> images = [
-      "assets/puzzles/Group_4.png",
-      "assets/puzzles/Group_5.png",
-      "assets/puzzles/Group_6.png",
-      "assets/puzzles/Group_7.png",
+      // "assets/puzzles/Group_4.png",
+      // "assets/puzzles/Group_5.png",
+      // "assets/puzzles/Group_6.png",
+      // "assets/puzzles/Group_7.png",
     ];
 class _PuzzlePiecesState extends State<PuzzlePieces> {
   final Set<String> acceptedImages = {};
+  late MyMenuController menuController;
 
+  @override
+  void initState() {
+    menuController=Provider.of<MyMenuController>(context, listen: false);
+    images.addAll([
+      "assets/puzzles/${menuController.selectedNumber}/Group 4.png",
+      "assets/puzzles/${menuController.selectedNumber}/Group 5.png",
+      "assets/puzzles/${menuController.selectedNumber}/Group 6.png",
+      "assets/puzzles/${menuController.selectedNumber}/Group 7.png",
+    ]);
+    // TODO: implement initState
+    super.initState();
+  }
+  @override
+  void dispose() {
+    images.clear();
+    // TODO: implement dispose
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     

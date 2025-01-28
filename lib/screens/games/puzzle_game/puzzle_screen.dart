@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:match/controllers/menu_controller.dart';
+import 'package:match/controllers/puzzle_controller.dart';
 import 'package:match/screens/games/puzzle_game/widgets/puzzle_widgets.dart';
+import 'package:provider/provider.dart';
 
 class PuzzleScreen extends StatefulWidget {
   const PuzzleScreen({super.key});
@@ -8,7 +11,16 @@ class PuzzleScreen extends StatefulWidget {
 }
 
 class _PuzzleScreenState extends State<PuzzleScreen> {
-  
+  late MyMenuController menuController;
+  late PuzzleController puzzleController;
+  @override
+  void initState() {
+    // menuController=Provider.of<MyMenuController>(context, listen: false);
+    // puzzleController=Provider.of<PuzzleController>(context, listen: false);
+    // puzzleController.initPuzzlePieces(menuController.selectedNumber);
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,16 +47,20 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                           child: Image.asset("assets/icons/back.png",width: 50,height: 50,),
                         )),
                       )),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              
-              PuzzlePieces(),
-              SizedBox(width: 20),
-              PuzzleHolder(),
-
-            ],
-          ),
+           Consumer<PuzzleController>(
+             builder: (context,puzzleController,child) {
+               return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  
+                  PuzzlePieces(),
+                  SizedBox(width: 20),
+                  PuzzleHolder(),
+               
+                ],
+                         );
+             }
+           ),
           
         ],
       ),

@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
 
 class PuzzleController extends ChangeNotifier{
-final List<String> puzzlePieces = [
-      "assets/puzzles/Group_4.png",
-      "assets/puzzles/Group_5.png",
-      "assets/puzzles/Group_6.png",
-      "assets/puzzles/Group_7.png",
+final List<String> images = [
+      // "assets/puzzles/Group_4.png",
+      // "assets/puzzles/Group_5.png",
+      // "assets/puzzles/Group_6.png",
+      // "assets/puzzles/Group_7.png",
     ];
+initPuzzlePieces(number){
+  // if(number==0){
+    images.clear();
+    images.addAll([
+      "assets/puzzles/$number/Group_4.png",
+      "assets/puzzles/$number/Group_5.png",
+      "assets/puzzles/$number/Group_6.png",
+      "assets/puzzles/$number/Group_7.png",
+    ]);
+    notifyListeners();
+  // }
+  // else if(number==1){
 
+  // }
+}
 
 dragEndHandler({acceptedImage, data}){
     if (acceptedImage != null) {

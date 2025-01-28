@@ -28,6 +28,16 @@ flutter:
    - assets/images/
    - assets/backgrounds/
    - assets/puzzles/
+   - assets/puzzles/0/
+   - assets/puzzles/1/
+   - assets/puzzles/2/
+   - assets/puzzles/3/
+   - assets/puzzles/4/
+   - assets/puzzles/5/
+   - assets/puzzles/6/
+   - assets/puzzles/7/
+   - assets/puzzles/8/
+   - assets/puzzles/9/
    - assets/icons/
    - assets/images/number/
   #  - assets/audio/

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:match/controllers/auth_controller.dart';
 import 'package:match/controllers/click_controller.dart';
 import 'package:match/controllers/colors_controller.dart';
+import 'package:match/controllers/count_game_controller.dart';
 import 'package:match/controllers/match_controller.dart';
 import 'package:match/controllers/menu_controller.dart';
 import 'package:match/controllers/press_controller.dart';
@@ -50,6 +51,9 @@ class MainApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<MyMenuController>(
             create: (_) => MyMenuController(),
+        ),
+        ChangeNotifierProvider<CountController>(
+            create: (_) => CountController(),
         ),
       ],
       child: MaterialApp(

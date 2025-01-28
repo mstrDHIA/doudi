@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:match/controllers/menu_controller.dart';
 import 'package:match/screens/games/colors_game/widgets/colors_widgets.dart';
+import 'package:provider/provider.dart';
 
 class ColorsGameScreen extends StatefulWidget{
   const ColorsGameScreen({super.key});
@@ -9,6 +11,13 @@ class ColorsGameScreen extends StatefulWidget{
 }
 
 class _ColorsGameScreenState extends State<ColorsGameScreen> {
+  late MyMenuController menuController;
+  @override
+  void initState() {
+    menuController=Provider.of<MyMenuController>(context, listen: false);
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,11 +42,11 @@ class _ColorsGameScreenState extends State<ColorsGameScreen> {
               children: [
                 Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ColorUnit(index: 0),
-                    ColorUnit(index: 1,),
-                    ColorUnit(index: 2,),
-                    ColorUnit(index: 3,),
-                    ColorUnit(index: 4,),
+                    ColorUnit(index: 0,number:menuController.selectedNumber),
+                    ColorUnit(index: 1,number:menuController.selectedNumber),
+                    ColorUnit(index: 2,number:menuController.selectedNumber),
+                    ColorUnit(index: 3,number:menuController.selectedNumber),
+                    ColorUnit(index: 4,number:menuController.selectedNumber),
                     // StrokeText(text: '1',strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 80),strokeWidth: 2,),
                     // StrokeText(text: '1',strokeColor: Colors.black,textColor: Colors.green,textStyle: TextStyle(fontSize: 80),strokeWidth: 2,),
                     // StrokeText(text: '1',strokeColor: Colors.black,textColor: Colors.purple,textStyle: TextStyle(fontSize: 80),strokeWidth: 2,),
@@ -58,6 +67,16 @@ class _ColorsGameScreenState extends State<ColorsGameScreen> {
                           child: Image.asset("assets/icons/back.png",width: 50,height: 50,),
                         )),
                       )),
+                //       Container(
+                //   color: Colors.green.withOpacity(0.5),
+                //   child: const Center(
+                //     child: Icon(
+                //       Icons.check_circle,
+                //       color: Colors.white,
+                //       size: 100,
+                //     ),
+                //   ),
+                // ),
         ],
       ),
     );

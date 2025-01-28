@@ -62,10 +62,11 @@ class _ColorCircleState extends State<ColorCircle> {
 
 // ignore: must_be_immutable
 class ColorUnit extends StatelessWidget {
+  final int number;
   final int index;
   List<Color> colors=[Colors.blue,Colors.red,Colors.green,Colors.purple,Colors.yellow];
    ColorUnit({
-    super.key, required this.index,
+    super.key, required this.index, required this.number,
   });
 
   @override
@@ -73,7 +74,7 @@ class ColorUnit extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        StrokeText(text: '1',strokeColor: Colors.black,textColor: colors[Random().nextInt(4)],textStyle: const TextStyle(fontSize: 80),strokeWidth: 2,),
+        StrokeText(text: number.toString(),strokeColor: Colors.black,textColor: colors[Random().nextInt(4)],textStyle: const TextStyle(fontSize: 80),strokeWidth: 2,),
         ColorCircle(index: index),
       ],
     );

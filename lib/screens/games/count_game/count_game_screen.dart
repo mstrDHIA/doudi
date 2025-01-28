@@ -1,8 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:match/controllers/count_game_controller.dart';
+import 'package:match/controllers/menu_controller.dart';
+import 'package:match/screens/games/count_game/widgets/count_game_widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:stroke_text/stroke_text.dart';
 
-class CountGameScreen extends StatelessWidget {
+class CountGameScreen extends StatefulWidget {
   const CountGameScreen({super.key});
+
+  @override
+  State<CountGameScreen> createState() => _CountGameScreenState();
+}
+
+class _CountGameScreenState extends State<CountGameScreen> {
+  late CountController countController;
+  late MyMenuController menuController;
+
+  @override
+  void initState() {
+    countController=Provider.of<CountController>(context, listen: false);
+    menuController=Provider.of<MyMenuController>(context, listen: false);
+    countController.generateAndShuffleNumbers(menuController.selectedNumber);
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    countController.numbers.clear();
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,41 +71,40 @@ class CountGameScreen extends StatelessWidget {
                             child: Row(mainAxisAlignment: MainAxisAlignment.center,
                             // crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                                Container(
-                                  width: MediaQuery.of(context).size.width/12,
-                                  height: MediaQuery.of(context).size.width/12,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10)
-                                  ),
-                                  child: const Center(child: StrokeText(text:"1",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 50),strokeWidth: 2,))),
-                                  const SizedBox(width: 10,),
-                                  Container(
-                                  width: MediaQuery.of(context).size.width/12,
-                                  height: MediaQuery.of(context).size.width/12,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10)
-                                  ),
-                                  child: const Center(child: StrokeText(text:"2",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 50),strokeWidth: 2,))),
-                                  const SizedBox(width: 10,),
-                                  Container(
-                                  width: MediaQuery.of(context).size.width/12,
-                                  height: MediaQuery.of(context).size.width/12,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10)
-                                  ),
-                                  child: const Center(child: StrokeText(text:"3",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 50),strokeWidth: 2,))),
-                                  const SizedBox(width: 10,),
-                                  Container(
-                                  width: MediaQuery.of(context).size.width/12,
-                                  height: MediaQuery.of(context).size.width/12,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10)
-                                  ),
-                                  child: const Center(child: StrokeText(text:"4",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 50),strokeWidth: 2,))),
+                              for (int i = 0; i < 4; i++)
+                                Row(
+                                  children: [
+                                    AnswerBox(number: countController.numbers[i],),
+                                    const SizedBox(width: 10,),
+                                  ],
+                                ),
+                                  // const SizedBox(width: 10,),
+                                  // Container(
+                                  // width: MediaQuery.of(context).size.width/12,
+                                  // height: MediaQuery.of(context).size.width/12,
+                                  // decoration: BoxDecoration(
+                                  //   color: Colors.white,
+                                  //   borderRadius: BorderRadius.circular(10)
+                                  // ),
+                                  // child: const Center(child: StrokeText(text:"2",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 50),strokeWidth: 2,))),
+                                  // const SizedBox(width: 10,),
+                                  // Container(
+                                  // width: MediaQuery.of(context).size.width/12,
+                                  // height: MediaQuery.of(context).size.width/12,
+                                  // decoration: BoxDecoration(
+                                  //   color: Colors.white,
+                                  //   borderRadius: BorderRadius.circular(10)
+                                  // ),
+                                  // child: const Center(child: StrokeText(text:"3",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 50),strokeWidth: 2,))),
+                                  // const SizedBox(width: 10,),
+                                  // Container(
+                                  // width: MediaQuery.of(context).size.width/12,
+                                  // height: MediaQuery.of(context).size.width/12,
+                                  // decoration: BoxDecoration(
+                                  //   color: Colors.white,
+                                  //   borderRadius: BorderRadius.circular(10)
+                                  // ),
+                                  // child: const Center(child: StrokeText(text:"4",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 50),strokeWidth: 2,))),
                                 // StrokeText(text:"2",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 80),strokeWidth: 2,),
                                 // StrokeText(text:"3",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 80),strokeWidth: 2,),
                                 // StrokeText(text:"4",strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 80),strokeWidth: 2,), 
@@ -91,3 +118,4 @@ class CountGameScreen extends StatelessWidget {
     );
   }
 }
+

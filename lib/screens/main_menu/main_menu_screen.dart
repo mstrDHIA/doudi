@@ -61,30 +61,44 @@ class MainMenuScreen extends StatelessWidget{
               ),
             ),
           ),
+          
           // Foreground content
-          GridView.builder(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,
-          childAspectRatio: 1, crossAxisSpacing: 40, mainAxisSpacing: 10,
-        
-          ), itemBuilder: (context,index)=>
-          GestureDetector(
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>menuItems[index]['widget'])),
-            child: Container(
-              // width: 100,
-              // height: 100,
-              // width: MediaQuery.of(context).size.width/5,
-              // height: MediaQuery.of(context).size.width/5,
-              color: Colors.white,
-              child: Center(child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                   Icon(menuItems[index]['icon']),
-                   const SizedBox(height: 10,),
-                  Text(menuItems[index]['title']),
-                ],
-              )),
+          Padding(
+            padding: const EdgeInsets.all(36.0),
+            child: GridView.builder(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,
+            childAspectRatio: 1, crossAxisSpacing: 40, mainAxisSpacing: 10,
+                    
+            ), itemBuilder: (context,index)=>
+            GestureDetector(
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>menuItems[index]['widget'])),
+              child: Container(
+                // width: 100,
+                // height: 100,
+                // width: MediaQuery.of(context).size.width/5,
+                // height: MediaQuery.of(context).size.width/5,
+                color: Colors.white,
+                child: Center(child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                     Icon(menuItems[index]['icon']),
+                     const SizedBox(height: 10,),
+                    Text(menuItems[index]['title']),
+                  ],
+                )),
+              ),
             ),
+             itemCount: menuItems.length,),
           ),
-           itemCount: menuItems.length,)
+          Positioned(
+                      top: 20,
+                      left: 20,
+                      child: GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: CircleAvatar(child: Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: Image.asset("assets/icons/back.png",width: 50,height: 50,),
+                        )),
+                      )),
         ])
     );
 

@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:match/controllers/menu_controller.dart';
 import 'package:match/screens/home/home_screen.dart';
+import 'package:provider/provider.dart';
 
-class NumbersMenuScreen extends StatelessWidget{
-  final List<String> numbers = ["assets/images/number1.png","assets/images/number2.png","assets/images/number3.png","assets/images/number4.png","assets/images/number5.png","assets/images/number6.png","assets/images/number7.png","assets/images/number8.png","assets/images/number9.png","assets/images/number0.png"];
+class NumbersMenuScreen extends StatefulWidget{
 
    NumbersMenuScreen({super.key});
+
+  @override
+  State<NumbersMenuScreen> createState() => _NumbersMenuScreenState();
+}
+
+class _NumbersMenuScreenState extends State<NumbersMenuScreen> {
+  final List<String> numbers = ["assets/images/number1.png","assets/images/number2.png","assets/images/number3.png","assets/images/number4.png","assets/images/number5.png","assets/images/number6.png","assets/images/number7.png","assets/images/number8.png","assets/images/number9.png","assets/images/number0.png"];
+  late MyMenuController menuController;
+
+  @override
+  void initState() {
+    menuController=Provider.of<MyMenuController>(context, listen: false);
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +70,7 @@ class NumbersMenuScreen extends StatelessWidget{
                                      itemBuilder: (BuildContext context, int index) { 
                                         return Center(child: GestureDetector(
                                           onTap: (){
+                                            menuController.selectedNumber=index+1;
                                             Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
                                           },
                                           child: Image.asset(numbers[index])));

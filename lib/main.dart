@@ -4,8 +4,10 @@ import 'package:match/controllers/auth_controller.dart';
 import 'package:match/controllers/click_controller.dart';
 import 'package:match/controllers/colors_controller.dart';
 import 'package:match/controllers/match_controller.dart';
+import 'package:match/controllers/menu_controller.dart';
 import 'package:match/controllers/press_controller.dart';
 import 'package:match/controllers/puzzle_controller.dart';
+import 'package:match/screens/numbers/numbers_menu.dart';
 import 'package:match/screens/splash_sreen.dart';
 import 'package:provider/provider.dart';
 import 'package:match/utils/theme.dart'; // Import the theme
@@ -46,13 +48,17 @@ class MainApp extends StatelessWidget {
         ChangeNotifierProvider<AuthController>(
             create: (_) => AuthController(),
         ),
+        ChangeNotifierProvider<MyMenuController>(
+            create: (_) => MyMenuController(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: appTheme, // Use the theme
         home: 
-        const SplashScreen()
-        // NumbersMenuScreen()
+        // const 
+        // SplashScreen()
+        NumbersMenuScreen()
         //  MainMenuScreen()
         //  WelcomeScreen()
         // WritingGameScreen(),

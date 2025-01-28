@@ -1,21 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:match/controllers/menu_controller.dart';
 import 'package:match/controllers/press_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:stroke_text/stroke_text.dart';
 
 class PressGameScreen extends StatefulWidget {
-  const PressGameScreen({super.key});
+  final int? number;
+  const PressGameScreen({super.key,  this.number});
 
   @override
-  State<PressGameScreen> createState() => _PressGameScreenState();
+  State<PressGameScreen> createState() => _PressGameScreenState(number: number);
 }
 
 class _PressGameScreenState extends State<PressGameScreen> {
+  final int? number;
   late PressController pressController;
+  late MyMenuController menuController;
+
+  _PressGameScreenState({required this.number});
   @override
   void initState() {
     pressController=Provider.of<PressController>(context, listen: false);
+    menuController=Provider.of<MyMenuController>(context, listen: false);
+
+    pressController.setTargetNumber(menuController.selectedNumber);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    pressController.number=0;
+    pressController.isSolved=false;
+    // pressController.dispose();
+    // menuController.dispose();
+    // TODO: implement dispose
+    super.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -27,7 +46,7 @@ class _PressGameScreenState extends State<PressGameScreen> {
         builder: (context,pressController,child) {
           return InkWell(
             onTap: () {
-              pressController.incrementNumber();
+              pressController.incrementNumber(context);
             },
             child: Stack(
               children: [
@@ -66,6 +85,18 @@ class _PressGameScreenState extends State<PressGameScreen> {
                       strokeColor: Colors.black,
                     )),
                     const Positioned(top: 20,right: 20,child:  Text("اضغط على الشاشة مرة واحدة",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),),
+                    if(pressController.isSolved)
+                    Container(
+                  color: Colors.green.withOpacity(0.5),
+                  child: const Center(
+                    child: Icon(
+                      Icons.check_circle,
+                      color: Colors.white,
+                      size: 100,
+                    ),
+                  ),
+                ),
+              
               ],
             ),
           );
@@ -73,4 +104,5 @@ class _PressGameScreenState extends State<PressGameScreen> {
       )
     );
   }
+  
 }

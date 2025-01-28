@@ -3,6 +3,7 @@ import 'package:match/screens/auth/login/login_screen.dart';
 // import 'package:match/screens/home/home_screen.dart';
 // import 'package:match/screens/numbers/numbers_menu.dart';
 
+// ignore: must_be_immutable
 class SelectProfileScreen extends StatelessWidget {
   List<String> profileOption=["parent","child","QRcode"];
 

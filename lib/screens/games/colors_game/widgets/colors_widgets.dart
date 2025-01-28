@@ -10,6 +10,7 @@ class ColorCircle extends StatefulWidget{
 
   const ColorCircle({super.key, required this.index});
   @override
+  // ignore: no_logic_in_create_state
   State<ColorCircle> createState() => _ColorCircleState(index: index);
 }
 
@@ -23,7 +24,6 @@ class _ColorCircleState extends State<ColorCircle> {
   void initState() {
     colorsController=Provider.of<ColorsController>(context,listen: false);
     colorIndex=index;
-    // TODO: implement initState
     super.initState();
   }
 
@@ -55,12 +55,12 @@ class _ColorCircleState extends State<ColorCircle> {
         }
       ),
     );
-    // TODO: implement build
-    throw UnimplementedError();
+
   }
 }
 
 
+// ignore: must_be_immutable
 class ColorUnit extends StatelessWidget {
   final int index;
   List<Color> colors=[Colors.blue,Colors.red,Colors.green,Colors.purple,Colors.yellow];

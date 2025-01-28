@@ -126,6 +126,7 @@ class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SplashScreenState createState() => _SplashScreenState();
 }
 
@@ -138,13 +139,13 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   late Animation<double> _finalSizeAnimation;
   late AnimationController _opacityController;
   late Animation<double> _opacityAnimation;
-  bool first_time = true;
-  late double last_size;
+  bool firstTime = true;
+  late double lastSize;
   bool coverScreen = false;
 
   @override
   void didChangeDependencies() {
-    last_size=MediaQuery.of(context).size.width *0.05;
+    lastSize=MediaQuery.of(context).size.width *0.05;
     _controller = AnimationController(
       duration: const Duration(seconds: 1),
       vsync: this,
@@ -189,7 +190,7 @@ _sizeController = AnimationController(
       vsync: this,
     );
 
-    _finalSizeAnimation = Tween<double>(begin: 2.0*last_size, end: 100.0*last_size).animate(
+    _finalSizeAnimation = Tween<double>(begin: 2.0*lastSize, end: 100.0*lastSize).animate(
       CurvedAnimation(parent: _finalSizeController, curve: Curves.easeInOut),
     );
 
@@ -208,25 +209,25 @@ _sizeController = AnimationController(
     });
     _sizeController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        if(first_time==true){
-          first_time = false;
-          last_size = 2.0;
+        if(firstTime==true){
+          firstTime = false;
+          lastSize = 2.0;
           _sizeController.reset();
           _sizeAnimation = TweenSequence<double>([
             TweenSequenceItem(
-              tween: Tween(begin: last_size, end: last_size * 2.4).chain(CurveTween(curve: Curves.easeInOut)),
+              tween: Tween(begin: lastSize, end: lastSize * 2.4).chain(CurveTween(curve: Curves.easeInOut)),
               weight: 20,
             ),
             TweenSequenceItem(
-              tween: Tween(begin: last_size * 2.4, end: last_size * 1.8).chain(CurveTween(curve: Curves.bounceOut)),
+              tween: Tween(begin: lastSize * 2.4, end: lastSize * 1.8).chain(CurveTween(curve: Curves.bounceOut)),
               weight: 20,
             ),
             TweenSequenceItem(
-              tween: Tween(begin: last_size*1.8, end: last_size * 2.2).chain(CurveTween(curve: Curves.easeInOut)),
+              tween: Tween(begin: lastSize*1.8, end: lastSize * 2.2).chain(CurveTween(curve: Curves.easeInOut)),
               weight: 20,
             ),
             TweenSequenceItem(
-              tween: Tween(begin: last_size * 2.2, end: last_size * 2.0).chain(CurveTween(curve: Curves.bounceOut)),
+              tween: Tween(begin: lastSize * 2.2, end: lastSize * 2.0).chain(CurveTween(curve: Curves.bounceOut)),
               weight: 20,
             ),
           ]).animate(_sizeController);
@@ -248,6 +249,7 @@ _sizeController = AnimationController(
         // _opacityController.forward();
         // Navigate to the next screen after a delay
         Future.delayed(const Duration(seconds: 2), () {
+          // ignore: use_build_context_synchronously
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => const WelcomeScreen()), // Replace with your next screen
           );
@@ -255,7 +257,6 @@ _sizeController = AnimationController(
       }
     });
   
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
   }
 
@@ -340,14 +341,14 @@ _sizeController = AnimationController(
               animation: Listenable.merge([_fallAnimation, _sizeAnimation]),
               builder: (context, child) {
                 double translateY = -MediaQuery.of(context).size.height  * (1 - _fallAnimation.value);
-                //  last_size = MediaQuery.of(context).size.width *0.05 * _sizeAnimation.value;
-                last_size= MediaQuery.of(context).size.width *0.05 * (_finalSizeController.isAnimating ? _finalSizeAnimation.value : _sizeAnimation.value);
+                //  lastSize = MediaQuery.of(context).size.width *0.05 * _sizeAnimation.value;
+                lastSize= MediaQuery.of(context).size.width *0.05 * (_finalSizeController.isAnimating ? _finalSizeAnimation.value : _sizeAnimation.value);
           
                 return Transform.translate(
                   offset: Offset(0, translateY),
                   child: Container(
-                    width: last_size,
-                    height: last_size,
+                    width: lastSize,
+                    height: lastSize,
                     decoration: const BoxDecoration(
                       // color: Colors.green,
                      gradient:LinearGradient(

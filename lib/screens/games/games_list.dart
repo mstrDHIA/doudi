@@ -10,7 +10,6 @@ class GamesList extends StatelessWidget{
         title: const Text('Games List'),
       ),
       body: const Center(child: Text("Games List")),);
-    // TODO: implement build
-    throw UnimplementedError();
+
   }
 }

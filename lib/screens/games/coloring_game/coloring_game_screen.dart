@@ -6,6 +6,7 @@ class ColoringGameScreen extends StatefulWidget {
   const ColoringGameScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ColoringGameScreenState createState() => _ColoringGameScreenState();
 }
 

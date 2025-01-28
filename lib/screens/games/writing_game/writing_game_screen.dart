@@ -6,6 +6,7 @@ class WritingGameScreen extends StatefulWidget {
   const WritingGameScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _WritingGameScreenState createState() => _WritingGameScreenState();
 }
 

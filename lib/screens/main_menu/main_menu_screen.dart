@@ -5,6 +5,7 @@ import 'package:match/screens/games/count_game/count_game_screen.dart';
 import 'package:match/screens/games/press_game/press_game_screen.dart';
 import 'package:match/screens/games/puzzle_game/puzzle_screen.dart';
 
+// ignore: must_be_immutable
 class MainMenuScreen extends StatelessWidget{
   List<Map<String,dynamic>> menuItems=[
     // {
@@ -86,7 +87,6 @@ class MainMenuScreen extends StatelessWidget{
            itemCount: menuItems.length,)
         ])
     );
-    // TODO: implement build
-    throw UnimplementedError();
+
   }
 }

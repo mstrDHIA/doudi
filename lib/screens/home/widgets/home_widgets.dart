@@ -5,9 +5,9 @@ class HomeItem extends StatelessWidget {
   final String txt;
   final double top;
   final double left;
-  final Widget Route;
+  final Widget route;
   const HomeItem({
-    super.key, required this.img, required this.txt, required this.top, required this.left, required this.Route,
+    super.key, required this.img, required this.txt, required this.top, required this.left, required this.route,
   });
 
   @override
@@ -17,7 +17,7 @@ class HomeItem extends StatelessWidget {
       left: left,
       child: GestureDetector(
         onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>Route));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>route));
         },
         child: Column(
           children: [

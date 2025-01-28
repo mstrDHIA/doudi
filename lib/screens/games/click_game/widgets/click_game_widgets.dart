@@ -8,6 +8,7 @@ class NumberHolder extends StatefulWidget {
   const NumberHolder({super.key, required this.clickController});
 
   @override
+  // ignore: library_private_types_in_public_api, no_logic_in_create_state
   _NumberHolderState createState() => _NumberHolderState(clickController: clickController);
 }
 

@@ -12,6 +12,7 @@ class AnswerWidget extends StatefulWidget {
   final int index;
 
   @override
+  // ignore: no_logic_in_create_state
   State<AnswerWidget> createState() => _AnswerWidgetState(index: index);
 }
 
@@ -80,5 +81,6 @@ class _AnswerWidgetState extends State<AnswerWidget> {
         ],
       ),
     );
+    
   }
 }

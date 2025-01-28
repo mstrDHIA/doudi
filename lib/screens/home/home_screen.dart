@@ -46,26 +46,25 @@ class HomeScreen extends StatelessWidget {
       HomeItem(top: MediaQuery.of(context).size.height/3,
       left: MediaQuery.of(context).size.width/2.3,
       img: "assets/images/olors.png",
-      Route: const ColoringGameScreen(),
+      route: const ColoringGameScreen(),
       txt: "الالوان",),
 
       HomeItem(top: MediaQuery.of(context).size.height/5,
       left: MediaQuery.of(context).size.width/1.65,
       img: "assets/images/writing.png",
-      Route: const WritingGameScreen(),
+      route: const WritingGameScreen(),
       txt: "الكتابة",),
       HomeItem(top: MediaQuery.of(context).size.height/2.5,
       left: MediaQuery.of(context).size.width/1.3,
       img: "assets/images/games.png",
-      Route: MainMenuScreen(), 
+      route: MainMenuScreen(), 
       // GamesList(),
       txt: "الالعاب",),
       
         ],
       )
     );
-    // TODO: implement build
-    throw UnimplementedError();
+
   }
 
 }

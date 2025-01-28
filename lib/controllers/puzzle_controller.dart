@@ -12,7 +12,7 @@ final List<String> puzzlePieces = [
 dragEndHandler({acceptedImage, data}){
     if (acceptedImage != null) {
             // Swap the images
-            final temp = acceptedImage;
+            // final temp = acceptedImage;
             acceptedImage = data.data;
             // final sourcePuzzleBox = context.findAncestorStateOfType<_PuzzleBoxState>();
             // sourcePuzzleBox!.acceptedImage = temp;

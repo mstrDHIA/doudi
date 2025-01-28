@@ -93,8 +93,7 @@ class _ClickGameScreenState extends State<ClickGameScreen> {
         }
       ),
     );
-    // TODO: implement build
-    throw UnimplementedError();
+
   }
 }
 

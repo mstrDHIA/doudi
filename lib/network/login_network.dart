@@ -5,7 +5,7 @@ class AuthNetwork {
   // Future<Response>
    login(String email, String password) async {
     try {
-      print(apis.baseurl + apis.login);
+      // print(apis.baseurl + apis.login);
       var response = await Apis.dio.post(apis.baseurl + apis.login, data: {
         "username": email,
         "password": password,
@@ -16,7 +16,7 @@ class AuthNetwork {
       }
       // return false;
     } catch (e) {
-      print(e);
+      // print(e);
       // return false;
     }
   }

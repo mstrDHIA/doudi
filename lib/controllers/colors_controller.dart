@@ -5,7 +5,7 @@ class ColorsController extends ChangeNotifier{
 
 
   changeColor(int index){
-    print(index);
+    // print(index);
     if(index<4){
       index++;
     }
@@ -13,7 +13,7 @@ class ColorsController extends ChangeNotifier{
       index=0;
     }
     
-    print(index);
+    // print(index);
     notifyListeners();
   }
   notify(){

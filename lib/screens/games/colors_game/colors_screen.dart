@@ -62,8 +62,6 @@ class _ColorsGameScreenState extends State<ColorsGameScreen> {
       ),
     );
 
-    // TODO: implement build
-    throw UnimplementedError();
   }
 }
 

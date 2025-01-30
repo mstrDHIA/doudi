@@ -3,7 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class CountController extends ChangeNotifier{
+  bool isSolved=false;
   List<int> numbers = [];
+  List<Color> colors = [Colors.white, Colors.white, Colors.white, Colors.white];
   // List<int> 
   generateAndShuffleNumbers(int number) {
     // List<int> numbers = [number];
@@ -22,5 +24,16 @@ class CountController extends ChangeNotifier{
     numbers.shuffle();
 
     // return numbers;
+  }
+
+  validateResult({required int number,required int targetNumber,required int index}) {
+    if (targetNumber == number) {
+      colors[index] = Colors.green;
+      isSolved = true;
+    } else {
+      colors[index] = Colors.red;
+      isSolved = false;
+    }
+    notifyListeners();
   }
 }

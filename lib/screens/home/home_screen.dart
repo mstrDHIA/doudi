@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:match/screens/games/coloring_game/coloring_game_screen.dart';
+import 'package:match/screens/games/writing_game/Writing.dart';
 import 'package:match/screens/games/writing_game/writing_game_screen.dart';
+import 'package:match/screens/games/writing_game/writing_game_screen_2.dart';
+import 'package:match/screens/games/writing_game/writing_game_screen_3.dart';
 import 'package:match/screens/home/widgets/home_widgets.dart';
 import 'package:match/screens/main_menu/main_menu_screen.dart';
 
@@ -52,7 +55,8 @@ class HomeScreen extends StatelessWidget {
       HomeItem(top: MediaQuery.of(context).size.height/5,
       left: MediaQuery.of(context).size.width/1.65,
       img: "assets/images/writing.png",
-      route: const WritingGameScreen(),
+      // route: const WritingGameScreen(),
+      route: WritingGameScreen3(),
       txt: "الكتابة",),
       HomeItem(top: MediaQuery.of(context).size.height/2.5,
       left: MediaQuery.of(context).size.width/1.3,

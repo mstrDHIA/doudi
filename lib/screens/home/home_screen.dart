@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
       HomeItem(top: MediaQuery.of(context).size.height/3,
       left: MediaQuery.of(context).size.width/2.3,
       img: "assets/images/olors.png",
-      route: const ColoringGameScreen(),
+      route:  ColoringGameScreen(),
       txt: "الالوان",),
 
       HomeItem(top: MediaQuery.of(context).size.height/5,

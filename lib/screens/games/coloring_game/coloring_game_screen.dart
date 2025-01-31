@@ -1,40 +1,33 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:match/controllers/menu_controller.dart';
+import 'package:provider/provider.dart';
 
 class ColoringGameScreen extends StatefulWidget {
-  const ColoringGameScreen({super.key});
-
   @override
-  // ignore: library_private_types_in_public_api
   _ColoringGameScreenState createState() => _ColoringGameScreenState();
 }
 
 class _ColoringGameScreenState extends State<ColoringGameScreen> {
+  late MyMenuController menuController;
   List<Offset?> points = [];
-
+  @override
+  void initState() {
+    menuController=Provider.of<MyMenuController>(context,listen: false);
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Coloring Game'),
-      ),
       body: Stack(
         children: [
-          
-          // Blueprint of the number 1
-          // Center(
-          //   child: CustomPaint(
-          //     size: Size(200, 400),
-          //     painter: NumberOnePainter(),
-          //   ),
-          // ),
-          // User's coloring
           GestureDetector(
             onPanUpdate: (details) {
               setState(() {
                 RenderBox renderBox = context.findRenderObject() as RenderBox;
-                points.add(renderBox.globalToLocal(details.globalPosition));
+                points.add(renderBox.globalToLocal(details.localPosition));
               });
             },
             onPanEnd: (details) {
@@ -43,35 +36,12 @@ class _ColoringGameScreenState extends State<ColoringGameScreen> {
             child: CustomPaint(
               size: Size.infinite,
               painter: ColoringPainter(points),
-              child:Center(child: Image.asset("assets/images/number/color1.png")),
+              child: Center(child: Image.asset("assets/images/number/color${menuController.selectedNumber}.png"),),
             ),
-            
           ),
-          
         ],
       ),
     );
-  }
-}
-
-class NumberOnePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.grey
-      ..strokeWidth = 4.0
-      ..style = PaintingStyle.stroke;
-
-    final path = Path();
-    path.moveTo(size.width / 2, size.height * 0.1);
-    path.lineTo(size.width / 2, size.height * 0.9);
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
   }
 }
 

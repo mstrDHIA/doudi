@@ -6,6 +6,7 @@ import 'package:match/screens/games/writing_game/writing_game_screen_2.dart';
 import 'package:match/screens/games/writing_game/writing_game_screen_3.dart';
 import 'package:match/screens/home/widgets/home_widgets.dart';
 import 'package:match/screens/main_menu/main_menu_screen.dart';
+import 'package:match/screens/qr/qr_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -45,6 +46,12 @@ class HomeScreen extends StatelessWidget {
       // img: "assets/images/numbers.png",
       // Route: NumbersMenuScreen(),
       // txt: "الأرقام",),
+      HomeItem(
+        top: MediaQuery.of(context).size.height/4,
+      left: MediaQuery.of(context).size.width/4,
+      img: "assets/images/qr.png",
+      route:  QRScreen(),
+      txt: "مسح",),
 
       HomeItem(top: MediaQuery.of(context).size.height/3,
       left: MediaQuery.of(context).size.width/2.3,

@@ -12,15 +12,47 @@ class ColoringGameScreen extends StatefulWidget {
 class _ColoringGameScreenState extends State<ColoringGameScreen> {
   late MyMenuController menuController;
   List<Offset?> points = [];
+  Color selectedColor = Colors.blue;
+  double strokeWidth = 5.0;
+  bool isEraser = false;
   @override
   void initState() {
-    menuController=Provider.of<MyMenuController>(context,listen: false);
+    menuController=Provider.of(context,listen: false);
     // TODO: implement initState
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              switch (value) {
+                // case 'Color':
+                //   _selectColor();
+                  // break;
+                case 'Stroke Width':
+                  _selectStrokeWidth();
+                  break;
+                case 'Eraser':
+                  setState(() {
+                    isEraser = !isEraser;
+                  });
+                  break;
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return {'Color', 'Stroke Width', 'Eraser'}.map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
+            },
+          ),
+        ],
+      ),
       body: Stack(
         children: [
           GestureDetector(
@@ -35,26 +67,100 @@ class _ColoringGameScreenState extends State<ColoringGameScreen> {
             },
             child: CustomPaint(
               size: Size.infinite,
-              painter: ColoringPainter(points),
-              child: Center(child: Image.asset("assets/images/number/color${menuController.selectedNumber}.png"),),
+              painter: ColoringPainter(points, selectedColor, strokeWidth, isEraser),
+              child: Center(
+                child: Image.asset("assets/images/number/color${menuController.selectedNumber}.png"),
+              ),
             ),
           ),
         ],
       ),
     );
   }
+
+  // void _selectColor() async {
+  //   Color? color = await showDialog(
+  //     context: context,
+  //     builder: (context) => AlertDialog(
+  //       title: Text('Select Color'),
+  //       content: SingleChildScrollView(
+  //         child: BlockPicker(
+  //           pickerColor: selectedColor,
+  //           onColorChanged: (color) {
+  //             setState(() {
+  //               selectedColor = color;
+  //               isEraser = false;
+  //             });
+  //           },
+  //         ),
+  //       ),
+  //       actions: [
+  //         TextButton(
+  //           child: Text('Done'),
+  //           onPressed: () {
+  //             Navigator.of(context).pop(selectedColor);
+  //           },
+  //         ),
+  //       ],
+  //     ),
+  //   );
+
+  //   if (color != null) {
+  //     setState(() {
+  //       selectedColor = color;
+  //     });
+  //   }
+  // }
+
+  void _selectStrokeWidth() async {
+    double? width = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Select Stroke Width'),
+        content: Slider(
+          value: strokeWidth,
+          min: 1.0,
+          max: 10.0,
+          divisions: 9,
+          label: strokeWidth.round().toString(),
+          onChanged: (value) {
+            setState(() {
+              strokeWidth = value;
+            });
+          },
+        ),
+        actions: [
+          TextButton(
+            child: Text('Done'),
+            onPressed: () {
+              Navigator.of(context).pop(strokeWidth);
+            },
+          ),
+        ],
+      ),
+    );
+
+    if (width != null) {
+      setState(() {
+        strokeWidth = width;
+      });
+    }
+  }
 }
 
 class ColoringPainter extends CustomPainter {
   final List<Offset?> points;
+  final Color color;
+  final double strokeWidth;
+  final bool isEraser;
 
-  ColoringPainter(this.points);
+  ColoringPainter(this.points, this.color, this.strokeWidth, this.isEraser);
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.blue
-      ..strokeWidth = 10.0
+      ..color = isEraser ? Colors.white : color
+      ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round;
 
     for (int i = 0; i < points.length - 1; i++) {

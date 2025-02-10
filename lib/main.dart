@@ -61,8 +61,8 @@ class MainApp extends StatelessWidget {
         theme: appTheme, // Use the theme
         home: 
         // const 
-        // SplashScreen()
-        NumbersMenuScreen()
+        SplashScreen()
+        // NumbersMenuScreen()
         //  MainMenuScreen()
         //  WelcomeScreen()
         // WritingGameScreen(),

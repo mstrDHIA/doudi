@@ -24,35 +24,11 @@ class _ColoringGameScreenState extends State<ColoringGameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          PopupMenuButton<String>(
-            onSelected: (value) {
-              switch (value) {
-                // case 'Color':
-                //   _selectColor();
-                  // break;
-                case 'Stroke Width':
-                  _selectStrokeWidth();
-                  break;
-                case 'Eraser':
-                  setState(() {
-                    isEraser = !isEraser;
-                  });
-                  break;
-              }
-            },
-            itemBuilder: (BuildContext context) {
-              return {'Color', 'Stroke Width', 'Eraser'}.map((String choice) {
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(choice),
-                );
-              }).toList();
-            },
-          ),
-        ],
-      ),
+      // appBar: AppBar(
+      //   actions: [
+          
+      //   ],
+      // ),
       body: Stack(
         children: [
           GestureDetector(
@@ -68,11 +44,57 @@ class _ColoringGameScreenState extends State<ColoringGameScreen> {
             child: CustomPaint(
               size: Size.infinite,
               painter: ColoringPainter(points, selectedColor, strokeWidth, isEraser),
-              child: Center(
-                child: Image.asset("assets/images/number/color${menuController.selectedNumber}.png"),
+              child: Container(
+                width: MediaQuery.sizeOf(context).width,
+                height: MediaQuery.sizeOf(context).height,
+                child: Center(
+                  child: Image.asset(
+                    "assets/images/number/color${menuController.selectedNumber}.png",
+                    width: 1000,
+                    ),
+                ),
               ),
             ),
           ),
+          Positioned(
+            right: 10,
+            child: PopupMenuButton<String>(
+              child: Image.asset("assets/icons/palette.png",scale: 1.5,),
+              onSelected: (value) {
+                switch (value) {
+                  // case 'Color':
+                  //   _selectColor();
+                    // break;
+                  case 'Stroke Width':
+                    _selectStrokeWidth();
+                    break;
+                  case 'Eraser':
+                    setState(() {
+                      isEraser = !isEraser;
+                    });
+                    break;
+                }
+              },
+              itemBuilder: (BuildContext context) {
+                return {'Color', 'Stroke Width', 'Eraser'}.map((String choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice),
+                  );
+                }).toList();
+              },
+            ),
+          ),
+          Positioned(
+                      top: 20,
+                      left: 20,
+                      child: GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: CircleAvatar(child: Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: Image.asset("assets/icons/back.png",width: 50,height: 50,),
+                        )),
+                      )),
         ],
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:match/controllers/auth_controller.dart';
+import 'package:match/screens/numbers/numbers_menu.dart';
 // import 'package:match/screens/auth/selet_profile.dart';
 // import 'package:match/screens/home/home_screen.dart';
 // import 'package:match/screens/numbers/numbers_menu.dart';
@@ -101,8 +102,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     GestureDetector(
                       onTap: (){
-                        authController.login(usernameController.text, passwordController.text,context);
-                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>NumbersMenuScreen()));
+                        // authController.login(usernameController.text, passwordController.text,context);
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>NumbersMenuScreen()));
                       },
                       child: Container(
                         width: MediaQuery.sizeOf(context).width * 0.2,

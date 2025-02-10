@@ -45,4 +45,8 @@ flutter:
    - assets/puzzles/9/
    - assets/icons/
    - assets/images/number/
+  fonts:
+    - family: Trace
+      fonts:
+        - asset: assets/fonts/Trace-lxy0.ttf
   #  - assets/audio/

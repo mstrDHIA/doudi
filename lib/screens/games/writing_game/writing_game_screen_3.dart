@@ -68,6 +68,7 @@ class _WritingGameScreen3State extends State<WritingGameScreen3> {
             child: Text(
               menuController.selectedNumber.toString(),
               style: TextStyle(
+                fontFamily: 'Trace',
                 fontSize: fontSize,
                 color: Colors.grey[300],
                 fontWeight: FontWeight.w100,

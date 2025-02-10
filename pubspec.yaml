@@ -16,9 +16,10 @@ dependencies:
   audiofilereader: ^2.1.3
   dio: ^5.7.0
   # flutter_barcode_scanner: ^2.0.0
-
+  flutter_colorpicker: ^1.1.0
   # qr_code_scanner: ^0.7.0
   mobile_scanner: ^6.0.6
+  animated_float_action_button: ^1.0.4
 
 dev_dependencies:
   flutter_test:

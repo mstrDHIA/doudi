@@ -1,91 +1,338 @@
-import 'dart:ui';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 
+// import 'package:animated_floatactionbuttons/animated_floatactionbuttons.dart';
+import 'package:animated_float_action_button/animated_floating_action_button.dart';
 import 'package:flutter/material.dart';
-import 'package:match/controllers/menu_controller.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+// import 'package:image_gallery_saver/image_gallery_saver.dart';
+// import 'package:permission_handler/permission_handler.dart';
 
-class ColoringGameScreen extends StatefulWidget {
+//void main() => runApp(CanvasPainting());
+
+class CanvasPainting extends StatefulWidget {
   @override
-  _ColoringGameScreenState createState() => _ColoringGameScreenState();
+  _CanvasPaintingState createState() => _CanvasPaintingState();
 }
 
-class _ColoringGameScreenState extends State<ColoringGameScreen> {
-  late MyMenuController menuController;
-  List<Offset?> points = [];
-  Color selectedColor = Colors.blue;
-  double strokeWidth = 5.0;
-  bool isEraser = false;
-  @override
-  void initState() {
-    menuController=Provider.of(context,listen: false);
-    // TODO: implement initState
-    super.initState();
+class _CanvasPaintingState extends State<CanvasPainting> {
+  GlobalKey globalKey = GlobalKey();
+
+  List<TouchPoints?> points = [];
+  double opacity = 1.0;
+  StrokeCap strokeType = StrokeCap.round;
+  double strokeWidth = 3.0;
+  Color selectedColor = Colors.black;
+
+  Future<void> _pickStroke() async {
+    //Shows AlertDialog
+    return showDialog<void>(
+      context: context,
+
+      //Dismiss alert dialog when set true
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        //Clips its child in a oval shape
+        return ClipOval(
+          child: AlertDialog(
+            //Creates three buttons to pick stroke value.
+            actions: <Widget>[
+              //Resetting to default stroke value
+              ElevatedButton(
+                child: Icon(
+                  Icons.clear,
+                ),
+                onPressed: () {
+                  strokeWidth = 3.0;
+                  Navigator.of(context).pop();
+                },
+              ),
+              ElevatedButton(
+                child: Icon(
+                  Icons.brush,
+                  size: 24,
+                ),
+                onPressed: () {
+                  strokeWidth = 10.0;
+                  Navigator.of(context).pop();
+                },
+              ),
+              ElevatedButton(
+                child: Icon(
+                  Icons.brush,
+                  size: 40,
+                ),
+                onPressed: () {
+                  strokeWidth = 30.0;
+                  Navigator.of(context).pop();
+                },
+              ),
+              ElevatedButton(
+                child: Icon(
+                  Icons.brush,
+                  size: 60,
+                ),
+                onPressed: () {
+                  strokeWidth = 50.0;
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(
-      //   actions: [
-          
-      //   ],
-      // ),
-      body: Stack(
-        children: [
-          GestureDetector(
-            onPanUpdate: (details) {
+// void 
+_selectColor() async {
+  print('selecting color');
+    Color? color = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        // title: Text('Select Color'),
+        content: SingleChildScrollView(
+          child: BlockPicker(
+            pickerColor: selectedColor,
+            onColorChanged: (color) {
               setState(() {
-                RenderBox renderBox = context.findRenderObject() as RenderBox;
-                points.add(renderBox.globalToLocal(details.localPosition));
+                selectedColor = color;
               });
             },
-            onPanEnd: (details) {
-              points.add(null);
+          ),
+        ),
+        actions: [
+          TextButton(
+            child: Text('Done'),
+            onPressed: () {
+              Navigator.of(context).pop(selectedColor);
             },
-            child: CustomPaint(
-              size: Size.infinite,
-              painter: ColoringPainter(points, selectedColor, strokeWidth, isEraser),
-              child: Container(
-                width: MediaQuery.sizeOf(context).width,
-                height: MediaQuery.sizeOf(context).height,
-                child: Center(
-                  child: Image.asset(
-                    "assets/images/number/color${menuController.selectedNumber}.png",
-                    width: 1000,
-                    ),
+          ),
+        ],
+      ),
+    );
+
+    if (color != null) {
+      setState(() {
+        selectedColor = color;
+      });
+    }
+  }
+  Future<void> _opacity() async {
+    //Shows AlertDialog
+    return showDialog<void>(
+      context: context,
+
+      //Dismiss alert dialog when set true
+      barrierDismissible: true,
+
+      builder: (BuildContext context) {
+        //Clips its child in a oval shape
+        return ClipOval(
+          child: AlertDialog(
+            //Creates three buttons to pick opacity value.
+            actions: <Widget>[
+              ElevatedButton(
+                child: Icon(
+                  Icons.opacity,
+                  size: 24,
                 ),
+                onPressed: () {
+                  //most transparent
+                  opacity = 0.1;
+                  Navigator.of(context).pop();
+                },
               ),
-            ),
+              ElevatedButton(
+                child: Icon(
+                  Icons.opacity,
+                  size: 40,
+                ),
+                onPressed: () {
+                  opacity = 0.5;
+                  Navigator.of(context).pop();
+                },
+              ),
+              ElevatedButton(
+                child: Icon(
+                  Icons.opacity,
+                  size: 60,
+                ),
+                onPressed: () {
+                  //not transparent at all.
+                  opacity = 1.0;
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
           ),
-          Positioned(
-            right: 10,
-            child: PopupMenuButton<String>(
-              child: Image.asset("assets/icons/palette.png",scale: 1.5,),
-              onSelected: (value) {
-                switch (value) {
-                  // case 'Color':
-                  //   _selectColor();
-                    // break;
-                  case 'Stroke Width':
-                    _selectStrokeWidth();
-                    break;
-                  case 'Eraser':
-                    setState(() {
-                      isEraser = !isEraser;
-                    });
-                    break;
-                }
-              },
-              itemBuilder: (BuildContext context) {
-                return {'Color', 'Stroke Width', 'Eraser'}.map((String choice) {
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice),
-                  );
-                }).toList();
-              },
-            ),
-          ),
-          Positioned(
+        );
+      },
+    );
+  }
+
+  // Future<void> _save() async {
+  //   RenderRepaintBoundary boundary =
+  //       globalKey.currentContext.findRenderObject();
+  //   ui.Image image = await boundary.toImage();
+  //   ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+  //   Uint8List pngBytes = byteData.buffer.asUint8List();
+
+  //   //Request permissions if not already granted
+  //   if (!(await Permission.storage.status.isGranted))
+  //     await Permission.storage.request();
+
+  //   final result = await ImageGallerySaver.saveImage(
+  //       Uint8List.fromList(pngBytes),
+  //       quality: 60,
+  //       name: "canvas_image");
+  //   print(result);
+  // }
+
+  List<Widget> fabOption() {
+    return <Widget>[
+      FloatingActionButton(
+        heroTag: "paint_save",
+        child: Icon(Icons.save),
+        tooltip: 'Save',
+        onPressed: () {
+          //min: 0, max: 50
+          setState(() {
+            // _save();
+          });
+        },
+      ),
+      FloatingActionButton(
+        heroTag: "paint_stroke",
+        child: Icon(Icons.brush),
+        tooltip: 'Stroke',
+        onPressed: () {
+          //min: 0, max: 50
+          setState(() {
+            _pickStroke();
+          });
+        },
+      ),
+      // FloatingActionButton(
+      //   heroTag: "paint_opacity",
+      //   child: Icon(Icons.opacity),
+      //   tooltip: 'Opacity',
+      //   onPressed: () {
+      //     //min:0, max:1
+      //     setState(() {
+      //       _opacity();
+      //     });
+      //   },
+      // ),
+      FloatingActionButton(
+          heroTag: "erase",
+          child: Icon(Icons.clear),
+          tooltip: "Erase",
+          onPressed: () {
+            setState(() {
+              points.clear();
+            });
+          }),
+      FloatingActionButton(
+        backgroundColor: Colors.white,
+        heroTag: "color",
+        child: colorMenuItem(selectedColor),
+        tooltip: 'Color',
+        onPressed: ()  {
+            _selectColor();
+          // setState(() {
+           
+          //   // selectedColor = Colors.red;
+          // });
+        },
+      ),
+      // FloatingActionButton(
+      //   backgroundColor: Colors.white,
+      //   heroTag: "color_green",
+      //   child: colorMenuItem(Colors.green),
+      //   tooltip: 'Color',
+      //   onPressed: () {
+      //     setState(() {
+      //       selectedColor = Colors.green;
+      //     });
+      //   },
+      // ),
+      // FloatingActionButton(
+      //   backgroundColor: Colors.white,
+      //   heroTag: "color_pink",
+      //   child: colorMenuItem(Colors.pink),
+      //   tooltip: 'Color',
+      //   onPressed: () {
+      //     setState(() {
+      //       selectedColor = Colors.pink;
+      //     });
+      //   },
+      // ),
+      // FloatingActionButton(
+      //   backgroundColor: Colors.white,
+      //   heroTag: "color_blue",
+      //   child: colorMenuItem(Colors.blue),
+      //   tooltip: 'Color',
+      //   onPressed: () {
+      //     setState(() {
+      //       selectedColor = Colors.blue;
+      //     });
+      //   },
+      // ),
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: GestureDetector(
+          onPanUpdate: (details) {
+            setState(() {
+              RenderBox renderBox = context.findRenderObject() as RenderBox;
+              points.add(TouchPoints(
+                  points: renderBox.globalToLocal(details.globalPosition),
+                  paint: Paint()
+                    ..strokeCap = strokeType
+                    ..isAntiAlias = true
+                    ..color = selectedColor.withOpacity(opacity)
+                    ..strokeWidth = strokeWidth));
+            });
+          },
+          onPanStart: (details) {
+            setState(() {
+              RenderBox renderBox = context.findRenderObject() as RenderBox;
+              points.add(TouchPoints(
+                  points: renderBox.globalToLocal(details.globalPosition),
+                  paint: Paint()
+                    ..strokeCap = strokeType
+                    ..isAntiAlias = true
+                    ..color = selectedColor.withOpacity(opacity)
+                    ..strokeWidth = strokeWidth));
+            });
+          },
+          onPanEnd: (details) {
+            setState(() {
+              points.add(null);
+            });
+          },
+          child: RepaintBoundary(
+            key: globalKey,
+            child: Stack(
+              children: <Widget>[
+                Center(
+                  child: Image.asset("assets/images/number/color1.png"),
+                  // child: Image.asset("assets/images/number/color${menuController.selectedNumber}.png"),
+                ),
+                CustomPaint(
+                  size: Size.infinite,
+                  painter: MyPainter(
+                    pointsList: points,
+                  ),
+                ),
+                Positioned(
                       top: 20,
                       left: 20,
                       child: GestureDetector(
@@ -95,107 +342,149 @@ class _ColoringGameScreenState extends State<ColoringGameScreen> {
                           child: Image.asset("assets/icons/back.png",width: 50,height: 50,),
                         )),
                       )),
-        ],
+                Positioned(
+                  right: 10,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      FloatingActionButton(
+                            heroTag: "paint_save",
+                            child: Icon(Icons.save),
+                            tooltip: 'Save',
+                            onPressed: () {
+                              //min: 0, max: 50
+                              setState(() {
+                                // _save();
+                              });
+                            },
+                          ),
+                          FloatingActionButton(
+                            heroTag: "paint_stroke",
+                            child: Icon(Icons.brush),
+                            tooltip: 'Stroke',
+                            onPressed: () {
+                              //min: 0, max: 50
+                              setState(() {
+                                _pickStroke();
+                              });
+                            },
+                          ),
+                          // FloatingActionButton(
+                          //   heroTag: "paint_opacity",
+                          //   child: Icon(Icons.opacity),
+                          //   tooltip: 'Opacity',
+                          //   onPressed: () {
+                          //     //min:0, max:1
+                          //     setState(() {
+                          //       _opacity();
+                          //     });
+                          //   },
+                          // ),
+                          FloatingActionButton(
+                              heroTag: "erase",
+                              child: Icon(Icons.clear),
+                              tooltip: "Erase",
+                              onPressed: () {
+                                setState(() {
+                                  points.clear();
+                                });
+                              }),
+                          FloatingActionButton(
+                            backgroundColor: Colors.white,
+                            heroTag: "color",
+                            child: colorMenuItem(selectedColor),
+                            tooltip: 'Color',
+                            onPressed: ()  {
+                                _selectColor();
+                              // setState(() {
+                               
+                              //   // selectedColor = Colors.red;
+                              // });
+                            },
+                          ),
+                    ],
+                                    ),
+                  ),)
+              ],
+            ),
+          ),
+        ),
+        // floatingActionButton: 
+        // AnimatedFloatingActionButton(
+        //   fabButtons: fabOption(),
+        //   colorStartAnimation: Colors.blue,
+        //   colorEndAnimation: Colors.cyan,
+        //   animatedIconData: AnimatedIcons.menu_close,
+        // ),
       ),
     );
   }
 
-  // void _selectColor() async {
-  //   Color? color = await showDialog(
-  //     context: context,
-  //     builder: (context) => AlertDialog(
-  //       title: Text('Select Color'),
-  //       content: SingleChildScrollView(
-  //         child: BlockPicker(
-  //           pickerColor: selectedColor,
-  //           onColorChanged: (color) {
-  //             setState(() {
-  //               selectedColor = color;
-  //               isEraser = false;
-  //             });
-  //           },
-  //         ),
-  //       ),
-  //       actions: [
-  //         TextButton(
-  //           child: Text('Done'),
-  //           onPressed: () {
-  //             Navigator.of(context).pop(selectedColor);
-  //           },
-  //         ),
-  //       ],
-  //     ),
-  //   );
-
-  //   if (color != null) {
-  //     setState(() {
-  //       selectedColor = color;
-  //     });
-  //   }
-  // }
-
-  void _selectStrokeWidth() async {
-    double? width = await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Select Stroke Width'),
-        content: Slider(
-          value: strokeWidth,
-          min: 1.0,
-          max: 10.0,
-          divisions: 9,
-          label: strokeWidth.round().toString(),
-          onChanged: (value) {
-            setState(() {
-              strokeWidth = value;
-            });
-          },
-        ),
-        actions: [
-          TextButton(
-            child: Text('Done'),
-            onPressed: () {
-              Navigator.of(context).pop(strokeWidth);
-            },
+  Widget colorMenuItem(Color color) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedColor = color;
+        });
+      },
+      child: GestureDetector(
+        onTap: (){
+          _selectColor();
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: color,
           ),
-        ],
+          padding: const EdgeInsets.only(bottom: 8.0),
+          height: 36,
+          width: 36,
+          
+        ),
       ),
     );
-
-    if (width != null) {
-      setState(() {
-        strokeWidth = width;
-      });
-    }
   }
 }
 
-class ColoringPainter extends CustomPainter {
-  final List<Offset?> points;
-  final Color color;
-  final double strokeWidth;
-  final bool isEraser;
+class MyPainter extends CustomPainter {
+  MyPainter({required this.pointsList});
 
-  ColoringPainter(this.points, this.color, this.strokeWidth, this.isEraser);
+  //Keep track of the points tapped on the screen
+  final List<TouchPoints?> pointsList;
+  List<Offset> offsetPoints = [];
 
+  //This is where we can draw on canvas.
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = isEraser ? Colors.white : color
-      ..strokeWidth = strokeWidth
-      ..strokeCap = StrokeCap.round;
+    for (int i = 0; i < pointsList.length - 1; i++) {
+      if (pointsList[i] != null && pointsList[i + 1] != null) {
+        //Drawing line when two consecutive points are available
+        canvas.drawLine(pointsList[i]!.points!, pointsList[i + 1]!.points!,
+            pointsList[i]!.paint!);
+      } else if (pointsList[i] != null && pointsList[i + 1] == null) {
+        offsetPoints.clear();
+        offsetPoints.add(pointsList[i]!.points!);
+        offsetPoints.add(Offset(
+            pointsList[i]!.points!.dx + 0.1, pointsList[i]!.points!.dy + 0.1));
 
-    for (int i = 0; i < points.length - 1; i++) {
-      if (points[i] != null && points[i + 1] != null) {
-        canvas.drawLine(points[i]!, points[i + 1]!, paint);
-      } else if (points[i] != null && points[i + 1] == null) {
-        canvas.drawPoints(PointMode.points, [points[i]!], paint);
+        //Draw points when two points are not next to each other
+        canvas.drawPoints(
+            ui.PointMode.points, offsetPoints, pointsList[i]!.paint!);
       }
     }
   }
 
+  //Called when CustomPainter is rebuilt.
+  //Returning true because we want canvas to be rebuilt to reflect new changes.
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
-  }
+  bool shouldRepaint(MyPainter oldDelegate) => true;
+}
+
+//Class to define a point touched at canvas
+class TouchPoints {
+  Paint? paint;
+  Offset? points;
+  TouchPoints({this.points, this.paint});
 }

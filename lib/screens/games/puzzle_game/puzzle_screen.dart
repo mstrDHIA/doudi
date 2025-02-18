@@ -56,11 +56,17 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                   PuzzlePieces(),
                   SizedBox(width: 20),
                   PuzzleHolder(),
-               
+
                 ],
                          );
              }
            ),
+           Positioned(
+            right: 10,
+            
+            child: FloatingActionButton(onPressed: (){acceptedImages.clear();
+            puzzleController.notify();
+            },child: const Icon(Icons.refresh),),),
           
         ],
       ),

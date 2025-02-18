@@ -15,7 +15,7 @@ class PressController extends ChangeNotifier{
     } else {
       targetNumber = target;
     }
-    notifyListeners();
+    // notifyListeners();
   }
 
   incrementNumber(context){

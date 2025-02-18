@@ -16,7 +16,7 @@ class _PressGameScreenState extends State<PressGameScreen> {
   final int? number;
   late PressController pressController;
   late MyMenuController menuController;
-
+  String text='';
   _PressGameScreenState({required this.number});
   @override
   void initState() {
@@ -24,9 +24,39 @@ class _PressGameScreenState extends State<PressGameScreen> {
     menuController=Provider.of<MyMenuController>(context, listen: false);
 
     pressController.setTargetNumber(menuController.selectedNumber);
+    prepareText();
     super.initState();
   }
+  prepareText(){
+    if(menuController.selectedNumber==1){
+      text= "اضغط على الشاشة مرة واحدة";
+  }
+  else if(menuController.selectedNumber==2){
+    text= "اضغط على الشاشة مرتين";
+  }
+  else if(menuController.selectedNumber==3){
+    text= "اضغط على الشاشة ثلاث مرات";
+  }
+  else if(menuController.selectedNumber==4){
+    text= "اضغط على الشاشة أربع مرات";
+  }
+  else if(menuController.selectedNumber==5){
+    text= "اضغط على الشاشة خمس مرات";
+  }
+  else if(menuController.selectedNumber==6){
+    text= "اضغط على الشاشة ست مرات";
+  }
+  else if(menuController.selectedNumber==7){
+    text= "اضغط على الشاشة سبع مرات";
+  }
+  else if(menuController.selectedNumber==8){
+    text= "اضغط على الشاشة ثمان مرات";
+  }
+  else if(menuController.selectedNumber==9){
+    text= "اضغط على الشاشة تسع مرات";
+  }
 
+  }
   @override
   void dispose() {
     pressController.number=0;
@@ -75,6 +105,7 @@ class _PressGameScreenState extends State<PressGameScreen> {
                     Positioned(
                       top: MediaQuery.of(context).size.height/2-100,
                       child: Image.asset("assets/images/worm.png")),
+                    if(pressController.number!=0)
                     Center(child:StrokeText(
                       text: pressController.number.toString(),
                       textStyle: const TextStyle(
@@ -84,7 +115,7 @@ class _PressGameScreenState extends State<PressGameScreen> {
                       strokeWidth: 3,
                       strokeColor: Colors.black,
                     )),
-                    const Positioned(top: 20,right: 20,child:  Text("اضغط على الشاشة مرة واحدة",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),),
+                     Positioned(top: 20,right: 20,child:  Text(text,style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),),
                     if(pressController.isSolved)
                     Container(
                   color: Colors.green.withOpacity(0.5),

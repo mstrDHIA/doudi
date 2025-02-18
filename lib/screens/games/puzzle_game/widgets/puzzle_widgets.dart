@@ -1,13 +1,15 @@
 // ignore_for_file: avoid_unnecessary_containers, library_private_types_in_public_api, no_logic_in_create_state
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:match/controllers/menu_controller.dart';
 import 'package:provider/provider.dart';
-List<String> acceptedImages = [
-  '',
-  '',
-  '',
-  '',
+List<Map<String, dynamic>> acceptedImages = [
+  {},
+  {},
+  {},
+  {},
       // "assets/puzzles/Group_4.png",
       // "assets/puzzles/Group_5.png",
       // "assets/puzzles/Group_6.png",
@@ -15,27 +17,38 @@ List<String> acceptedImages = [
     ];  
 class PuzzleBox extends StatefulWidget {
   final int index;
-  const PuzzleBox({super.key, required this.index});
+    final int id;
+
+  const PuzzleBox({super.key, required this.index, required this.id});
 
   @override
-  _PuzzleBoxState createState() => _PuzzleBoxState(index: index);
+  _PuzzleBoxState createState() => _PuzzleBoxState(id,index: index);
 }
 
 class _PuzzleBoxState extends State<PuzzleBox> {
-  final int index;
-  String? acceptedImage;
+    final int id;
 
-  _PuzzleBoxState({required this.index});
+  final int index;
+   String? acceptedImage;
+
+  _PuzzleBoxState(this.id, {required this.index});
 
   @override
   Widget build(BuildContext context) {
-    return DragTarget<String>(
+    return DragTarget<Map<String, dynamic>>(
 
       onWillAcceptWithDetails: (data) {
         if(acceptedImage == null) {
-          if(acceptedImages.contains(data.data)) {
+          
+          if(acceptedImages.any((element)=>data.data['id']==element['id'])) {
+            print('aaaa');
             return false;
           }
+          // print(data.data['id']);
+          acceptedImages.forEach((element) {
+            print(element['id']);
+          });
+          print('bbbb');
           return true;
         }
         
@@ -48,8 +61,9 @@ class _PuzzleBoxState extends State<PuzzleBox> {
           
            if (acceptedImage != null) {
             // Swap the images
+            
             // final temp = acceptedImage;
-            acceptedImage = data.data;
+            acceptedImage = data.data['img']!;
             // final sourcePuzzleBox = context.findAncestorStateOfType<_PuzzleBoxState>();
             // sourcePuzzleBox!.acceptedImage = temp;
             // DragTargetDetails<String> target=DragTargetDetails(data: temp!, offset: Offset(0, 0));
@@ -58,7 +72,7 @@ class _PuzzleBoxState extends State<PuzzleBox> {
             // data.data = temp!;
 
           } else {
-            acceptedImage = data.data;
+            acceptedImage = data.data['img']!;
             
           }
           
@@ -87,12 +101,12 @@ class _PuzzleBoxState extends State<PuzzleBox> {
             border: Border.all(color: Colors.green),
           ),
           child: acceptedImage != null
-              ? Draggable<String>(
+              ? Draggable<Map<String, dynamic>>(
 
-                  data: acceptedImage!,
+                  data: {'img': acceptedImage!, 'id': id},
                   feedback: Opacity(
                     opacity: 0.7,
-                    child: PuzzlePiece(img: acceptedImage!),
+                    child: PuzzlePiece(img: acceptedImage!, id: id,),
                   ),
                   onDragCompleted: (){
                     setState(() {
@@ -100,7 +114,7 @@ class _PuzzleBoxState extends State<PuzzleBox> {
                     });
                   },
                   childWhenDragging: Container(),
-                  child: PuzzlePiece(img: acceptedImage!),
+                  child: PuzzlePiece(img: acceptedImage!, id: id,),
                 )
               :  Center(
                   child: Text(
@@ -135,8 +149,8 @@ class PuzzleHolder extends StatelessWidget {
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  PuzzleBox(index:1),
-                  PuzzleBox(index:2),
+                  PuzzleBox(index:1, id: 1),
+                  PuzzleBox(index:2, id: 2),
                 ],
               ),
             ),
@@ -144,8 +158,8 @@ class PuzzleHolder extends StatelessWidget {
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  PuzzleBox(index:3),
-                  PuzzleBox(index:4),
+                  PuzzleBox(index:3,id: 3,),
+                  PuzzleBox(index:4,id: 4,),
                 ],
               ),
             ),
@@ -162,24 +176,28 @@ class PuzzlePieces extends StatefulWidget {
   @override
   _PuzzlePiecesState createState() => _PuzzlePiecesState();
 }
-final List<String> images = [
+final List<Map<String, dynamic>> images = [
       // "assets/puzzles/Group_4.png",
       // "assets/puzzles/Group_5.png",
       // "assets/puzzles/Group_6.png",
       // "assets/puzzles/Group_7.png",
     ];
 class _PuzzlePiecesState extends State<PuzzlePieces> {
-  final Set<String> acceptedImages = {};
+  // final Set<String> acceptedImages = {};
   late MyMenuController menuController;
 
   @override
   void initState() {
     menuController=Provider.of<MyMenuController>(context, listen: false);
     images.addAll([
-      "assets/puzzles/${menuController.selectedNumber}/Group 4.png",
-      "assets/puzzles/${menuController.selectedNumber}/Group 5.png",
-      "assets/puzzles/${menuController.selectedNumber}/Group 6.png",
-      "assets/puzzles/${menuController.selectedNumber}/Group 7.png",
+       {'img': "assets/puzzles/${menuController.selectedNumber}/Group 4.png", 'id': 1},
+      {'img': "assets/puzzles/${menuController.selectedNumber}/Group 5.png", 'id': 2},
+      {'img': "assets/puzzles/${menuController.selectedNumber}/Group 6.png", 'id': 3},
+      {'img': "assets/puzzles/${menuController.selectedNumber}/Group 7.png", 'id': 4},
+      // "assets/puzzles/${menuController.selectedNumber}/Group 4.png",
+      // "assets/puzzles/${menuController.selectedNumber}/Group 5.png",
+      // "assets/puzzles/${menuController.selectedNumber}/Group 6.png",
+      // "assets/puzzles/${menuController.selectedNumber}/Group 7.png",
     ]);
     // TODO: implement initState
     super.initState();
@@ -209,7 +227,8 @@ class _PuzzlePiecesState extends State<PuzzlePieces> {
         itemBuilder: (context, index) {
           final img = images.where((img) => !acceptedImages.contains(img)).toList()[index];
           return DraggablePuzzlePiece(
-            img: img,
+            img: img['img'],
+            id: img['id'],
             onDragCompleted: () {
               setState(() {
                 acceptedImages.add(img);
@@ -224,32 +243,33 @@ class _PuzzlePiecesState extends State<PuzzlePieces> {
 
 class DraggablePuzzlePiece extends StatelessWidget {
   final String img;
+  final int id;
   final VoidCallback onDragCompleted;
 
   const DraggablePuzzlePiece({super.key, 
     required this.img,
-    required this.onDragCompleted,
+    required this.onDragCompleted, required this.id,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Draggable<String>(
-      data: img,
+    return Draggable<Map<String, dynamic>>(
+      data: {'img': img, 'id': id},
       feedback: Opacity(
         opacity: 0.7,
-        child: PuzzlePiece(img: img),
+        child: PuzzlePiece(img: img,id:id),
       ),
       childWhenDragging: Container(),
       onDragCompleted: onDragCompleted,
-      child: PuzzlePiece(img: img),
+      child: PuzzlePiece(img: img,id:id),
     );
   }
 }
 
 class PuzzlePiece extends StatelessWidget {
   final String img;
-
-  const PuzzlePiece({super.key, required this.img});
+  final int id;
+  const PuzzlePiece({super.key, required this.img, required this.id});
 
   @override
   Widget build(BuildContext context) {

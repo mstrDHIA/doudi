@@ -126,7 +126,7 @@ class _WritingGameScreen3State extends State<WritingGameScreen3> {
               painter: DrawingPainter(points),
             ),
           ),
-          Positioned(
+          Positioned(   
             top: 20,
             left: 20,
             child: GestureDetector(

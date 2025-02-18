@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:match/screens/qr/widget.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -8,6 +11,7 @@ class QRScreen extends StatefulWidget {
 }
 
 class _QRScreenState extends State<QRScreen> {
+  final AudioPlayer _audioPlayer = AudioPlayer();
   final MobileScannerController controller = MobileScannerController(
     formats: const [BarcodeFormat.qrCode],
   );
@@ -22,8 +26,17 @@ class _QRScreenState extends State<QRScreen> {
           Expanded(
             flex: 5,
             child: MobileScanner(
-              onDetect: (barcode) {
-               
+              onDetect: (barcode) async {
+              //  print(barcode.raw);
+              // Map<String, dynamic> data = barcode.raw as Map<String, dynamic>;
+              //  print(barcode.raw.toString());
+              String stringData=barcode.raw.toString().split('displayValue: ')[1].split(', driverLicense:')[0];
+              Map<String, dynamic> data = jsonDecode(stringData);
+              print(data['message']);
+               await _audioPlayer.play(AssetSource(data['message']));
+               Navigator.pop(context);
+
+
               },
               overlayBuilder: (context, constraints) {
                 return Padding(
@@ -79,3 +92,51 @@ class _QRScreenState extends State<QRScreen> {
     );
   }
 }
+
+
+// import 'package:flutter/material.dart';
+// import 'package:mobile_scanner/mobile_scanner.dart';
+
+// class QRCodeScannerScreen extends StatefulWidget {
+//   @override
+//   _QRCodeScannerScreenState createState() => _QRCodeScannerScreenState();
+// }
+
+// class _QRCodeScannerScreenState extends State<QRCodeScannerScreen> {
+//   String? qrCodeData;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('QR Code Scanner'),
+//       ),
+//       body: Column(
+//         children: <Widget>[
+//           Expanded(
+//             flex: 5,
+//             child: MobileScanner(
+//               onDetect: (barcode) {
+//                 if (barcode != null) {
+//                   setState(() {
+//                     qrCodeData = barcode.raw.toString();
+//                   });
+//                   print(qrCodeData);
+//                   // Navigator.of(context).pop(barcode.rawValue);
+//                 }
+//               },
+//             ),
+//           ),
+//           Expanded(
+//             flex: 1,
+//             child: Center(
+//               child: qrCodeData != null
+//                   ? Text('Data: $qrCodeData')
+//                   : Text('Scan a code'),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }

@@ -77,7 +77,7 @@ class _ClickGameScreenState extends State<ClickGameScreen> {
                           child: Image.asset("assets/icons/back.png",width: 50,height: 50,),
                         )),
                       )),
-              const Positioned(top: 30,right: 30,child: Text("اضغط على الرقم 1",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),),
+               Positioned(top: 30,right: 30,child: Text("اضغط على الرقم ${menuController.selectedNumber}",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),),
              
               if (clickController.showOverlay&&clickController.isSolved)
                 GestureDetector(

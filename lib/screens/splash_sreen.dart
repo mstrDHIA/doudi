@@ -1,126 +1,7 @@
-// import 'package:flutter/material.dart';
 
-// class SplashScreen extends StatefulWidget {
-//   @override
-//   _SplashScreenState createState() => _SplashScreenState();
-// }
-
-// class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
-//   late AnimationController _controller;
-//   late Animation<double> _animation;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _controller = AnimationController(
-//       duration: const Duration(seconds: 2),
-//       vsync: this,
-//     )..forward();
-
-//     _animation = CurvedAnimation(
-//       parent: _controller,
-//       curve: Curves.easeInOut,
-//     );
-
-//     _controller.addStatusListener((status) {
-//       if (status == AnimationStatus.completed) {
-//         // Navigate to the next screen after the animation completes
-//         // Navigator.of(context).pushReplacement(
-//         //   MaterialPageRoute(builder: (context) => NextScreen()), // Replace with your next screen
-//         // );
-//       }
-//     });
-//   }
-
-//   @override
-//   void dispose() {
-//     _controller.dispose();
-//     super.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Stack(
-//         children: [
-//           Center(
-//             child: AnimatedBuilder(
-//               animation: _animation,
-//               builder: (context, child) {
-//                 return ClipPath(
-//                   clipper: CircleClipper(_animation.value),
-//                   child: Container(
-//                     color: Colors.green,
-//                   ),
-//                 );
-//               },
-//             ),
-//           ),
-//           Center(
-//             child: AnimatedOpacity(
-//               opacity: _animation.value > 0.5 ? 1.0 : 0.0,
-//               duration: Duration(milliseconds: 500),
-//               child: Column(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 children: [
-//                   Image.asset(
-//                     'assets/images/worm.png', // Replace with your logo asset
-//                     width: 100,
-//                     height: 100,
-//                   ),
-//                   const SizedBox(height: 20),
-//                   const Text(
-//                     'DOUDI',
-//                     style: TextStyle(
-//                       fontSize: 24,
-//                       color: Colors.white,
-//                       fontWeight: FontWeight.bold,
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// class CircleClipper extends CustomClipper<Path> {
-//   final double radiusFactor;
-
-//   CircleClipper(this.radiusFactor);
-
-//   @override
-//   Path getClip(Size size) {
-//     final path = Path();
-//     final radius = radiusFactor * size.longestSide;
-//     path.addOval(Rect.fromCircle(
-//       center: Offset(size.width / 2, size.height / 2),
-//       radius: radius,
-//     ));
-//     return path;
-//   }
-
-//   @override
-//   bool shouldReclip(CircleClipper oldClipper) {
-//     return oldClipper.radiusFactor != radiusFactor;
-//   }
-// }
-
-// class NextScreen extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Center(
-//         child: Text('Next Screen'),
-//       ),
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'package:match/screens/auth/login/welome_sreen.dart';
+import 'package:match/screens/intro_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -251,7 +132,7 @@ _sizeController = AnimationController(
         Future.delayed(const Duration(seconds: 2), () {
           // ignore: use_build_context_synchronously
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const WelcomeScreen()), // Replace with your next screen
+            MaterialPageRoute(builder: (context) =>  IntroScreen()), // Replace with your next screen
           );
         });
       }

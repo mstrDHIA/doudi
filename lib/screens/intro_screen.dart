@@ -40,15 +40,50 @@ class _IntroScreenState extends State<IntroScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Center(
-        child: _controller.value.isInitialized
-            ? AspectRatio(
-
-
-                aspectRatio: _controller.value.aspectRatio,
-                child: VideoPlayer(_controller,),
-              )
-            : CircularProgressIndicator(),
+      body: Stack(
+        children: [
+          Center(
+            child: _controller.value.isInitialized
+                ? AspectRatio(
+          
+          
+                    aspectRatio: _controller.value.aspectRatio,
+                    child: VideoPlayer(_controller,),
+                  )
+                : CircularProgressIndicator(),
+          ),
+          Positioned(
+            bottom: 20,
+            right: 20,
+            child: GestureDetector(
+              onTap: () {
+                _controller.pause();
+                // _controller.removeListener(listener);
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) =>  WelcomeScreen()), // Replace with your next screen
+                );
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width*0.15,
+                height: MediaQuery.of(context).size.height*0.15,
+                
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.black.withOpacity(0.5),
+                ),
+                child: Center(
+                  child: Text(
+                    'تخطي',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

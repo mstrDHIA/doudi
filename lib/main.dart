@@ -8,6 +8,7 @@ import 'package:match/controllers/match_controller.dart';
 import 'package:match/controllers/menu_controller.dart';
 import 'package:match/controllers/press_controller.dart';
 import 'package:match/controllers/puzzle_controller.dart';
+import 'package:match/controllers/qr_controller.dart';
 import 'package:match/screens/audio_screen.dart';
 import 'package:match/screens/auth/login/welome_sreen.dart';
 import 'package:match/screens/home/home_screen.dart';
@@ -59,6 +60,9 @@ class MainApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<CountController>(
             create: (_) => CountController(),
+        ),
+        ChangeNotifierProvider<QrController>(
+            create: (_) => QrController(),
         ),
       ],
       child: MaterialApp(

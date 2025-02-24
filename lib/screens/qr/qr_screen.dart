@@ -4,7 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:match/controllers/qr_controller.dart';
 import 'package:match/screens/qr/widget.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
+// import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:provider/provider.dart';
 
 class QRScreen extends StatefulWidget {
@@ -15,9 +15,9 @@ class QRScreen extends StatefulWidget {
 class _QRScreenState extends State<QRScreen> {
   late QrController qrController;
   // final AudioPlayer _audioPlayer = AudioPlayer();
-  final MobileScannerController controller = MobileScannerController(
-    formats: const [BarcodeFormat.qrCode],
-  );
+  // final MobileScannerController controller = MobileScannerController(
+  //   formats: const [BarcodeFormat.qrCode],
+  // );
   String? barcode;
 
 
@@ -28,6 +28,14 @@ class _QRScreenState extends State<QRScreen> {
     // TODO: implement initState
     super.initState();
   }
+
+
+  @override
+  void dispose() {
+    // controller.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,45 +44,47 @@ class _QRScreenState extends State<QRScreen> {
         quarterTurns: 1,
         child: Expanded(
           flex: 5,
-          child: MobileScanner(
+          child: Container(),
+          // child: MobileScanner(
             
-            onDetect: (barcode) async {
-              print('aaa');
-              // Map<String, dynamic> data = barcode.raw as Map<String, dynamic>;
-              await qrController.qrCodeHandler(qrData: barcode,context: context,barcode: barcode);
-            //  print(barcode.raw);
-            // Map<String, dynamic> data = barcode.raw as Map<String, dynamic>;
-            //  print(barcode.raw.toString());
+          //   onDetect: (barcode,a) async {
+          //     print('aaa');
+          //     // Map<String, dynamic> data = barcode.raw as Map<String, dynamic>;
+          //     await qrController.qrCodeHandler(qrData: barcode,context: context,barcode: barcode);
+          //   //  print(barcode.raw);
+          //   // Map<String, dynamic> data = barcode.raw as Map<String, dynamic>;
+          //   //  print(barcode.raw.toString());
             
-            //  await _audioPlayer.play(AssetSource(data['message']));
-            //  Navigator.pop(context);
+          //   //  await _audioPlayer.play(AssetSource(data['message']));
+          //   //  Navigator.pop(context);
         
         
-            },
-            overlayBuilder: (context, constraints) {
-              return Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Center(
-                    child: Container(
-                      width: MediaQuery.sizeOf(context).width/4,
-                      height: MediaQuery.sizeOf(context).width/4,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.green,
-                        style: BorderStyle.solid
-                        )
-                        // color: Colors.red
+          //   },
+            
+          //   // overlayBuilder: (context, constraints) {
+          //   //   return Padding(
+          //   //     padding: const EdgeInsets.all(16.0),
+          //   //     child: Align(
+          //   //       alignment: Alignment.bottomCenter,
+          //   //       child: Center(
+          //   //         child: Container(
+          //   //           width: MediaQuery.sizeOf(context).width/4,
+          //   //           height: MediaQuery.sizeOf(context).width/4,
+          //   //           decoration: BoxDecoration(
+          //   //             border: Border.all(color: Colors.green,
+          //   //             style: BorderStyle.solid
+          //   //             )
+          //   //             // color: Colors.red
                         
-                      ),
-                    ),
-                  )
-                  // ScannedBarcodeLabel(barcodes: controller.barcodes),
-                ),
-              );
-            },
+          //   //           ),
+          //   //         ),
+          //   //       )
+          //   //       // ScannedBarcodeLabel(barcodes: controller.barcodes),
+          //   //     ),
+          //   //   );
+          //   // },
             
-          ),
+          // ),
         ),
       ),
     );

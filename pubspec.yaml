@@ -18,9 +18,15 @@ dependencies:
   # flutter_barcode_scanner: ^2.0.0
   flutter_colorpicker: ^1.1.0
   # qr_code_scanner: ^0.7.0
-  mobile_scanner: ^6.0.6
+  # mobile_scanner: ^6.0.6
   animated_float_action_button: ^1.0.4
   video_player: ^2.7.1
+  # scan: ^1.6.0
+  # barcode_scan2: ^4.5.0
+  # flutter_barcode_scanner: ^2.0.0
+  simple_barcode_scanner: ^0.3.0
+  mobile_device_identifier: ^0.0.3
+
 
 dev_dependencies:
   flutter_test:

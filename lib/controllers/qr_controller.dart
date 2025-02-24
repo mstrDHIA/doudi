@@ -2,9 +2,14 @@ import 'dart:convert';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:match/controllers/auth_controller.dart';
 import 'package:match/controllers/menu_controller.dart';
 import 'package:match/screens/games/coloring_game/coloring_game_screen.dart';
+import 'package:match/screens/games/games_list.dart';
+import 'package:match/screens/games/writing_game/writing_game_screen_3.dart';
+import 'package:match/screens/main_menu/main_menu_screen.dart';
 import 'package:match/screens/video/video_screen.dart';
+import 'package:mobile_device_identifier/mobile_device_identifier.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
@@ -25,16 +30,18 @@ class QrController extends ChangeNotifier{
 
   qrCodeHandler({required qrData,required context,required barcode}){
     print('bbb');
-    print(barcode.raw);
-    String stringData=barcode.raw.toString().split('displayValue: ')[1].split(', driverLicense:')[0];
+    // print(barcode.raw);
+    // String stringData=barcode.raw.toString().split('displayValue: ')[1].split(', driverLicense:')[0];
     print('ccc');
-              Map<String, dynamic> data = jsonDecode(stringData);
+              Map<String, dynamic> data = jsonDecode(qrData);
               print(data);
     if(data['title']=='auth'){
-      authHandler(qrData: data);
+      print('eee');
+      authHandler(qrData: data['content'],context: context);
+      print('fff');
     }
     else if(data['title']=='activity'){
-      activityHandler(qrData: data,context: context);
+      activityHandler(qrData: data['content'],context: context);
     }
     else if(data['title']=='story'){
       print('ddd');
@@ -43,14 +50,26 @@ class QrController extends ChangeNotifier{
     else if(data['title']=='progress'){
       progressHandler(qrData: data);
     }
+    print('ggg');
   }
 
-  authHandler({required Map<String,dynamic> qrData}){
-    
+  authHandler({required Map<String,dynamic> qrData,required context}) async {
+    if(qrData['title']=="login"){
+        Provider.of<AuthController>(context, listen: false).login(qrData['content']['username'], qrData['content']['password'], context);
+
+    }
+    else if(qrData['title']=="register"){
+       String? mobileDeviceIdentifier = await MobileDeviceIdentifier().getDeviceId();
+      mobileDeviceIdentifier=mobileDeviceIdentifier!.replaceAll(":", "");
+      Provider.of<AuthController>(context, listen: false).register(mobileDeviceIdentifier!, qrData['content']['password'], context);
+    }
+
+  
   }
   activityHandler({required Map<String,dynamic> qrData,required context}){
-    Provider.of<MyMenuController>(context, listen: false).selectedNumber=qrData['number'];
+    // Provider.of<MyMenuController>(context, listen: false).selectedNumber= int.parse(qrData['content']['number']) ;
     if(qrData['title']=="coloring"){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => CanvasPainting()));
       // return ColoringGameScreen();
     }
     else if(qrData['title']=="puzzle"){
@@ -69,13 +88,19 @@ class QrController extends ChangeNotifier{
 
     }
     else if(qrData['title']=="writing"){
-
+      Navigator.push(context, MaterialPageRoute(builder: (context) => WritingGameScreen3()));
+    }
+    else{
+      Navigator.push(context, MaterialPageRoute(builder: (context) => MainMenuScreen()));
     }
        
   }
   storyHandler({required Map<String,dynamic> qrData,required context}) async {
+    print('story');
     if(qrData['title']=="audio"){
-      if(isFirst){
+      print('audio');
+      // if(isFirst){
+        print('first');
         isFirst=false;
         
         audioPlayer.onPlayerComplete.listen((event) {
@@ -86,9 +111,9 @@ class QrController extends ChangeNotifier{
         isPlaying=true;
         // audioPlayer.
         
-      Navigator.pop(context);
+      // Navigator.pop(context);
       notifyListeners();
-      }
+      // }
       
     }
     else if(qrData['title']=="video"){

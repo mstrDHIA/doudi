@@ -1,13 +1,34 @@
+// import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
+import 'package:match/controllers/qr_controller.dart';
+// import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:match/screens/auth/login/login_screen.dart';
+import 'package:match/screens/qr/qr_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 // import 'package:match/screens/home/home_screen.dart';
 // import 'package:match/screens/numbers/numbers_menu.dart';
 
 // ignore: must_be_immutable
-class SelectProfileScreen extends StatelessWidget {
-  List<String> profileOption=["parent","child","QRcode"];
+class SelectProfileScreen extends StatefulWidget {
 
   SelectProfileScreen({super.key});
+
+  @override
+  State<SelectProfileScreen> createState() => _SelectProfileScreenState();
+}
+
+class _SelectProfileScreenState extends State<SelectProfileScreen> {
+  late QrController qrController;
+  // List<String> profileOption=["parent","child","QRcode"];
+  List<String> profileOption=["تسجيل","دخول"];
+  @override
+  void initState() {
+    qrController=Provider.of<QrController>(context, listen: false);
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,9 +79,35 @@ class SelectProfileScreen extends StatelessWidget {
                   children: [
                     for (var i = 0; i < profileOption.length; i++)
                       GestureDetector(
-                        onTap:(){
+                        onTap:() async {
+                          // if(profileOption[i]=="child"){
+                          //   Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
+                          // }
+                          // else if(profileOption[i]=="parent"){
+                          //   // Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
+                          // }
                           if(profileOption[i]=="child"){
                             Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
+                          }
+                          else if(profileOption[i]=="QRcode"){
+                            
+String? res = await SimpleBarcodeScanner.scanBarcode(
+                  context,
+                  barcodeAppBar: const BarcodeAppBar(
+                    appBarTitle: 'مسح الكود',
+                    centerTitle: false,
+                    enableBackButton: true,
+                    backButtonIcon: Icon(Icons.arrow_back_ios),
+                  ),
+                  isShowFlashIcon: true,
+                  delayMillis: 2000,
+                  cameraFace: CameraFace.back,
+                );
+                // setState(() {
+                 String result = res as String;
+                  qrController.qrCodeHandler(qrData: result, context: context, barcode: res);
+                 print(result);
+      
                           }
                         },
                         child: Column(

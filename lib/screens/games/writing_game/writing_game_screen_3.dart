@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -70,7 +71,7 @@ class _WritingGameScreen3State extends State<WritingGameScreen3> {
               style: TextStyle(
                 fontFamily: 'Trace',
                 fontSize: fontSize,
-                color: Colors.grey[300],
+                color: Colors.grey[800],
                 fontWeight: FontWeight.w100,
               ),
             ),
@@ -128,20 +129,22 @@ class _WritingGameScreen3State extends State<WritingGameScreen3> {
           ),
           Positioned(   
             top: 20,
-            left: 20,
+            right: 20,
             child: GestureDetector(
               onTap: () {
+                
                 setState(() {
                   points.clear();
                 });
               },
               child: Container(
                 padding: const EdgeInsets.all(10),
-                color: Colors.blue,
-                child: const Text(
-                  'Clear',
-                  style: TextStyle(color: Colors.white),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: Colors.green,
+
                 ),
+                child: Icon(Icons.restart_alt,color: Colors.white,),
               ),
             ),
           ),
@@ -155,7 +158,17 @@ class _WritingGameScreen3State extends State<WritingGameScreen3> {
                 else{
                   Navigator.pop(context);
                 }
-          }, child: Text((count<16)?"Next":"Done")),bottom: 20,right: 20,)
+          }, child: Text((count<16)?"التالي":"النهاية")),bottom: 20,right: 20,),
+          Positioned(
+                      top: 20,
+                      left: 20,
+                      child: GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: CircleAvatar(child: Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: Image.asset("assets/icons/back.png",width: 50,height: 50,),
+                        )),
+                      )),
         ],
       ),
     );

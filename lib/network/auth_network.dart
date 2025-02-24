@@ -26,7 +26,7 @@ class AuthNetwork {
       print(apis.baseurl + apis.register);
       print(email);
       print(password);
-      print(deviceId);
+      // print(deviceId);
       // print(apis.baseurl + apis.login);
       var response = await Apis.dio.post(apis.baseurl + apis.register, data: {
         "username": email,

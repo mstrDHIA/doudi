@@ -7,10 +7,11 @@ import 'package:match/controllers/count_game_controller.dart';
 import 'package:match/controllers/match_controller.dart';
 import 'package:match/controllers/menu_controller.dart';
 import 'package:match/controllers/press_controller.dart';
+import 'package:match/controllers/progress_controller.dart';
 import 'package:match/controllers/puzzle_controller.dart';
 import 'package:match/controllers/qr_controller.dart';
 import 'package:match/screens/audio_screen.dart';
-import 'package:match/screens/auth/login/welome_sreen.dart';
+import 'package:match/screens/auth/login/welcome_sreen.dart';
 import 'package:match/screens/home/home_screen.dart';
 import 'package:match/screens/intro_screen.dart';
 import 'package:match/screens/main_menu/main_menu_screen.dart';
@@ -63,6 +64,9 @@ class MainApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<QrController>(
             create: (_) => QrController(),
+        ),
+        ChangeNotifierProvider<ProgressController>(
+            create: (_) => ProgressController(),
         ),
       ],
       child: MaterialApp(

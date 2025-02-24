@@ -1,7 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:match/screens/auth/login/welome_sreen.dart';
+import 'package:match/screens/auth/login/welcome_sreen.dart';
 import 'package:match/screens/intro_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -25,7 +26,12 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   bool coverScreen = false;
 
   @override
-  void didChangeDependencies() {
+  Future<void> didChangeDependencies() async {
+    SharedPreferences prefs=await SharedPreferences.getInstance();
+    if((prefs.containsKey('isFirst'))&&(prefs.getBool('isFirst')==true)){
+      prefs.setInt('currentLevel', 1);
+    }
+    prefs.setBool('isFirst', false);
     lastSize=MediaQuery.of(context).size.width *0.05;
     _controller = AnimationController(
       duration: const Duration(seconds: 1),
@@ -131,6 +137,7 @@ _sizeController = AnimationController(
         // Navigate to the next screen after a delay
         Future.delayed(const Duration(seconds: 2), () {
           // ignore: use_build_context_synchronously
+          
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) =>  IntroScreen()), // Replace with your next screen
           );

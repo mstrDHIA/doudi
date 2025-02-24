@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:match/screens/auth/login/welome_sreen.dart';
+import 'package:match/screens/auth/login/welcome_sreen.dart';
 import 'package:match/screens/home/home_screen.dart';
 import 'package:video_player/video_player.dart';
 

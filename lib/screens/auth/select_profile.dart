@@ -20,8 +20,8 @@ class SelectProfileScreen extends StatefulWidget {
 
 class _SelectProfileScreenState extends State<SelectProfileScreen> {
   late QrController qrController;
-  // List<String> profileOption=["parent","child","QRcode"];
-  List<String> profileOption=["تسجيل","دخول"];
+  List<String> profileOption=["parent","child","QRcode"];
+
   @override
   void initState() {
     qrController=Provider.of<QrController>(context, listen: false);
@@ -80,14 +80,11 @@ class _SelectProfileScreenState extends State<SelectProfileScreen> {
                     for (var i = 0; i < profileOption.length; i++)
                       GestureDetector(
                         onTap:() async {
-                          // if(profileOption[i]=="child"){
-                          //   Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
-                          // }
-                          // else if(profileOption[i]=="parent"){
-                          //   // Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
-                          // }
                           if(profileOption[i]=="child"){
                             Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
+                          }
+                          else if(profileOption[i]=="parent"){
+                            // Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
                           }
                           else if(profileOption[i]=="QRcode"){
                             
@@ -107,7 +104,20 @@ String? res = await SimpleBarcodeScanner.scanBarcode(
                  String result = res as String;
                   qrController.qrCodeHandler(qrData: result, context: context, barcode: res);
                  print(result);
-      
+                // });
+                            // Navigator.push(context, MaterialPageRoute(builder: (context)=> QRScreen()));
+  //                            var result = await BarcodeScanner.scan(options: ScanOptions(
+  //                             restrictFormat: [BarcodeFormat.qr],
+                              
+  //                            ));
+  //                            print('aaaa');
+  //          print(result.type); // The result type (barcode, cancelled, failed)
+  // print(result.rawContent); // The barcode content
+  // print(result.format); // The barcode format (as enum)
+  // print(result.formatNote); // If a unknown format was scanned this field contains a note
+
+  // String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+  //                                                  "#ff6666", "Cancel", false, ScanMode.QR);
                           }
                         },
                         child: Column(

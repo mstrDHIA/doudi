@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:match/screens/auth/selet_profile.dart';
+import 'package:match/screens/auth/select_profile.dart';
 // import 'package:match/screens/home/home_screen.dart';
 // import 'package:match/screens/numbers/numbers_menu.dart';
 

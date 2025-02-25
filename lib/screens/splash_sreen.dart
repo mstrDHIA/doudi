@@ -27,11 +27,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
   @override
   Future<void> didChangeDependencies() async {
-    SharedPreferences prefs=await SharedPreferences.getInstance();
-    if((prefs.containsKey('isFirst'))&&(prefs.getBool('isFirst')==true)){
-      prefs.setInt('currentLevel', 1);
-    }
-    prefs.setBool('isFirst', false);
+    
     lastSize=MediaQuery.of(context).size.width *0.05;
     _controller = AnimationController(
       duration: const Duration(seconds: 1),
@@ -144,7 +140,11 @@ _sizeController = AnimationController(
         });
       }
     });
-  
+    SharedPreferences prefs=await SharedPreferences.getInstance();
+    if((prefs.containsKey('isFirst'))&&(prefs.getBool('isFirst')==true)){
+      prefs.setInt('currentLevel', 1);
+    }
+    prefs.setBool('isFirst', false);
     super.didChangeDependencies();
   }
 

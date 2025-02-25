@@ -4,6 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:match/controllers/auth_controller.dart';
 import 'package:match/controllers/menu_controller.dart';
+import 'package:match/controllers/progress_controller.dart';
 import 'package:match/screens/games/coloring_game/coloring_game_screen.dart';
 import 'package:match/screens/games/games_list.dart';
 import 'package:match/screens/games/writing_game/writing_game_screen_3.dart';
@@ -11,13 +12,13 @@ import 'package:match/screens/main_menu/main_menu_screen.dart';
 import 'package:match/screens/video/video_screen.dart';
 import 'package:mobile_device_identifier/mobile_device_identifier.dart';
 import 'package:provider/provider.dart';
-import 'package:video_player/video_player.dart';
+// import 'package:video_player/video_player.dart';
 
 class QrController extends ChangeNotifier{
   bool isFirst=true;
   bool isPlaying=false;
   final AudioPlayer audioPlayer = AudioPlayer();
-  late VideoPlayerController videoController;
+  // late VideoPlayerController videoController;
   
   // List<Map<String, dynamic>> qrScreens = [
   //   {"title":"activity",
@@ -48,7 +49,7 @@ class QrController extends ChangeNotifier{
       storyHandler(qrData: data['content'],context: context);
     }
     else if(data['title']=='progress'){
-      progressHandler(qrData: data);
+      progressHandler(qrData: data,context: context);
     }
     print('ggg');
   }
@@ -135,8 +136,11 @@ class QrController extends ChangeNotifier{
     }
 
   }
-  progressHandler({required Map<String,dynamic> qrData}){
-    
+  progressHandler({required Map<String,dynamic> qrData,required context}){
+    if(qrData['title']=="number"){
+      Provider.of<ProgressController>(context, listen: false).updateCurrentNumber(qrData['content']);
+      // Provider.of<ProgressController>(context, listen: false).updateCurrentNumber();
+    }
   }
 
 

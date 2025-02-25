@@ -1,7 +1,10 @@
+// import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:match/screens/auth/login/welcome_sreen.dart';
 import 'package:match/screens/home/home_screen.dart';
-import 'package:video_player/video_player.dart';
+import 'package:pod_player/pod_player.dart';
+// import 'package:native_video_player/native_video_player.dart';
+// import 'package:video_player/video_player.dart';
 
 class VideoScreen extends StatefulWidget {
   final String videoPath;
@@ -13,33 +16,45 @@ class VideoScreen extends StatefulWidget {
 
 class _IntroScreenState extends State<VideoScreen> {
   final String videoPath;
-  late VideoPlayerController _controller;
+  // late VideoPlayerController _controller;
+  late final PodPlayerController controller;
 
+//  late VideoPlayerController videoPlayerController;
   _IntroScreenState({required this.videoPath});
 
   @override
   void initState() {
-    super.initState();
-    _controller = VideoPlayerController.asset(videoPath)
-      ..initialize().then((_) {
-
-        setState(() {}); // Ensure the first frame is shown after the video is initialized
-        _controller.play(); // Auto play the video
-      
-      });
-      _controller.addListener(() {
-      if (_controller.value.position == _controller.value.duration) {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) =>  HomeScreen()), // Replace with your next screen
-          );
+    controller = PodPlayerController(
+      podPlayerConfig: PodPlayerConfig(
+        forcedVideoFocus: true,
+        autoPlay: true,
         
-      }
-    });
+      ),
+      playVideoFrom: PlayVideoFrom.asset(
+        'assets/videos/number1.mp4',
+      ),
+    )..initialise();
+    super.initState();
+    // _controller = VideoPlayerController.asset(videoPath)
+    //   ..initialize().then((_) {
+
+    //     setState(() {}); // Ensure the first frame is shown after the video is initialized
+    //     _controller.play(); // Auto play the video
+      
+    //   });
+    //   _controller.addListener(() {
+    //   if (_controller.value.position == _controller.value.duration) {
+    //     Navigator.of(context).pushReplacement(
+    //         MaterialPageRoute(builder: (context) =>  HomeScreen()), // Replace with your next screen
+    //       );
+        
+    //   }
+    // });
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    // _controller.dispose();
     super.dispose();
   }
 
@@ -49,22 +64,38 @@ class _IntroScreenState extends State<VideoScreen> {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          Center(
-            child: _controller.value.isInitialized
-                ? AspectRatio(
+        PodVideoPlayer(controller: controller
+        
+        ),
+  //           NativeVideoPlayerView(
+
+  //   onViewReady: (controller) async {
+  //     final videoSource = await VideoSource.init(
+
+  //       path: 'assets/videos/number1.mp4',
+  //       type: VideoSourceType.asset,
+  //     );
+      
+  //     await controller.loadVideoSource(videoSource);
+  //     await controller.play();
+  //   },
+  // ),
+          // Center(
+          //   child: _controller.value.isInitialized
+          //       ? AspectRatio(
           
           
-                    aspectRatio: _controller.value.aspectRatio,
-                    child: VideoPlayer(_controller,),
-                  )
-                : CircularProgressIndicator(),
-          ),
+          //           aspectRatio: _controller.value.aspectRatio,
+          //           child: VideoPlayer(_controller,),
+          //         )
+          //       : CircularProgressIndicator(),
+          // ),
           Positioned(
             bottom: 20,
             right: 20,
             child: GestureDetector(
               onTap: () {
-                _controller.pause();
+                // _controller.pause();
                 // _controller.removeListener(listener);
                 // Navigator.of(context).pushReplacement(
                 //   MaterialPageRoute(builder: (context) =>  WelcomeScreen()), // Replace with your next screen

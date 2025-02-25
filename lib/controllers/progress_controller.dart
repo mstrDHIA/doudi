@@ -9,4 +9,15 @@ class ProgressController extends ChangeNotifier{
     return prefs.getInt('currentLevel') ?? 1;
   }
 
+  updateCurrentNumber(number){
+    // currentNumber++;
+    if(number>currentNumber){
+      SharedPreferences.getInstance().then((prefs) {
+      prefs.setInt('currentLevel', currentNumber);
+    });
+    notifyListeners();
+    }
+    
+  }
+
 }

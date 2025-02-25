@@ -76,8 +76,8 @@ class MainApp extends StatelessWidget {
         // IntroScreen(),
         // AudioScreen(),
         // const 
-        SplashScreen()
-        // NumbersMenuScreen()
+        // SplashScreen()
+        NumbersMenuScreen()
         //  MainMenuScreen()
         //  WelcomeScreen()
         // WritingGameScreen(),

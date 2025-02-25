@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:match/screens/auth/login/welcome_sreen.dart';
-import 'package:video_player/video_player.dart';
+import 'package:pod_player/pod_player.dart';
+// import 'package:video_player/video_player.dart';
 
 class IntroScreen extends StatefulWidget {
   @override
@@ -8,31 +9,52 @@ class IntroScreen extends StatefulWidget {
 }
 
 class _IntroScreenState extends State<IntroScreen> {
-  late VideoPlayerController _controller;
+  // late VideoPlayerController _controller;
+  late final PodPlayerController controller;
 
   @override
   void initState() {
-    super.initState();
-    _controller = VideoPlayerController.asset('assets/videos/intro.mp4',)
-      ..initialize().then((_) {
-
-        setState(() {}); // Ensure the first frame is shown after the video is initialized
-        _controller.play(); // Auto play the video
-      
-      });
-      _controller.addListener(() {
-      if (_controller.value.position == _controller.value.duration) {
+     controller = PodPlayerController(
+      podPlayerConfig: PodPlayerConfig(
+        forcedVideoFocus: true,
+        autoPlay: true,
+        
+      ),
+      playVideoFrom: PlayVideoFrom.asset(
+        'assets/videos/intro.mp4',
+      ),
+    )..initialise();
+    print(controller.totalVideoLength);
+    controller.addListener(() {
+      if (controller.currentVideoPosition == controller.totalVideoLength) {
+        // controller.videoState.
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) =>  WelcomeScreen()), // Replace with your next screen
           );
         
       }
     });
+    super.initState();
+    // _controller = VideoPlayerController.asset('assets/videos/intro.mp4',)
+    //   ..initialize().then((_) {
+
+    //     setState(() {}); // Ensure the first frame is shown after the video is initialized
+    //     _controller.play(); // Auto play the video
+      
+    //   });
+    //   _controller.addListener(() {
+    //   if (_controller.value.position == _controller.value.duration) {
+    //     Navigator.of(context).pushReplacement(
+    //         MaterialPageRoute(builder: (context) =>  WelcomeScreen()), // Replace with your next screen
+    //       );
+        
+    //   }
+    // });
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    controller.dispose();
     super.dispose();
   }
 
@@ -43,22 +65,27 @@ class _IntroScreenState extends State<IntroScreen> {
       body: Stack(
         children: [
           Center(
-            child: _controller.value.isInitialized
-                ? AspectRatio(
+           child: PodVideoPlayer(controller: controller),
+            // child: _controller.value.isInitialized
+            //     ? AspectRatio(
           
           
-                    aspectRatio: _controller.value.aspectRatio,
-                    child: VideoPlayer(_controller,),
-                  )
-                : CircularProgressIndicator(),
+            //         aspectRatio: _controller.value.aspectRatio,
+            //         child: VideoPlayer(_controller,),
+            //       )
+            //     : CircularProgressIndicator(),
           ),
           Positioned(
             bottom: 20,
             right: 20,
             child: GestureDetector(
               onTap: () {
-                _controller.pause();
-                // _controller.removeListener(listener);
+                print(controller.videoState);
+                print(controller.videoState.index);
+                print(controller.videoState.name);
+        
+                controller.pause();
+                // controller.removeListener();
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) =>  WelcomeScreen()), // Replace with your next screen
                 );

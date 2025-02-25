@@ -3,6 +3,7 @@ import 'package:match/controllers/auth_controller.dart';
 import 'package:match/controllers/menu_controller.dart';
 import 'package:match/controllers/progress_controller.dart';
 import 'package:match/screens/home/home_screen.dart';
+import 'package:match/screens/numbers/widgets/numbers_widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,7 +16,7 @@ class NumbersMenuScreen extends StatefulWidget{
 }
 
 class _NumbersMenuScreenState extends State<NumbersMenuScreen> {
-  final List<String> numbers = ["assets/images/number1.png","assets/images/number2.png","assets/images/number3.png","assets/images/number4.png","assets/images/number5.png","assets/images/number6.png","assets/images/number7.png","assets/images/number8.png","assets/images/number9.png","assets/images/number0.png"];
+  final List<String> numbers = ["assets/images/number1.png","assets/images/number2.png","assets/images/number3.png","assets/images/number4.png","assets/images/number5.png","assets/images/qrbox.png","assets/images/number6.png","assets/images/number7.png","assets/images/number8.png","assets/images/number9.png","assets/images/number0.png","assets/images/numbers.png",];
   late MyMenuController menuController;
   late AuthController authController;
   late ProgressController progressController;
@@ -94,20 +95,10 @@ class _NumbersMenuScreenState extends State<NumbersMenuScreen> {
                                     child: GridView.builder(
                                       
                                       shrinkWrap: true,
-                                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5),
-                                    itemCount: 10,
+                                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 6),
+                                    itemCount: 12,
                                      itemBuilder: (BuildContext context, int index) { 
-                                        return Center(child: GestureDetector(
-                                          onTap: (){
-                                            if(index+1<=progressController.currentNumber){
-                                              menuController.selectedNumber=index+1;
-                                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
-                                            }
-                                            
-                                          },
-                                          child: Opacity(
-                                            opacity: (index+1<=progressController.currentNumber)?1:0.5,
-                                            child: Image.asset(numbers[index]))));
+                                        return NumberBox(progressController: progressController, menuController: menuController, numbers: numbers, index: index,);
                                       },),
                                   ),
                                 ),
@@ -127,3 +118,4 @@ class _NumbersMenuScreenState extends State<NumbersMenuScreen> {
 
   }
 }
+

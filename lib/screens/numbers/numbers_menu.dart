@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:match/controllers/auth_controller.dart';
 import 'package:match/controllers/menu_controller.dart';
 import 'package:match/controllers/progress_controller.dart';
-import 'package:match/screens/home/home_screen.dart';
+import 'package:match/controllers/qr_controller.dart';
+import 'package:match/screens/numbers/widgets/dialogs/numbers_dialogs.dart';
+// import 'package:match/screens/home/home_screen.dart';
 import 'package:match/screens/numbers/widgets/numbers_widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 class NumbersMenuScreen extends StatefulWidget{
 
@@ -20,13 +22,14 @@ class _NumbersMenuScreenState extends State<NumbersMenuScreen> {
   late MyMenuController menuController;
   late AuthController authController;
   late ProgressController progressController;
-  
+  late QrController qrController;
   // late SharedPreferences prefs;
   @override
   void initState() {
     menuController=Provider.of<MyMenuController>(context, listen: false);
     authController=Provider.of<AuthController>(context, listen: false);
     progressController=Provider.of<ProgressController>(context, listen: false);
+    qrController=Provider.of<QrController>(context, listen: false);
     // TODO: implement initState
     super.initState();
   }
@@ -60,7 +63,15 @@ class _NumbersMenuScreenState extends State<NumbersMenuScreen> {
                       right: 20,
                       child: GestureDetector(
                         
-                        onTap: () => authController.logout(context),
+                        onTap: () { 
+                          showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return LogoutConfirmationDialog(authController: authController);
+      },
+    );
+                          // authController.logout(context);
+                          },
                         child: CircleAvatar(child: Padding(
                           padding: const EdgeInsets.all(6.0),
                           child: Icon(Icons.logout,color: Colors.green,),
@@ -92,14 +103,18 @@ class _NumbersMenuScreenState extends State<NumbersMenuScreen> {
                                   
                                   width: MediaQuery.of(context).size.width*0.8,
                                   child: Center(
-                                    child: GridView.builder(
-                                      
-                                      shrinkWrap: true,
-                                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 6),
-                                    itemCount: 12,
-                                     itemBuilder: (BuildContext context, int index) { 
-                                        return NumberBox(progressController: progressController, menuController: menuController, numbers: numbers, index: index,);
-                                      },),
+                                    child: Consumer<ProgressController>(
+                                      builder: (context,progressController,child) {
+                                        return GridView.builder(
+                                          
+                                          shrinkWrap: true,
+                                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 6),
+                                        itemCount: 12,
+                                         itemBuilder: (BuildContext context, int index) { 
+                                            return NumberBox(progressController: progressController, menuController: menuController, numbers: numbers, index: index,qrController: qrController,);
+                                          },);
+                                      }
+                                    ),
                                   ),
                                 ),
                               ],
@@ -118,4 +133,5 @@ class _NumbersMenuScreenState extends State<NumbersMenuScreen> {
 
   }
 }
+
 

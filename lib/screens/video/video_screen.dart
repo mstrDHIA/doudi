@@ -31,7 +31,7 @@ class _IntroScreenState extends State<VideoScreen> {
         
       ),
       playVideoFrom: PlayVideoFrom.asset(
-        'assets/videos/number1.mp4',
+        videoPath,
       ),
     )..initialise();
     super.initState();
@@ -95,7 +95,8 @@ class _IntroScreenState extends State<VideoScreen> {
             right: 20,
             child: GestureDetector(
               onTap: () {
-                // _controller.pause();
+                controller.pause();
+                Navigator.pop(context);
                 // _controller.removeListener(listener);
                 // Navigator.of(context).pushReplacement(
                 //   MaterialPageRoute(builder: (context) =>  WelcomeScreen()), // Replace with your next screen

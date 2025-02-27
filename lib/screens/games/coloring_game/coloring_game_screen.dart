@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:match/controllers/menu_controller.dart';
+import 'package:provider/provider.dart';
 // import 'package:image_gallery_saver/image_gallery_saver.dart';
 // import 'package:permission_handler/permission_handler.dart';
 
@@ -19,7 +21,7 @@ class CanvasPainting extends StatefulWidget {
 
 class _CanvasPaintingState extends State<CanvasPainting> {
   GlobalKey globalKey = GlobalKey();
-
+  late MyMenuController menuController;
   List<TouchPoints?> points = [];
   double opacity = 1.0;
   StrokeCap strokeType = StrokeCap.round;
@@ -284,6 +286,13 @@ _selectColor() async {
   }
 
   @override
+  void initState() {
+    menuController=Provider.of<MyMenuController>(context, listen: false);
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -323,7 +332,7 @@ _selectColor() async {
             child: Stack(
               children: <Widget>[
                 Center(
-                  child: Image.asset("assets/images/number/color1.png"),
+                  child: Image.asset("assets/images/number/color${menuController.selectedNumber}.png"),
                   // child: Image.asset("assets/images/number/color${menuController.selectedNumber}.png"),
                 ),
                 CustomPaint(

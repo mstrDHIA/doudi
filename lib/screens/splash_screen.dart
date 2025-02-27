@@ -1,7 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:match/controllers/auth_controller.dart';
+import 'package:match/controllers/progress_controller.dart';
 import 'package:match/screens/auth/login/welcome_sreen.dart';
 import 'package:match/screens/intro_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -24,10 +27,10 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   bool firstTime = true;
   late double lastSize;
   bool coverScreen = false;
-
+  late ProgressController progressController;
   @override
   Future<void> didChangeDependencies() async {
-    
+    progressController.getCurrentNumber();
     lastSize=MediaQuery.of(context).size.width *0.05;
     _controller = AnimationController(
       duration: const Duration(seconds: 1),
@@ -145,12 +148,13 @@ _sizeController = AnimationController(
       prefs.setInt('currentLevel', 1);
     }
     prefs.setBool('isFirst', false);
+    Provider.of<AuthController>(context, listen: false).isAuth= prefs.getBool('isAuth')!;
     super.didChangeDependencies();
   }
 
   @override
   void initState() {
-    
+    progressController=Provider.of<ProgressController>(context, listen: false);
     super.initState();
     
     // _controller.addStatusListener((status) {

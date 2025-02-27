@@ -16,7 +16,7 @@ import 'package:match/screens/home/home_screen.dart';
 import 'package:match/screens/intro_screen.dart';
 import 'package:match/screens/main_menu/main_menu_screen.dart';
 import 'package:match/screens/numbers/numbers_menu.dart';
-import 'package:match/screens/splash_sreen.dart';
+import 'package:match/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:match/utils/theme.dart'; // Import the theme
 
@@ -76,8 +76,8 @@ class MainApp extends StatelessWidget {
         // IntroScreen(),
         // AudioScreen(),
         // const 
-        // SplashScreen()
-        NumbersMenuScreen()
+        SplashScreen()
+        // NumbersMenuScreen()
         //  MainMenuScreen()
         //  WelcomeScreen()
         // WritingGameScreen(),

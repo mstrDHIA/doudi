@@ -6,14 +6,17 @@ class ProgressController extends ChangeNotifier{
   
   getCurrentNumber() async {
     SharedPreferences prefs=await SharedPreferences.getInstance();  
-    return prefs.getInt('currentLevel') ?? 1;
+    currentNumber=prefs.getInt('currentLevel') ?? 1;
   }
 
   updateCurrentNumber(number){
     // currentNumber++;
-    if(number>currentNumber){
+    print(number);
+    if(number==currentNumber+1){
+      
+      currentNumber=number;
       SharedPreferences.getInstance().then((prefs) {
-      prefs.setInt('currentLevel', currentNumber);
+      prefs.setInt('currentLevel', number);
     });
     notifyListeners();
     }

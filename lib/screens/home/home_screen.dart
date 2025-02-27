@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:match/controllers/menu_controller.dart';
+import 'package:match/controllers/progress_controller.dart';
 import 'package:match/controllers/qr_controller.dart';
 import 'package:match/screens/games/coloring_game/coloring_game_screen.dart';
 import 'package:match/screens/games/writing_game/Writing.dart';
@@ -19,9 +21,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late QrController qrController;
+    late MyMenuController menuController;
+
   @override
   void initState() {
     qrController=Provider.of<QrController>(context, listen: false);
+    menuController=Provider.of<MyMenuController>(context, listen: false);
+
     // TODO: implement initState
     super.initState();
   }
@@ -54,10 +60,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Image.asset("assets/icons/back.png",width: 50,height: 50,),
                             )),
                           )),
-               Positioned(
-                              top: MediaQuery.of(context).size.height/2-100,
-                              left: MediaQuery.of(context).size.width/50,
-                              child: Image.asset("assets/images/worm.png")),
+                          Positioned(
+                              top: MediaQuery.of(context).size.height/2-10,
+                              left: MediaQuery.of(context).size.width/30,
+                              child: Image.asset("assets/images/number${menuController.selectedNumber}.png")),
+              //  Positioned(
+              //                 top: MediaQuery.of(context).size.height/2-100,
+              //                 left: MediaQuery.of(context).size.width/50,
+              //                 child: Image.asset("assets/images/number${progressController.currentNumber}.png")),
           //                     HomeItem(top: MediaQuery.of(context).size.height/4,
           // left: MediaQuery.of(context).size.width/4,
           // img: "assets/images/numbers.png",
@@ -66,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
           HomeItem(
             top: MediaQuery.of(context).size.height/4,
           left: MediaQuery.of(context).size.width/4,
-          img: "assets/images/qr.png",
+          img: "assets/images/qrbox.png",
           route:  QRScreen(),
           txt: "مسح",
           qrController: qrController,

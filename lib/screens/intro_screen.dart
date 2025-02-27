@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:match/controllers/auth_controller.dart';
 import 'package:match/screens/auth/login/welcome_sreen.dart';
+import 'package:match/screens/numbers/numbers_menu.dart';
 import 'package:pod_player/pod_player.dart';
+import 'package:provider/provider.dart';
 // import 'package:video_player/video_player.dart';
 
 class IntroScreen extends StatefulWidget {
@@ -28,9 +31,17 @@ class _IntroScreenState extends State<IntroScreen> {
     controller.addListener(() {
       if (controller.currentVideoPosition == controller.totalVideoLength) {
         // controller.videoState.
-        Navigator.of(context).pushReplacement(
+        if(Provider.of<AuthController>(context,listen: false).isAuth){
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) =>  NumbersMenuScreen()), // Replace with your next screen
+          );
+        }
+        else{
+          Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) =>  WelcomeScreen()), // Replace with your next screen
           );
+        }
+        
         
       }
     });
@@ -86,9 +97,16 @@ class _IntroScreenState extends State<IntroScreen> {
         
                 controller.pause();
                 // controller.removeListener();
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) =>  WelcomeScreen()), // Replace with your next screen
-                );
+                if(Provider.of<AuthController>(context,listen: false).isAuth){
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) =>  NumbersMenuScreen()), // Replace with your next screen
+          );
+        }
+        else{
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) =>  WelcomeScreen()), // Replace with your next screen
+          );
+        }
               },
               child: Container(
                 width: MediaQuery.of(context).size.width*0.15,

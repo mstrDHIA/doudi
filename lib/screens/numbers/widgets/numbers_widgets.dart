@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:match/controllers/menu_controller.dart';
 import 'package:match/controllers/progress_controller.dart';
+import 'package:match/controllers/qr_controller.dart';
 import 'package:match/screens/home/home_screen.dart';
 import 'package:match/screens/qr/qr_screen.dart';
+import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
 class NumberBox extends StatefulWidget {
   const NumberBox({
     super.key,
     required this.progressController,
     required this.menuController,
-    required this.numbers, required this.index,
+    required this.numbers, required this.index, required this.qrController,
   });
 
   final ProgressController progressController;
+  final QrController qrController;
   final MyMenuController menuController;
   final List<String> numbers;
   final int index;
@@ -50,14 +53,31 @@ class _NumberBoxState extends State<NumberBox> {
   @override
   Widget build(BuildContext context) {
     return Center(child: GestureDetector(
-      onTap: (){
+      onTap: () async {
  
         if((myindex<=widget.progressController.currentNumber)&&myindex>0){
           widget.menuController.selectedNumber=widget.index+1;
         Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
         }
         else if(myindex==-1){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> QRScreen()));
+          String? res = await SimpleBarcodeScanner.scanBarcode(
+                  context,
+                  barcodeAppBar: const BarcodeAppBar(
+                    appBarTitle: 'مسح الكود',
+                    centerTitle: false,
+                    enableBackButton: true,
+                    backButtonIcon: Icon(Icons.arrow_back_ios),
+                  ),
+                  isShowFlashIcon: true,
+                  delayMillis: 2000,
+                  cameraFace: CameraFace.back,
+                );
+                // setState(() {
+                 String result = res as String;
+                 widget.qrController.qrCodeHandler(qrData: result, context: context, barcode: res);
+                 print(result);
+          
+          // Navigator.push(context, MaterialPageRoute(builder: (context)=> QRScreen()));
         }
         else if(myindex==-2){
           // Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));

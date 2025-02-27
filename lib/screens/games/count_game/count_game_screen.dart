@@ -3,7 +3,6 @@ import 'package:match/controllers/count_game_controller.dart';
 import 'package:match/controllers/menu_controller.dart';
 import 'package:match/screens/games/count_game/widgets/count_game_widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:stroke_text/stroke_text.dart';
 
 class CountGameScreen extends StatefulWidget {
   const CountGameScreen({super.key});

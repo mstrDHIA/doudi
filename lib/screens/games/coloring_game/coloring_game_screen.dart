@@ -1,11 +1,7 @@
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 // import 'package:animated_floatactionbuttons/animated_floatactionbuttons.dart';
-import 'package:animated_float_action_button/animated_floating_action_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:match/controllers/menu_controller.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +11,8 @@ import 'package:provider/provider.dart';
 //void main() => runApp(CanvasPainting());
 
 class CanvasPainting extends StatefulWidget {
+  const CanvasPainting({super.key});
+
   @override
   _CanvasPaintingState createState() => _CanvasPaintingState();
 }
@@ -43,7 +41,7 @@ class _CanvasPaintingState extends State<CanvasPainting> {
             actions: <Widget>[
               //Resetting to default stroke value
               ElevatedButton(
-                child: Icon(
+                child: const Icon(
                   Icons.clear,
                 ),
                 onPressed: () {
@@ -52,7 +50,7 @@ class _CanvasPaintingState extends State<CanvasPainting> {
                 },
               ),
               ElevatedButton(
-                child: Icon(
+                child: const Icon(
                   Icons.brush,
                   size: 24,
                 ),
@@ -62,7 +60,7 @@ class _CanvasPaintingState extends State<CanvasPainting> {
                 },
               ),
               ElevatedButton(
-                child: Icon(
+                child: const Icon(
                   Icons.brush,
                   size: 40,
                 ),
@@ -72,7 +70,7 @@ class _CanvasPaintingState extends State<CanvasPainting> {
                 },
               ),
               ElevatedButton(
-                child: Icon(
+                child: const Icon(
                   Icons.brush,
                   size: 60,
                 ),
@@ -106,7 +104,7 @@ _selectColor() async {
         ),
         actions: [
           TextButton(
-            child: Text('Done'),
+            child: const Text('Done'),
             onPressed: () {
               Navigator.of(context).pop(selectedColor);
             },
@@ -136,7 +134,7 @@ _selectColor() async {
             //Creates three buttons to pick opacity value.
             actions: <Widget>[
               ElevatedButton(
-                child: Icon(
+                child: const Icon(
                   Icons.opacity,
                   size: 24,
                 ),
@@ -147,7 +145,7 @@ _selectColor() async {
                 },
               ),
               ElevatedButton(
-                child: Icon(
+                child: const Icon(
                   Icons.opacity,
                   size: 40,
                 ),
@@ -157,7 +155,7 @@ _selectColor() async {
                 },
               ),
               ElevatedButton(
-                child: Icon(
+                child: const Icon(
                   Icons.opacity,
                   size: 60,
                 ),
@@ -196,7 +194,6 @@ _selectColor() async {
     return <Widget>[
       FloatingActionButton(
         heroTag: "paint_save",
-        child: Icon(Icons.save),
         tooltip: 'Save',
         onPressed: () {
           //min: 0, max: 50
@@ -204,10 +201,10 @@ _selectColor() async {
             // _save();
           });
         },
+        child: const Icon(Icons.save),
       ),
       FloatingActionButton(
         heroTag: "paint_stroke",
-        child: Icon(Icons.brush),
         tooltip: 'Stroke',
         onPressed: () {
           //min: 0, max: 50
@@ -215,6 +212,7 @@ _selectColor() async {
             _pickStroke();
           });
         },
+        child: const Icon(Icons.brush),
       ),
       // FloatingActionButton(
       //   heroTag: "paint_opacity",
@@ -229,17 +227,16 @@ _selectColor() async {
       // ),
       FloatingActionButton(
           heroTag: "erase",
-          child: Icon(Icons.clear),
           tooltip: "Erase",
           onPressed: () {
             setState(() {
               points.clear();
             });
-          }),
+          },
+          child: const Icon(Icons.clear)),
       FloatingActionButton(
         backgroundColor: Colors.white,
         heroTag: "color",
-        child: colorMenuItem(selectedColor),
         tooltip: 'Color',
         onPressed: ()  {
             _selectColor();
@@ -248,6 +245,7 @@ _selectColor() async {
           //   // selectedColor = Colors.red;
           // });
         },
+        child: colorMenuItem(selectedColor),
       ),
       // FloatingActionButton(
       //   backgroundColor: Colors.white,
@@ -353,14 +351,13 @@ _selectColor() async {
                       )),
                 Positioned(
                   right: 10,
-                  child: Container(
+                  child: SizedBox(
                     height: MediaQuery.of(context).size.height,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       FloatingActionButton(
                             heroTag: "paint_save",
-                            child: Icon(Icons.save),
                             tooltip: 'Save',
                             onPressed: () {
                               //min: 0, max: 50
@@ -368,10 +365,10 @@ _selectColor() async {
                                 // _save();
                               });
                             },
+                            child: const Icon(Icons.save),
                           ),
                           FloatingActionButton(
                             heroTag: "paint_stroke",
-                            child: Icon(Icons.brush),
                             tooltip: 'Stroke',
                             onPressed: () {
                               //min: 0, max: 50
@@ -379,6 +376,7 @@ _selectColor() async {
                                 _pickStroke();
                               });
                             },
+                            child: const Icon(Icons.brush),
                           ),
                           // FloatingActionButton(
                           //   heroTag: "paint_opacity",
@@ -393,17 +391,16 @@ _selectColor() async {
                           // ),
                           FloatingActionButton(
                               heroTag: "erase",
-                              child: Icon(Icons.clear),
                               tooltip: "Erase",
                               onPressed: () {
                                 setState(() {
                                   points.clear();
                                 });
-                              }),
+                              },
+                              child: const Icon(Icons.clear)),
                           FloatingActionButton(
                             backgroundColor: Colors.white,
                             heroTag: "color",
-                            child: colorMenuItem(selectedColor),
                             tooltip: 'Color',
                             onPressed: ()  {
                                 _selectColor();
@@ -412,6 +409,7 @@ _selectColor() async {
                               //   // selectedColor = Colors.red;
                               // });
                             },
+                            child: colorMenuItem(selectedColor),
                           ),
                     ],
                                     ),

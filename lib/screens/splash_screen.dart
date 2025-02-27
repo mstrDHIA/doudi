@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:match/controllers/auth_controller.dart';
 import 'package:match/controllers/progress_controller.dart';
-import 'package:match/screens/auth/login/welcome_sreen.dart';
 import 'package:match/screens/intro_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -138,7 +137,7 @@ _sizeController = AnimationController(
           // ignore: use_build_context_synchronously
           
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) =>  IntroScreen()), // Replace with your next screen
+            MaterialPageRoute(builder: (context) =>  const IntroScreen()), // Replace with your next screen
           );
         });
       }

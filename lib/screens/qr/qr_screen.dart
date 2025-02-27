@@ -1,13 +1,12 @@
-import 'dart:convert';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:match/controllers/qr_controller.dart';
-import 'package:match/screens/qr/widget.dart';
 // import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:provider/provider.dart';
 
 class QRScreen extends StatefulWidget {
+  const QRScreen({super.key});
+
   @override
   _QRScreenState createState() => _QRScreenState();
 }

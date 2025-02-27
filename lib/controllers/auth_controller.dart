@@ -17,7 +17,7 @@ class AuthController extends ChangeNotifier{
       SharedPreferences prefs=await SharedPreferences.getInstance();
       isAuth = true;
       await prefs.setBool('isAuth', true);
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> NumbersMenuScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> const NumbersMenuScreen()));
 
       notifyListeners();
     }
@@ -37,7 +37,7 @@ class AuthController extends ChangeNotifier{
       SharedPreferences prefs=await SharedPreferences.getInstance();
       isAuth = true;
       await prefs.setBool('isAuth', true);
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> NumbersMenuScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> const NumbersMenuScreen()));
       notifyListeners();
     }
 
@@ -50,7 +50,7 @@ class AuthController extends ChangeNotifier{
     SharedPreferences prefs=await SharedPreferences.getInstance();
     isAuth = false;
     await prefs.setBool('isAuth', false);
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> WelcomeScreen()), (route) => false);
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> const WelcomeScreen()), (route) => false);
     notifyListeners();
   }
 }

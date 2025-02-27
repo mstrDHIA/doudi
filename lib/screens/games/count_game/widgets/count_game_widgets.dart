@@ -46,7 +46,7 @@ class _AnswerBoxState extends State<AnswerBox> {
              
               borderRadius: BorderRadius.circular(10)
             ),
-            child:  Center(child: StrokeText(text:widget.number.toString(),strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 50),strokeWidth: 2,))),
+            child:  Center(child: StrokeText(text:widget.number.toString(),strokeColor: Colors.black,textColor: Colors.red,textStyle: const TextStyle(fontSize: 50),strokeWidth: 2,))),
         );
       }
     );

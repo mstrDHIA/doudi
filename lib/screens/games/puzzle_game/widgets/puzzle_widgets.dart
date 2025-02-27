@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_unnecessary_containers, library_private_types_in_public_api, no_logic_in_create_state
 
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:match/controllers/menu_controller.dart';
@@ -45,9 +44,9 @@ class _PuzzleBoxState extends State<PuzzleBox> {
             return false;
           }
           // print(data.data['id']);
-          acceptedImages.forEach((element) {
+          for (var element in acceptedImages) {
             print(element['id']);
-          });
+          }
           print('bbbb');
           return true;
         }

@@ -14,17 +14,17 @@ class LogoutConfirmationDialog extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: AlertDialog(
-        title: Text('تاكيد تسجيل الخروج'),
-        content: Text('هل انت متاكد من تسجيل الخروج؟'),
+        title: const Text('تاكيد تسجيل الخروج'),
+        content: const Text('هل انت متاكد من تسجيل الخروج؟'),
         actions: <Widget>[
           TextButton(
-            child: Text('الغاء'),
+            child: const Text('الغاء'),
             onPressed: () {
               Navigator.of(context).pop(); // Dismiss the dialog
             },
           ),
           TextButton(
-            child: Text('تسجيل الخروج'),
+            child: const Text('تسجيل الخروج'),
             onPressed: () {
               Navigator.of(context).pop(); // Dismiss the dialog
               authController.logout(context); // Perform the logout action

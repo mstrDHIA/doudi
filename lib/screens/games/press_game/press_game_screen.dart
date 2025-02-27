@@ -115,7 +115,7 @@ class _PressGameScreenState extends State<PressGameScreen> {
                       strokeWidth: 3,
                       strokeColor: Colors.black,
                     )),
-                     Positioned(top: 20,right: 20,child:  Text(text,style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),),
+                     Positioned(top: 20,right: 20,child:  Text(text,style: const TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),),
                     if(pressController.isSolved)
                     Container(
                   color: Colors.green.withOpacity(0.5),

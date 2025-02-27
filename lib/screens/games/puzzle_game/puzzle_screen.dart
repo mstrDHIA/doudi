@@ -49,7 +49,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                       )),
            Consumer<PuzzleController>(
              builder: (context,puzzleController,child) {
-               return Row(
+               return const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   

@@ -3,7 +3,6 @@ import 'package:match/controllers/menu_controller.dart';
 import 'package:match/controllers/progress_controller.dart';
 import 'package:match/controllers/qr_controller.dart';
 import 'package:match/screens/home/home_screen.dart';
-import 'package:match/screens/qr/qr_screen.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
 class NumberBox extends StatefulWidget {

@@ -1,13 +1,13 @@
-import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:match/controllers/menu_controller.dart';
-import 'package:match/screens/games/writing_game/painters/number_three_painter.dart';
 import 'package:provider/provider.dart';
 // import 'number_three_painter.dart'; // Import the NumberThreePainter
 
 class WritingGameScreen3 extends StatefulWidget {
+  const WritingGameScreen3({super.key});
+
   @override
   _WritingGameScreen3State createState() => _WritingGameScreen3State();
 }
@@ -144,11 +144,11 @@ class _WritingGameScreen3State extends State<WritingGameScreen3> {
                   color: Colors.green,
 
                 ),
-                child: Icon(Icons.restart_alt,color: Colors.white,),
+                child: const Icon(Icons.restart_alt,color: Colors.white,),
               ),
             ),
           ),
-          Positioned(child: ElevatedButton(onPressed: (){
+          Positioned(bottom: 20,right: 20,child: ElevatedButton(onPressed: (){
             if(count<16){
              setState(() {
               
@@ -158,7 +158,7 @@ class _WritingGameScreen3State extends State<WritingGameScreen3> {
                 else{
                   Navigator.pop(context);
                 }
-          }, child: Text((count<16)?"التالي":"النهاية")),bottom: 20,right: 20,),
+          }, child: Text((count<16)?"التالي":"النهاية")),),
           Positioned(
                       top: 20,
                       left: 20,

@@ -3,11 +3,13 @@ import 'package:audioplayers/audioplayers.dart';
 class AudioScreen extends StatelessWidget {
   final AudioPlayer _audioPlayer = AudioPlayer();
 
+  AudioScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Audio Screen'),
+        title: const Text('Audio Screen'),
       ),
       body: Column(
         children: [
@@ -16,7 +18,7 @@ class AudioScreen extends StatelessWidget {
               onPressed: () async {
                 await _audioPlayer.play(AssetSource('audio/intro.ogg'));
               },
-              child: Text('Play Sound'),
+              child: const Text('Play Sound'),
             ),
           ),
            Center(
@@ -24,7 +26,7 @@ class AudioScreen extends StatelessWidget {
               onPressed: () async {
                 await _audioPlayer.stop();
               },
-              child: Text('Stop Sound'),
+              child: const Text('Stop Sound'),
             ),
           ),
         ],

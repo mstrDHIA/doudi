@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:match/controllers/menu_controller.dart';
-import 'package:match/controllers/progress_controller.dart';
 import 'package:match/controllers/qr_controller.dart';
 import 'package:match/screens/games/coloring_game/coloring_game_screen.dart';
-import 'package:match/screens/games/writing_game/Writing.dart';
-import 'package:match/screens/games/writing_game/writing_game_screen.dart';
-import 'package:match/screens/games/writing_game/writing_game_screen_2.dart';
 import 'package:match/screens/games/writing_game/writing_game_screen_3.dart';
 import 'package:match/screens/home/widgets/home_widgets.dart';
 import 'package:match/screens/main_menu/main_menu_screen.dart';
@@ -77,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
             top: MediaQuery.of(context).size.height/4,
           left: MediaQuery.of(context).size.width/4,
           img: "assets/images/qrbox.png",
-          route:  QRScreen(),
+          route:  const QRScreen(),
           txt: "مسح",
           qrController: qrController,
           ),
@@ -85,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
           HomeItem(top: MediaQuery.of(context).size.height/3,
           left: MediaQuery.of(context).size.width/2.3,
           img: "assets/images/olors.png",
-          route:  CanvasPainting(),
+          route:  const CanvasPainting(),
           txt: "الالوان",
           qrController: qrController,
           ),
@@ -95,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
           img: "assets/images/writing.png",
           qrController: qrController,
           // route: const WritingGameScreen(),
-          route: WritingGameScreen3(),
+          route: const WritingGameScreen3(),
           txt: "الكتابة",),
           HomeItem(top: MediaQuery.of(context).size.height/2.5,
           qrController: qrController,
@@ -126,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.black.withOpacity(0.5),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         'تخطي',
                         style: TextStyle(

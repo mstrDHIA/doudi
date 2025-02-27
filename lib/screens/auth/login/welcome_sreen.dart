@@ -56,7 +56,7 @@ class WelcomeScreen extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>SelectProfileScreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const SelectProfileScreen()));
                       },
                       child: Container(
                         width: MediaQuery.sizeOf(context).width * 0.2,

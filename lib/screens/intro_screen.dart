@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 // import 'package:video_player/video_player.dart';
 
 class IntroScreen extends StatefulWidget {
+  const IntroScreen({super.key});
+
   @override
   _IntroScreenState createState() => _IntroScreenState();
 }
@@ -18,7 +20,7 @@ class _IntroScreenState extends State<IntroScreen> {
   @override
   void initState() {
      controller = PodPlayerController(
-      podPlayerConfig: PodPlayerConfig(
+      podPlayerConfig: const PodPlayerConfig(
         forcedVideoFocus: true,
         autoPlay: true,
         
@@ -33,12 +35,12 @@ class _IntroScreenState extends State<IntroScreen> {
         // controller.videoState.
         if(Provider.of<AuthController>(context,listen: false).isAuth){
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) =>  NumbersMenuScreen()), // Replace with your next screen
+            MaterialPageRoute(builder: (context) =>  const NumbersMenuScreen()), // Replace with your next screen
           );
         }
         else{
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) =>  WelcomeScreen()), // Replace with your next screen
+            MaterialPageRoute(builder: (context) =>  const WelcomeScreen()), // Replace with your next screen
           );
         }
         
@@ -99,12 +101,12 @@ class _IntroScreenState extends State<IntroScreen> {
                 // controller.removeListener();
                 if(Provider.of<AuthController>(context,listen: false).isAuth){
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) =>  NumbersMenuScreen()), // Replace with your next screen
+            MaterialPageRoute(builder: (context) =>  const NumbersMenuScreen()), // Replace with your next screen
           );
         }
         else{
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) =>  WelcomeScreen()), // Replace with your next screen
+            MaterialPageRoute(builder: (context) =>  const WelcomeScreen()), // Replace with your next screen
           );
         }
               },
@@ -116,7 +118,7 @@ class _IntroScreenState extends State<IntroScreen> {
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.black.withOpacity(0.5),
                 ),
-                child: Center(
+                child: const Center(
                   child: Text(
                     'تخطي',
                     style: TextStyle(

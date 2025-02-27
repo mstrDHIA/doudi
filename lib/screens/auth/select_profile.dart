@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:match/controllers/qr_controller.dart';
 // import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:match/screens/auth/login/login_screen.dart';
-import 'package:match/screens/qr/qr_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 // import 'package:match/screens/home/home_screen.dart';
@@ -12,7 +11,7 @@ import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 // ignore: must_be_immutable
 class SelectProfileScreen extends StatefulWidget {
 
-  SelectProfileScreen({super.key});
+  const SelectProfileScreen({super.key});
 
   @override
   State<SelectProfileScreen> createState() => _SelectProfileScreenState();

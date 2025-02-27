@@ -3,10 +3,8 @@ import 'dart:convert';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:match/controllers/auth_controller.dart';
-import 'package:match/controllers/menu_controller.dart';
 import 'package:match/controllers/progress_controller.dart';
 import 'package:match/screens/games/coloring_game/coloring_game_screen.dart';
-import 'package:match/screens/games/games_list.dart';
 import 'package:match/screens/games/writing_game/writing_game_screen_3.dart';
 import 'package:match/screens/main_menu/main_menu_screen.dart';
 import 'package:match/screens/video/video_screen.dart';
@@ -49,7 +47,7 @@ class QrController extends ChangeNotifier {
         authHandler(qrData: data['content'], context: context);
       }
       else{
-        SnackBar snackBar = SnackBar(
+        SnackBar snackBar = const SnackBar(
           content: Text('Please login first'),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -68,7 +66,7 @@ class QrController extends ChangeNotifier {
           await MobileDeviceIdentifier().getDeviceId();
       mobileDeviceIdentifier = mobileDeviceIdentifier!.replaceAll(":", "");
       Provider.of<AuthController>(context, listen: false).register(
-          mobileDeviceIdentifier!, qrData['content']['password'], context);
+          mobileDeviceIdentifier, qrData['content']['password'], context);
     }
   }
 
@@ -76,7 +74,7 @@ class QrController extends ChangeNotifier {
     // Provider.of<MyMenuController>(context, listen: false).selectedNumber= int.parse(qrData['content']['number']) ;
     if (qrData['title'] == "coloring") {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => CanvasPainting()));
+          context, MaterialPageRoute(builder: (context) => const CanvasPainting()));
       // return ColoringGameScreen();
     } else if (qrData['title'] == "puzzle") {
     } else if (qrData['title'] == "count") {
@@ -85,7 +83,7 @@ class QrController extends ChangeNotifier {
     } else if (qrData['title'] == "click") {
     } else if (qrData['title'] == "writing") {
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => WritingGameScreen3()));
+          MaterialPageRoute(builder: (context) => const WritingGameScreen3()));
     } else {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => MainMenuScreen()));

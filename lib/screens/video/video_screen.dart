@@ -1,7 +1,5 @@
 // import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:match/screens/auth/login/welcome_sreen.dart';
-import 'package:match/screens/home/home_screen.dart';
 import 'package:pod_player/pod_player.dart';
 // import 'package:native_video_player/native_video_player.dart';
 // import 'package:video_player/video_player.dart';
@@ -9,7 +7,7 @@ import 'package:pod_player/pod_player.dart';
 class VideoScreen extends StatefulWidget {
   final String videoPath;
 
-   VideoScreen({super.key, required this.videoPath});
+   const VideoScreen({super.key, required this.videoPath});
   @override
   _IntroScreenState createState() => _IntroScreenState(videoPath: videoPath);
 }
@@ -25,7 +23,7 @@ class _IntroScreenState extends State<VideoScreen> {
   @override
   void initState() {
     controller = PodPlayerController(
-      podPlayerConfig: PodPlayerConfig(
+      podPlayerConfig: const PodPlayerConfig(
         forcedVideoFocus: true,
         autoPlay: true,
         
@@ -110,7 +108,7 @@ class _IntroScreenState extends State<VideoScreen> {
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.black.withOpacity(0.5),
                 ),
-                child: Center(
+                child: const Center(
                   child: Text(
                     'تخطي',
                     style: TextStyle(

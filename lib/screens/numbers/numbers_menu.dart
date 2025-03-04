@@ -58,7 +58,49 @@ class _NumbersMenuScreenState extends State<NumbersMenuScreen> {
               ),
             ),
           ),
+
           Positioned(
+                      top: 20,
+                      right: 120,
+                      child: GestureDetector(
+                        
+                        onTap: () { 
+    //                       showDialog(
+    //   context: context,
+    //   builder: (BuildContext context) {
+    //     return LogoutConfirmationDialog(authController: authController);
+    //   },
+    // );
+                          // authController.logout(context);
+                          },
+                        child: const CircleAvatar(child: Padding(
+                          padding: EdgeInsets.all(6.0),
+                          child: Icon(Icons.person,color: Colors.green,),
+                          // child: Image.asset("assets/icons/back.png",width: 50,height: 50,),
+                        )),
+                      )),
+          Positioned(
+                      top: 20,
+                      right: 70,
+                      child: GestureDetector(
+                        
+                        onTap: () { 
+    //                       showDialog(
+    //   context: context,
+    //   builder: (BuildContext context) {
+    //     return LogoutConfirmationDialog(authController: authController);
+    //   },
+    // );
+                          // authController.logout(context);
+                          },
+                        child: const CircleAvatar(child: Padding(
+                          padding: EdgeInsets.all(6.0),
+                          child: Icon(Icons.settings,color: Colors.green,),
+                          // child: Image.asset("assets/icons/back.png",width: 50,height: 50,),
+                        )),
+                      )),
+
+                      Positioned(
                       top: 20,
                       right: 20,
                       child: GestureDetector(

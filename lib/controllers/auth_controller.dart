@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:match/network/auth_network.dart';
 import 'package:match/screens/auth/login/welcome_sreen.dart';
 import 'package:match/screens/numbers/numbers_menu.dart';
+import 'package:match/screens/profile/add_profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends ChangeNotifier{
   bool isAuth = false;
-  
+  bool hasProfile = false;
   // bool get isAuth => _isAuth;
   AuthNetwork authNetwork = AuthNetwork();
   Future<void> login(String email, String password,context) async {
@@ -17,7 +18,13 @@ class AuthController extends ChangeNotifier{
       SharedPreferences prefs=await SharedPreferences.getInstance();
       isAuth = true;
       await prefs.setBool('isAuth', true);
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> const NumbersMenuScreen()));
+      if(hasProfile){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> const NumbersMenuScreen()));
+      }
+      else{
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>  AddProfileScreen()));
+      }
+      // Navigator.push(context, MaterialPageRoute(builder: (context)=> const NumbersMenuScreen()));
 
       notifyListeners();
     }

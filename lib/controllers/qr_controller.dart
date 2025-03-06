@@ -30,7 +30,7 @@ class QrController extends ChangeNotifier {
     Map<String, dynamic> data = jsonDecode(qrData);
 
     if (Provider.of<AuthController>(context, listen: false).isAuth) {
-      if (data['content']['content'] <= Provider.of<ProgressController>(context, listen: false).currentNumber) {
+      if (data['content']['number'] <= Provider.of<ProgressController>(context, listen: false).currentNumber) {
         if (data['title'] == 'activity') {
           activityHandler(qrData: data['content'], context: context);
         } else if (data['title'] == 'story') {
@@ -56,15 +56,17 @@ class QrController extends ChangeNotifier {
   }
 
   authHandler({required Map<String, dynamic> qrData, required context}) async {
+    String? mobileDeviceIdentifier =
+          await MobileDeviceIdentifier().getDeviceId();
+      mobileDeviceIdentifier = mobileDeviceIdentifier!.replaceAll(":", "");
     if (qrData['title'] == "login") {
       Provider.of<AuthController>(context, listen: false).login(
-          qrData['content']['username'],
+          // qrData['content']['username'],
+          mobileDeviceIdentifier,
           qrData['content']['password'],
           context);
     } else if (qrData['title'] == "register") {
-      String? mobileDeviceIdentifier =
-          await MobileDeviceIdentifier().getDeviceId();
-      mobileDeviceIdentifier = mobileDeviceIdentifier!.replaceAll(":", "");
+      
       Provider.of<AuthController>(context, listen: false).register(
           mobileDeviceIdentifier, qrData['content']['password'], context);
     }

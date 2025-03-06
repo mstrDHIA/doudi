@@ -15,32 +15,32 @@ class MainMenuScreen extends StatelessWidget{
     //   'route':'/match'
     // },
     {
-      'title':'Press',
-      'icon':Icons.ads_click,
+      'title':'اضغط على الشاشة',
+      'icon':'assets/icons/click.png',
       'widget':const PressGameScreen(),
       'route':'/press'
     },
     {
-      'title':'Puzzle',
-      'icon':Icons.question_answer,
+      'title':'حل الأحجية',
+      'icon':'assets/icons/puzzle.png',
       'widget':const PuzzleScreen(),
       'route':'/puzzle'
     },
     {
-      'title':'Count',
-      'icon':Icons.numbers,
+      'title':'احسب الاشياء',
+      'icon':'assets/icons/countdown.png',
       'widget':const CountGameScreen(),
       'route':'/count'
     },
     {
-      'title':'Colors',
-      'icon':Icons.color_lens,
+      'title':'لغبة الالوان',
+      'icon':'assets/icons/color-palette.png',
       'widget':const ColorsGameScreen(),
       'route':'/colors'
     },
     {
-      'title':'Click',
-      'icon':Icons.ads_click,
+      'title':'اختر الرقم الصحيح',
+      'icon':'assets/icons/check-box.png',
       'widget':const ClickGameScreen(),
       'route':'/click'
     },
@@ -71,20 +71,24 @@ class MainMenuScreen extends StatelessWidget{
             ), itemBuilder: (context,index)=>
             GestureDetector(
               onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>menuItems[index]['widget'])),
-              child: Container(
-                // width: 100,
-                // height: 100,
-                // width: MediaQuery.of(context).size.width/5,
-                // height: MediaQuery.of(context).size.width/5,
-                color: Colors.white,
-                child: Center(child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                     Icon(menuItems[index]['icon']),
-                     const SizedBox(height: 10,),
-                    Text(menuItems[index]['title']),
-                  ],
-                )),
+              child: Column(
+                children: [
+                  Container(
+                    // width: 100,
+                    // height: 100,
+                    // width: MediaQuery.of(context).size.width/5,
+                    // height: MediaQuery.of(context).size.width/5,
+                    color: Colors.white,
+                    child: Center(child: Image.asset(menuItems[index]['icon'],
+                    width: MediaQuery.of(context).size.width/10,
+                    height: MediaQuery.of(context).size.width/10,
+                    )),
+                  ),
+                   const SizedBox(height: 10,),
+                        Container(
+                          color: Colors.white,
+                          child: Text(menuItems[index]['title'])),
+                ],
               ),
             ),
              itemCount: menuItems.length,),

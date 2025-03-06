@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:match/controllers/auth_controller.dart';
 import 'package:match/controllers/progress_controller.dart';
 import 'package:match/screens/intro_screen.dart';
+import 'package:match/screens/numbers/numbers_menu.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,6 +16,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
+
+  late AuthController authController;
   late AnimationController _controller;
   late Animation<double> _fallAnimation;
   late AnimationController _sizeController;
@@ -126,6 +129,7 @@ _sizeController = AnimationController(
       }
       
     });
+    SharedPreferences prefs=await SharedPreferences.getInstance();
     _finalSizeController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         setState(() {
@@ -135,14 +139,14 @@ _sizeController = AnimationController(
         // Navigate to the next screen after a delay
         Future.delayed(const Duration(seconds: 2), () {
           // ignore: use_build_context_synchronously
-          
+          prefs.getBool('isAuth')!?authController.login(prefs.getString('username')!, prefs.getString('password')!, context):
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) =>  const IntroScreen()), // Replace with your next screen
           );
         });
       }
     });
-    SharedPreferences prefs=await SharedPreferences.getInstance();
+    
     if((prefs.containsKey('isFirst'))&&(prefs.getBool('isFirst')==true)){
       prefs.setInt('currentLevel', 1);
     }
@@ -153,6 +157,7 @@ _sizeController = AnimationController(
 
   @override
   void initState() {
+    authController=Provider.of<AuthController>(context, listen: false);
     progressController=Provider.of<ProgressController>(context, listen: false);
     super.initState();
     

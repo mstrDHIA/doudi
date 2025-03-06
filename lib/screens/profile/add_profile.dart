@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_inner_shadow/flutter_inner_shadow.dart';
+import 'package:match/controllers/auth_controller.dart';
+// import 'package:flutter_inner_shadow/flutter_inner_shadow.dart';
 import 'package:match/screens/numbers/numbers_menu.dart';
 import 'package:match/screens/profile/widgets/profile_widgets.dart';
+import 'package:provider/provider.dart';
 
 class AddProfileScreen extends StatefulWidget {
   @override
@@ -9,10 +11,23 @@ class AddProfileScreen extends StatefulWidget {
 }
 
 class _AddProfileScreenState extends State<AddProfileScreen> {
+  late AuthController authController;
   final _formKey = GlobalKey<FormState>();
-  String name = '';
-  String _email = '';
-  String _phone = '';
+  TextEditingController firstNameController=TextEditingController();
+  TextEditingController lastNameController=TextEditingController();
+  TextEditingController emailController=TextEditingController();
+  TextEditingController phoneController=TextEditingController();
+  TextEditingController sexController=TextEditingController();
+  TextEditingController ageController=TextEditingController();
+  TextEditingController cityController=TextEditingController();
+  TextEditingController addressController=TextEditingController();
+
+  @override
+  void initState() {
+    authController=Provider.of<AuthController>(context,listen: false);
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +74,8 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        FormChip(txt:'الاسم'),
-                        FormChip(txt:'اللقب'),
+                        FormChip(txt:'الاسم',textController: firstNameController,inputType: TextInputType.name,),
+                        FormChip(txt:'اللقب',textController: lastNameController,inputType: TextInputType.name,),
                         // Container(
                         //   width: MediaQuery.of(context).size.width * 0.4,
                         //   child: TextFormField(
@@ -88,7 +103,7 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                         //     _phone = value!;
                         //   },
                         // ),
-                        // SizedBox(height: 20),
+                        // SizedBox(height: 10),
                         // ElevatedButton(
                         //   onPressed: () {
                         //     if (_formKey.currentState!.validate()) {
@@ -103,41 +118,42 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                         // ),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        FormChip(txt:'البريد الالكتروني'),
-                        FormChip(txt:'رقم الهاتف'),
+                        FormChip(txt:'البريد الالكتروني',textController: emailController,inputType: TextInputType.emailAddress,),
+                        FormChip(txt:'رقم الهاتف',textController: phoneController,inputType: TextInputType.phone,),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 10),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        FormChip(txt:'الجنس'),
-                        FormChip(txt:'تاريخ الميلاد'),
+                        SelectChip(txt:'الجنس',textController: sexController,options: ['ذكر','انثى'],),
+                        // FormChip(txt:'الجنس',textController: sexController,),
+                        FormChip(txt:'العمر',textController: ageController,inputType: TextInputType.number,),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 10),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        FormChip(txt:'العنوان'),
-                        FormChip(txt:'المدينة'),
+                        FormChip(txt:'العنوان',textController: addressController,inputType: TextInputType.streetAddress,),
+                        FormChip(txt:'المدينة',textController: cityController,inputType: TextInputType.text,),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    // SizedBox(height: 10),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        FormChip(txt:'الدولة'),
-                        FormChip(txt:'الرمز البريدي'),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    //   children: <Widget>[
+                    //     FormChip(txt:'الدولة'),
+                    //     FormChip(txt:'الرمز البريدي'),
+                    //   ],
+                    // ),
                     // Row(
                     //   mainAxisAlignment: MainAxisAlignment.spaceAround,
                     //   children: <Widget>[
@@ -145,7 +161,7 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                     //     FormChip(txt:'المستوى الدراسي'),
                     //   ],
                     // ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 10),
                     GestureDetector(
                       onTap: (){
                         // if (_formKey.currentState!.validate()) {
@@ -155,7 +171,8 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                         //     const SnackBar(content: Text('تم حفظ الملف الشخصي')),
                         //   );
                         // }
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>  NumbersMenuScreen()));
+                        authController.editProfile(context,address: addressController.text,city: cityController.text,age: ageController.text,email: emailController.text,firstName: firstNameController.text,lastName: lastNameController.text,phone: phoneController.text,sex: sexController.text,);
+                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>  NumbersMenuScreen()));
                       },
                       child: Container(
                       

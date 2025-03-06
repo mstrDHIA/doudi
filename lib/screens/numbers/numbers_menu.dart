@@ -6,6 +6,7 @@ import 'package:match/controllers/qr_controller.dart';
 import 'package:match/screens/numbers/widgets/dialogs/numbers_dialogs.dart';
 // import 'package:match/screens/home/home_screen.dart';
 import 'package:match/screens/numbers/widgets/numbers_widgets.dart';
+import 'package:match/screens/profile/profile_screen.dart';
 import 'package:provider/provider.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
@@ -65,6 +66,7 @@ class _NumbersMenuScreenState extends State<NumbersMenuScreen> {
                       child: GestureDetector(
                         
                         onTap: () { 
+                          Navigator.push(context, MaterialPageRoute(builder:  (context)=>ProfileScreen()));
     //                       showDialog(
     //   context: context,
     //   builder: (BuildContext context) {
@@ -85,6 +87,7 @@ class _NumbersMenuScreenState extends State<NumbersMenuScreen> {
                       child: GestureDetector(
                         
                         onTap: () { 
+                          Provider.of<AuthController>(context, listen: false).login('6D5E8847105E86F7D34C642C647511F9636F48DFB88488112DF01C22853D7DB3','12345',context);
     //                       showDialog(
     //   context: context,
     //   builder: (BuildContext context) {

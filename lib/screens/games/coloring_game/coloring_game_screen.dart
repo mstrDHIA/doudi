@@ -1,10 +1,14 @@
+import 'dart:typed_data';
 import 'dart:ui' as ui;
+import 'dart:ui';
 
 // import 'package:animated_floatactionbuttons/animated_floatactionbuttons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:match/controllers/menu_controller.dart';
 import 'package:provider/provider.dart';
+import 'package:saver_gallery/saver_gallery.dart';
 // import 'package:image_gallery_saver/image_gallery_saver.dart';
 // import 'package:permission_handler/permission_handler.dart';
 
@@ -282,6 +286,7 @@ _selectColor() async {
       // ),
     ];
   }
+  var scr = GlobalKey();
 
   @override
   void initState() {
@@ -290,131 +295,152 @@ _selectColor() async {
     super.initState();
   }
 
+  takescrshot() async {
+  RenderRepaintBoundary boundary = scr.currentContext!.findRenderObject() as RenderRepaintBoundary; // the key provided
+  var image = await boundary.toImage();
+  var byteData = await image.toByteData(format: ImageByteFormat.png);
+  var pngBytes = byteData!.buffer.asUint8List();
+  final result = await SaverGallery.saveImage(
+    Uint8List.fromList(pngBytes),
+    quality: 60,
+    fileName: menuController.selectedNumber.toString(),
+    androidRelativePath: "Pictures/doudi/coloring/${menuController.selectedNumber}",
+    skipIfExists: false,
+  );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: GestureDetector(
-          onPanUpdate: (details) {
-            setState(() {
-              RenderBox renderBox = context.findRenderObject() as RenderBox;
-              points.add(TouchPoints(
-                  points: renderBox.globalToLocal(details.globalPosition),
-                  paint: Paint()
-                    ..strokeCap = strokeType
-                    ..isAntiAlias = true
-                    ..color = selectedColor.withOpacity(opacity)
-                    ..strokeWidth = strokeWidth));
-            });
-          },
-          onPanStart: (details) {
-            setState(() {
-              RenderBox renderBox = context.findRenderObject() as RenderBox;
-              points.add(TouchPoints(
-                  points: renderBox.globalToLocal(details.globalPosition),
-                  paint: Paint()
-                    ..strokeCap = strokeType
-                    ..isAntiAlias = true
-                    ..color = selectedColor.withOpacity(opacity)
-                    ..strokeWidth = strokeWidth));
-            });
-          },
-          onPanEnd: (details) {
-            setState(() {
-              points.add(null);
-            });
-          },
-          child: RepaintBoundary(
-            key: globalKey,
-            child: Stack(
-              children: <Widget>[
-                Center(
-                  child: Image.asset("assets/images/number/color${menuController.selectedNumber}.png"),
-                  // child: Image.asset("assets/images/number/color${menuController.selectedNumber}.png"),
+        body: RepaintBoundary(
+          key: scr,
+          child: Container(
+            color: Colors.white,
+            child: GestureDetector(
+              onPanUpdate: (details) {
+                setState(() {
+                  RenderBox renderBox = context.findRenderObject() as RenderBox;
+                  points.add(TouchPoints(
+                      points: renderBox.globalToLocal(details.globalPosition),
+                      paint: Paint()
+                        ..strokeCap = strokeType
+                        ..isAntiAlias = true
+                        ..color = selectedColor.withOpacity(opacity)
+                        ..strokeWidth = strokeWidth));
+                });
+              },
+              onPanStart: (details) {
+                setState(() {
+                  RenderBox renderBox = context.findRenderObject() as RenderBox;
+                  points.add(TouchPoints(
+                      points: renderBox.globalToLocal(details.globalPosition),
+                      paint: Paint()
+                        ..strokeCap = strokeType
+                        ..isAntiAlias = true
+                        ..color = selectedColor.withOpacity(opacity)
+                        ..strokeWidth = strokeWidth));
+                });
+              },
+              onPanEnd: (details) {
+                setState(() {
+                  points.add(null);
+                });
+              },
+              child: RepaintBoundary(
+                key: globalKey,
+                child: Stack(
+                  children: <Widget>[
+                    Center(
+                      child: Image.asset("assets/images/number/color${menuController.selectedNumber}.png"),
+                      // child: Image.asset("assets/images/number/color${menuController.selectedNumber}.png"),
+                    ),
+                    CustomPaint(
+                      size: Size.infinite,
+                      painter: MyPainter(
+                        pointsList: points,
+                      ),
+                    ),
+                    Positioned(
+                          top: 20,
+                          left: 20,
+                          child: GestureDetector(
+                            onTap: () => Navigator.pop(context),
+                            child: CircleAvatar(child: Padding(
+                              padding: const EdgeInsets.all(6.0),
+                              child: Image.asset("assets/icons/back.png",width: 50,height: 50,),
+                            )),
+                          )),
+                    Positioned(
+                      right: 10,
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          FloatingActionButton(
+                                heroTag: "paint_save",
+                                tooltip: 'Save',
+                                onPressed: () {
+                                  takescrshot();
+                                  //min: 0, max: 50
+                                  // setState(() {
+                                  //   // _save();
+                                  // });
+                                },
+                                child: const Icon(Icons.save),
+                              ),
+                              FloatingActionButton(
+                                heroTag: "paint_stroke",
+                                tooltip: 'Stroke',
+                                onPressed: () {
+                                  //min: 0, max: 50
+                                  setState(() {
+                                    _pickStroke();
+                                  });
+                                },
+                                child: const Icon(Icons.brush),
+                              ),
+                              // FloatingActionButton(
+                              //   heroTag: "paint_opacity",
+                              //   child: Icon(Icons.opacity),
+                              //   tooltip: 'Opacity',
+                              //   onPressed: () {
+                              //     //min:0, max:1
+                              //     setState(() {
+                              //       _opacity();
+                              //     });
+                              //   },
+                              // ),
+                              FloatingActionButton(
+                                  heroTag: "erase",
+                                  tooltip: "Erase",
+                                  onPressed: () {
+                                    setState(() {
+                                      points.clear();
+                                    });
+                                  },
+                                  child: const Icon(Icons.restart_alt)),
+                              FloatingActionButton(
+                                // backgroundColor: Colors.white,
+                                heroTag: "color",
+                                tooltip: 'Color',
+                                onPressed: ()  {
+                                    _selectColor();
+                                  // setState(() {
+                                   
+                                  //   // selectedColor = Colors.red;
+                                  // });
+                                },
+                                child: colorMenuItem(selectedColor),
+                              ),
+                        ],
+                                        ),
+                      ),)
+                  ],
                 ),
-                CustomPaint(
-                  size: Size.infinite,
-                  painter: MyPainter(
-                    pointsList: points,
-                  ),
-                ),
-                Positioned(
-                      top: 20,
-                      left: 20,
-                      child: GestureDetector(
-                        onTap: () => Navigator.pop(context),
-                        child: CircleAvatar(child: Padding(
-                          padding: const EdgeInsets.all(6.0),
-                          child: Image.asset("assets/icons/back.png",width: 50,height: 50,),
-                        )),
-                      )),
-                Positioned(
-                  right: 10,
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      FloatingActionButton(
-                            heroTag: "paint_save",
-                            tooltip: 'Save',
-                            onPressed: () {
-                              //min: 0, max: 50
-                              setState(() {
-                                // _save();
-                              });
-                            },
-                            child: const Icon(Icons.save),
-                          ),
-                          FloatingActionButton(
-                            heroTag: "paint_stroke",
-                            tooltip: 'Stroke',
-                            onPressed: () {
-                              //min: 0, max: 50
-                              setState(() {
-                                _pickStroke();
-                              });
-                            },
-                            child: const Icon(Icons.brush),
-                          ),
-                          // FloatingActionButton(
-                          //   heroTag: "paint_opacity",
-                          //   child: Icon(Icons.opacity),
-                          //   tooltip: 'Opacity',
-                          //   onPressed: () {
-                          //     //min:0, max:1
-                          //     setState(() {
-                          //       _opacity();
-                          //     });
-                          //   },
-                          // ),
-                          FloatingActionButton(
-                              heroTag: "erase",
-                              tooltip: "Erase",
-                              onPressed: () {
-                                setState(() {
-                                  points.clear();
-                                });
-                              },
-                              child: const Icon(Icons.clear)),
-                          FloatingActionButton(
-                            backgroundColor: Colors.white,
-                            heroTag: "color",
-                            tooltip: 'Color',
-                            onPressed: ()  {
-                                _selectColor();
-                              // setState(() {
-                               
-                              //   // selectedColor = Colors.red;
-                              // });
-                            },
-                            child: colorMenuItem(selectedColor),
-                          ),
-                    ],
-                                    ),
-                  ),)
-              ],
+              ),
             ),
           ),
         ),

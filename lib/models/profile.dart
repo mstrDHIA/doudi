@@ -1,5 +1,3 @@
-import 'package:match/models/user.dart';
-
 class Profile {
   int? id;
   String? firstName;
@@ -48,7 +46,7 @@ class Profile {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data =  {};
     data['id'] = this.id;
     data['first_name'] = this.firstName;
     data['last_name'] = this.lastName;

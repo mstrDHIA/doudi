@@ -74,20 +74,37 @@ class MainMenuScreen extends StatelessWidget{
               child: Column(
                 children: [
                   Container(
+                    width: MediaQuery.of(context).size.width/10,
+                      height: MediaQuery.of(context).size.width/10,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                    ),
                     // width: 100,
                     // height: 100,
                     // width: MediaQuery.of(context).size.width/5,
                     // height: MediaQuery.of(context).size.width/5,
-                    color: Colors.white,
-                    child: Center(child: Image.asset(menuItems[index]['icon'],
-                    width: MediaQuery.of(context).size.width/10,
-                    height: MediaQuery.of(context).size.width/10,
-                    )),
+                    
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Center(child: Image.asset(menuItems[index]['icon'],
+                      // width: MediaQuery.of(context).size.width/10,
+                      // height: MediaQuery.of(context).size.width/10,
+                      )),
+                    ),
                   ),
                    const SizedBox(height: 10,),
                         Container(
-                          color: Colors.white,
-                          child: Text(menuItems[index]['title'])),
+                           decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.white,
+                    ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: Text(menuItems[index]['title'],
+                            style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                          ),
+                          )
                 ],
               ),
             ),

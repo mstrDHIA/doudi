@@ -15,17 +15,26 @@ class AuthController extends ChangeNotifier{
   // bool get isAuth => _isAuth;
   AuthNetwork authNetwork = AuthNetwork();
   Future<void> login(String email, String password,context) async {
+    print('bbb');
     
     Response response = await authNetwork.login(email, password);
+    print('ddd');
     if(response.statusCode == 200){
+      print('eee');
       SharedPreferences prefs=await SharedPreferences.getInstance();
+      print('fff');
       isAuth = true;
+      print('ggg');
       await prefs.setBool('isAuth', true);
+      print('hhh');
       saveCredintials(email, password, response.data);
-      if(hasProfile){
+      print('iii');
+      if(prefs.getBool( 'hasProfile') == true){
+        print('jjj');
         Navigator.push(context, MaterialPageRoute(builder: (context)=> const NumbersMenuScreen()));
       }
       else{
+        print('kkk');
         Navigator.push(context, MaterialPageRoute(builder: (context)=>  AddProfileScreen()));
       }
       
@@ -43,7 +52,9 @@ class AuthController extends ChangeNotifier{
       hasProfile = true;
       await prefs.setBool('hasProfile', true);
     }
-    currentUser = User.fromJson(data);
+    currentUser = User.fromJson(data['user']);
+    currentUser.profile = Profile.fromJson(data['profile']);
+    print(data);
     await prefs.setString('username', username);
     await prefs.setString('password', password);
   }
@@ -81,20 +92,31 @@ class AuthController extends ChangeNotifier{
 
   editProfile(context,{String? firstName,String? lastName,String? email,String? phone,String? sex,String? city,String? address,String? age,}) async {
     Profile profile=Profile(
+      id: currentUser.profile!.id,
+      role: currentUser.profile!.role,
+      // deviceId: ,
+      qrCode: 'a',
       address: address,
       age: int.parse(age!),
       city: city,
       email: email,
       firstName: firstName,
       lastName: lastName,
-      phone: phone,
+      phone: phone.toString(),
+      deviceId: currentUser.username,
       sex: sex,
     );
-    
+    print(firstName);
     Map<String,dynamic> data=profile.toJson();
-    data['user']=currentUser.toJson();
-    Response response = await authNetwork.editProfile(data,currentUser.id);
+    data['user']={
+      'id':currentUser.id,
+      'username':'a',
+      'password':'12345',
+    };
+    Response response = await authNetwork.editProfile(data,currentUser.profile!.id);
     if(response.statusCode==200){
+      SharedPreferences prefs=await SharedPreferences.getInstance();
+      await prefs.setBool('hasProfile', true);
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>NumbersMenuScreen()));
     }
   }

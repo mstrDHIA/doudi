@@ -1,0 +1,2 @@
+C:/work/doudi/android/app/.cxx/Debug/b196j31d/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/work/doudi/android/app/.cxx/Debug/b196j31d/armeabi-v7a/CMakeFiles/rebuild_cache.dir

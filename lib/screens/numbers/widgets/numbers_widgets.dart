@@ -85,7 +85,7 @@ class _NumberBoxState extends State<NumberBox> {
       
       },
       child: Opacity(
-        opacity: (((myindex<=widget.progressController.currentNumber)&&myindex!=0)||myindex<0||myindex<=-1)?1:0.5,
+        opacity: (((myindex<=widget.progressController.currentNumber)&&myindex!=0)||myindex<0)?1:0.5,
         child: Image.asset(widget.numbers[widget.index]))));
   }
 }

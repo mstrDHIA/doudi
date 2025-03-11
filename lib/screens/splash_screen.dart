@@ -4,6 +4,7 @@ import 'package:match/controllers/auth_controller.dart';
 import 'package:match/controllers/progress_controller.dart';
 import 'package:match/screens/intro_screen.dart';
 import 'package:match/screens/numbers/numbers_menu.dart';
+import 'package:mobile_device_identifier/mobile_device_identifier.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -137,12 +138,19 @@ _sizeController = AnimationController(
         });
         // _opacityController.forward();
         // Navigate to the next screen after a delay
-        Future.delayed(const Duration(seconds: 2), () {
+        Future.delayed(const Duration(seconds: 2), () async {
+          print('aaaaa');
+          print(prefs.getString('username'));
           // ignore: use_build_context_synchronously
-          prefs.getBool('isAuth')!?authController.login(prefs.getString('username')!, prefs.getString('password')!, context):
+          // if
+          String? deviceId =
+          await MobileDeviceIdentifier().getDeviceId();
+          deviceId = deviceId!.replaceAll(":", "");
+          prefs.getBool('isAuth')!?authController.login(deviceId!, '12345', context):
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) =>  const IntroScreen()), // Replace with your next screen
           );
+          print('bbbbb');
         });
       }
     });
@@ -151,7 +159,14 @@ _sizeController = AnimationController(
       prefs.setInt('currentLevel', 1);
     }
     prefs.setBool('isFirst', false);
-    Provider.of<AuthController>(context, listen: false).isAuth= prefs.getBool('isAuth')!;
+    if(prefs.containsKey('isAuth')==false){
+      prefs.setBool('isAuth', false);
+      // prefs.setInt('currentLevel', 1);
+    }
+    else{
+        Provider.of<AuthController>(context, listen: false).isAuth= prefs.getBool('isAuth')!;
+
+    }
     super.didChangeDependencies();
   }
 

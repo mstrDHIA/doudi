@@ -15,7 +15,7 @@ class User {
     email = json['email'];
     firstName = json['first_name'];
     lastName = json['last_name'];
-    profile =  Profile.fromJson(json['profile']);
+    // profile =  Profile.fromJson(json['profile']);
   }
 
   Map<String, dynamic> toJson() {

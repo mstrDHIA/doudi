@@ -7,6 +7,8 @@ class AuthNetwork {
     print('aaaa');
     try {
       print('bbbb');
+      print(email);
+      print(password);
       // print(apis.baseurl + apis.login);
       var response = await Apis.dio.post(apis.baseurl + apis.login, data: {
         "username": email,
@@ -32,7 +34,7 @@ class AuthNetwork {
       // print(deviceId);
       // print(apis.baseurl + apis.login);
       var response = await Apis.dio.post(apis.baseurl + apis.register, data: {
-        "username": email,
+        "username": deviceId,
         "password": password,
         // "device_id":deviceId
       });
@@ -51,7 +53,10 @@ class AuthNetwork {
 
 
   editProfile(data,id) async {
-    var response = await Apis.dio.put(apis.baseurl + apis.profile+id+'/', data: data
+    print(data);
+    print(id);
+    
+    var response = await Apis.dio.put(apis.baseurl + apis.profile+id.toString()+'/', data: data
     // {
     //     "username": email,
     //     "password": password,

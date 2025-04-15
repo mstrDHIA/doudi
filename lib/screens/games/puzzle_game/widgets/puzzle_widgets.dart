@@ -65,14 +65,14 @@ class _PuzzleBoxState extends State<PuzzleBox> {
           if(acceptedImage == null) {
             
             if(acceptedImages.any((element)=>data.data['id']==element['id'])) {
-              // print('aaaa');
+              print('aaaa');
               return false;
             }
             // print(data.data['id']);
             // for (var element in acceptedImages) {
             //   print(element['id']);
             // }
-            // print('bbbb');
+            print('bbbb');
             if(id==data.data['id']){
               isCorrect[index-1]=true;
             }

@@ -6,6 +6,10 @@ class AuthNetwork {
    login(String email, String password) async {
     try {
 
+      print("username: "+ email+
+        
+        "password: "+ password,);
+
       // print(apis.baseurl + apis.login);
       var response = await Apis.dio.post(apis.baseurl + apis.login, data: {
         "username": email,
@@ -18,7 +22,7 @@ class AuthNetwork {
       }
       // return false;
     } catch (e) {
-      // print(e);
+      print(e);
       // return false;
     }
   }

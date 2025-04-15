@@ -1,4 +1,6 @@
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
+import 'package:match/controllers/colors_controller.dart';
 import 'package:match/controllers/menu_controller.dart';
 import 'package:match/screens/games/colors_game/widgets/colors_widgets.dart';
 import 'package:provider/provider.dart';
@@ -12,9 +14,18 @@ class ColorsGameScreen extends StatefulWidget{
 
 class _ColorsGameScreenState extends State<ColorsGameScreen> {
   late MyMenuController menuController;
+  late ColorsController colorsController;
+  final ConfettiController _confettiController =
+      ConfettiController(duration: const Duration(seconds: 2),
+      
+      );
+ 
   @override
   void initState() {
     menuController=Provider.of<MyMenuController>(context, listen: false);
+    colorsController=Provider.of<ColorsController>(context, listen: false);
+        colorsController.getRandomColors();
+
     super.initState();
   }
   @override
@@ -23,6 +34,7 @@ class _ColorsGameScreenState extends State<ColorsGameScreen> {
       body: Stack(
 
         children: [
+          
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -41,11 +53,11 @@ class _ColorsGameScreenState extends State<ColorsGameScreen> {
               children: [
                 Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ColorUnit(index: 0,number:menuController.selectedNumber),
-                    ColorUnit(index: 1,number:menuController.selectedNumber),
-                    ColorUnit(index: 2,number:menuController.selectedNumber),
-                    ColorUnit(index: 3,number:menuController.selectedNumber),
-                    ColorUnit(index: 4,number:menuController.selectedNumber),
+                    ColorUnit(index: 0,number:menuController.selectedNumber,confettiController: _confettiController,),
+                    ColorUnit(index: 1,number:menuController.selectedNumber,confettiController: _confettiController),
+                    ColorUnit(index: 2,number:menuController.selectedNumber,confettiController: _confettiController),
+                    ColorUnit(index: 3,number:menuController.selectedNumber,confettiController: _confettiController),
+                    ColorUnit(index: 4,number:menuController.selectedNumber,confettiController: _confettiController),
                     // StrokeText(text: '1',strokeColor: Colors.black,textColor: Colors.red,textStyle: TextStyle(fontSize: 80),strokeWidth: 2,),
                     // StrokeText(text: '1',strokeColor: Colors.black,textColor: Colors.green,textStyle: TextStyle(fontSize: 80),strokeWidth: 2,),
                     // StrokeText(text: '1',strokeColor: Colors.black,textColor: Colors.purple,textStyle: TextStyle(fontSize: 80),strokeWidth: 2,),
@@ -76,6 +88,17 @@ class _ColorsGameScreenState extends State<ColorsGameScreen> {
                 //     ),
                 //   ),
                 // ),
+                Positioned(
+                  left: MediaQuery.of(context).size.width*0.5,
+                  top: 0,
+                  child: ConfettiWidget(
+                            confettiController: _confettiController,
+                            blastDirectionality: BlastDirectionality.explosive,
+                            
+                            shouldLoop: false,
+                            colors: const [Colors.blue, Colors.red, Colors.green, Colors.yellow],
+                          ),
+                ),
         ],
       ),
     );

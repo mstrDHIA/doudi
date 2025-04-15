@@ -59,6 +59,7 @@ class QrController extends ChangeNotifier {
           await MobileDeviceIdentifier().getDeviceId();
       mobileDeviceIdentifier = mobileDeviceIdentifier!.replaceAll(":", "");
     if (qrData['title'] == "login") {
+      print('login from auth handler');
       Provider.of<AuthController>(context, listen: false).login(
           // qrData['content']['username'],
           mobileDeviceIdentifier,

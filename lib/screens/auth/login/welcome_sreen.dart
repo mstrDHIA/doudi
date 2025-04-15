@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:match/controllers/qr_controller.dart';
 import 'package:match/screens/auth/select_profile.dart';
+import 'package:provider/provider.dart';
 // import 'package:match/screens/home/home_screen.dart';
 // import 'package:match/screens/numbers/numbers_menu.dart';
 
@@ -70,17 +72,33 @@ class WelcomeScreen extends StatelessWidget {
                         )),
                     ),
                       const SizedBox(height: 10,),
-                      Container(
-                  width: MediaQuery.sizeOf(context).width * 0.2,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.green),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Center(child: Text('Je n\'est pas de compte',style: TextStyle(color: Colors.green),)),
-                  ))
+                      GestureDetector(
+                        onTap: (){
+                          print("login");
+                        Map<String,dynamic>  data= {
+      
+    
+            "title": "login",
+            "content": {
+                "username": "hama",
+                "password": "12345"
+            }
+        };
+    Provider.of<QrController>(context, listen: false).authHandler(qrData: data, context: context);
+                          // Navigator.push(context, MaterialPageRoute(builder: (context)=>const SelectProfileScreen()));
+                        },
+                        child: Container(
+                                          width: MediaQuery.sizeOf(context).width * 0.2,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: Colors.green),
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.circular(50),
+                                          ),
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Center(child: Text('Je n\'est pas de compte',style: TextStyle(color: Colors.green),)),
+                                          )),
+                      )
                   ],
                 ),
                   

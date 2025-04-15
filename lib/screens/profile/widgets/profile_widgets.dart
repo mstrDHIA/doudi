@@ -19,7 +19,7 @@ class FormChip extends StatelessWidget {
                   color: Colors.white.withOpacity(0.5),
                   blurRadius: 1
                 ),
-                 BoxShadow(
+                 const BoxShadow(
                   color: Colors.white,
                   spreadRadius: -4.0,
                   offset: Offset(0, 2),
@@ -33,7 +33,7 @@ class FormChip extends StatelessWidget {
         child: TextFormField(
           keyboardType: inputType,
           controller: textController,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
           decoration: InputDecoration(labelText: txt,
           border: InputBorder.none,
           ),
@@ -82,7 +82,7 @@ class InfoChip extends StatelessWidget {
                         color: Colors.white.withOpacity(0.5),
                         blurRadius: 1
                       ),
-                       BoxShadow(
+                       const BoxShadow(
                         color: Colors.white,
                         spreadRadius: -4.0,
                         offset: Offset(0, 2),
@@ -94,7 +94,7 @@ class InfoChip extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(info,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                   
                  
                  
@@ -142,7 +142,7 @@ class _SelectChipState extends State<SelectChip> {
               color: Colors.white.withOpacity(0.5),
               blurRadius: 1,
             ),
-            BoxShadow(
+            const BoxShadow(
               color: Colors.white,
               spreadRadius: -4.0,
               offset: Offset(0, 2),

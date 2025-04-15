@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class Apis {
-  String baseurl="https://c05d-2c0f-f698-4096-f96f-5893-57ac-6b82-989b.ngrok-free.app/api/";
+  String baseurl="https://80c1-2c0f-f698-41c6-a3a6-1b9-c29d-b4d1-fd17.ngrok-free.app/api/";
   static final Dio dio=Dio();
   final String login="login/";
   final String register="register/";

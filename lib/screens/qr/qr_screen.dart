@@ -24,7 +24,6 @@ class _QRScreenState extends State<QRScreen> {
   void initState() {
     qrController=Provider.of<QrController>(context, listen: false);
     qrController.isFirst=true;
-    // TODO: implement initState
     super.initState();
   }
 
@@ -32,7 +31,6 @@ class _QRScreenState extends State<QRScreen> {
   @override
   void dispose() {
     // controller.dispose();
-    // TODO: implement dispose
     super.dispose();
   }
   @override

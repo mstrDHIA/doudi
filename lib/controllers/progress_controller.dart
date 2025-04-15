@@ -3,6 +3,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ProgressController extends ChangeNotifier{
   int currentNumber=1;
+  Map<String, bool> progressData={
+    'writing':false,
+    'coloring':false,
+    'puzzle':false,
+    'press':false,
+    'click':false,
+    'count':false,
+    'colors':false,
+    'story':false,
+  };
   
   getCurrentNumber() async {
     SharedPreferences prefs=await SharedPreferences.getInstance();  
@@ -11,7 +21,6 @@ class ProgressController extends ChangeNotifier{
 
   updateCurrentNumber(number){
     // currentNumber++;
-    print(number);
     if(number==currentNumber+1){
       
       currentNumber=number;

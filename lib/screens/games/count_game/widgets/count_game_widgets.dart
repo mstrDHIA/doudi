@@ -21,7 +21,6 @@ class _AnswerBoxState extends State<AnswerBox> {
   @override
   void initState() {
     countController=Provider.of<CountController>(context, listen: false);
-    // TODO: implement initState
     super.initState();
   }
   @override
@@ -32,7 +31,6 @@ class _AnswerBoxState extends State<AnswerBox> {
         return GestureDetector(
           onTap: () {
             if(!clicked){
-              print('object');
             countController.validateResult(number: widget.number, targetNumber: widget.targetNumber,index: widget.index);
             clicked=true;
             }

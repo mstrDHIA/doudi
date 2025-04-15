@@ -47,18 +47,18 @@ class Profile {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data =  {};
-    data['id'] = this.id;
-    data['first_name'] = this.firstName;
-    data['last_name'] = this.lastName;
-    data['phone'] = this.phone;
-    data['email'] = this.email;
-    data['qr_code'] = this.qrCode;
-    data['role'] = this.role;
-    data['age'] = this.age;
-    data['device_id'] = this.deviceId;
-    data['city'] = this.city;
-    data['address'] = this.address;
-    data['sex'] = this.sex;
+    data['id'] = id;
+    data['first_name'] = firstName;
+    data['last_name'] = lastName;
+    data['phone'] = phone;
+    data['email'] = email;
+    data['qr_code'] = qrCode;
+    data['role'] = role;
+    data['age'] = age;
+    data['device_id'] = deviceId;
+    data['city'] = city;
+    data['address'] = address;
+    data['sex'] = sex;
     return data;
   }
 }

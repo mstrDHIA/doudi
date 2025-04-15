@@ -10,9 +10,9 @@ import 'package:match/controllers/press_controller.dart';
 import 'package:match/controllers/progress_controller.dart';
 import 'package:match/controllers/puzzle_controller.dart';
 import 'package:match/controllers/qr_controller.dart';
-import 'package:match/screens/numbers/numbers_menu.dart';
-import 'package:match/screens/profile/add_profile.dart';
-import 'package:match/screens/profile/profile_screen.dart';
+// import 'package:match/screens/numbers/numbers_menu.dart';
+// import 'package:match/screens/profile/add_profile.dart';
+// import 'package:match/screens/profile/profile_screen.dart';
 import 'package:match/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:match/utils/theme.dart'; // Import the theme
@@ -70,7 +70,7 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: appTheme, // Use the theme
         home: 
-        SplashScreen()
+        const SplashScreen()
         // IntroScreen(),
         // AudioScreen(),
         // const 

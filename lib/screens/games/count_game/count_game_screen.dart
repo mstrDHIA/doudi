@@ -20,7 +20,6 @@ class _CountGameScreenState extends State<CountGameScreen> {
     countController=Provider.of<CountController>(context, listen: false);
     menuController=Provider.of<MyMenuController>(context, listen: false);
     countController.generateAndShuffleNumbers(menuController.selectedNumber);
-    // TODO: implement initState
     super.initState();
   }
 
@@ -29,7 +28,6 @@ class _CountGameScreenState extends State<CountGameScreen> {
     countController.numbers.clear();
     countController.isSolved=false;
     countController.colors = [Colors.white, Colors.white, Colors.white, Colors.white];
-    // TODO: implement dispose
     super.dispose();
   }
 

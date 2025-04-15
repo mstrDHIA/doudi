@@ -91,7 +91,6 @@ class _CanvasPaintingState extends State<CanvasPainting> {
   }
 // void 
 _selectColor() async {
-  print('selecting color');
     Color? color = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -291,7 +290,6 @@ _selectColor() async {
   @override
   void initState() {
     menuController=Provider.of<MyMenuController>(context, listen: false);
-    // TODO: implement initState
     super.initState();
   }
 

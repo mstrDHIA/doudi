@@ -17,7 +17,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     authController=Provider.of<AuthController>(context, listen: false);
-    // TODO: implement initState
     super.initState();
   }
 
@@ -29,7 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         backgroundColor: Colors.green[600],
         title: const Align(
           alignment: Alignment.centerRight,
-          child: const Text('ملفك الشخصي',style: TextStyle(color: Colors.white),)),
+          child:  Text('ملفك الشخصي',style: TextStyle(color: Colors.white),)),
       ),
       body: Directionality(
         textDirection: TextDirection.rtl,
@@ -72,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   
                     ],
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -80,16 +79,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       InfoChip(txt:'رقم الهاتف',info:authController.currentUser.profile!.phone.toString()),
                     ],
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
               
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      InfoChip(txt:'الجنس',info:authController.currentUser.profile!.phone.toString()!),
+                      InfoChip(txt:'الجنس',info:authController.currentUser.profile!.phone.toString()),
                       InfoChip(txt:'العمر',info:authController.currentUser.profile!.age.toString()),
                     ],
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
               
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,7 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       InfoChip(txt:'المدينة',info:authController.currentUser.profile!.phone.toString()),
                     ],
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
               
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.spaceBetween,

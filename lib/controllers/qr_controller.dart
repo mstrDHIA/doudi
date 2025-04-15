@@ -34,7 +34,6 @@ class QrController extends ChangeNotifier {
         if (data['title'] == 'activity') {
           activityHandler(qrData: data['content'], context: context);
         } else if (data['title'] == 'story') {
-          print('story');
           storyHandler(qrData: data['content'], context: context);
         }
       } else {
@@ -93,11 +92,8 @@ class QrController extends ChangeNotifier {
   }
 
   storyHandler({required Map<String, dynamic> qrData, required context}) async {
-    print('story');
     if (qrData['title'] == "audio") {
-      print('audio');
       // if(isFirst){
-      print('first');
       isFirst = false;
 
       audioPlayer.onPlayerComplete.listen((event) {

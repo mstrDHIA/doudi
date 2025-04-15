@@ -20,7 +20,6 @@ class _ClickGameScreenState extends State<ClickGameScreen> {
     clickController=Provider.of<ClickController>(context, listen: false);
     menuController=Provider.of<MyMenuController>(context, listen: false);
     // clickController.startTimer();
-    // TODO: implement initState
     super.initState();
   }
   
@@ -28,7 +27,6 @@ class _ClickGameScreenState extends State<ClickGameScreen> {
   void dispose() {
     clickController.isSolved=false;
     clickController.showOverlay=false;
-    // TODO: implement dispose
     super.dispose();
   }
 

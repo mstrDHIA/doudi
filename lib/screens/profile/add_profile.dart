@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:match/controllers/auth_controller.dart';
 // import 'package:flutter_inner_shadow/flutter_inner_shadow.dart';
-import 'package:match/screens/numbers/numbers_menu.dart';
+// import 'package:match/screens/numbers/numbers_menu.dart';
 import 'package:match/screens/profile/widgets/profile_widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +25,6 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
   @override
   void initState() {
     authController=Provider.of<AuthController>(context,listen: false);
-    // TODO: implement initState
     super.initState();
   }
 
@@ -34,7 +33,7 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[600],
-        title: Align(
+        title: const Align(
           alignment: Alignment.centerRight,
           child: Text('اضف ملفك الشخصي')),
       ),
@@ -118,7 +117,7 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                         // ),
                       ],
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
@@ -126,17 +125,17 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                         FormChip(txt:'رقم الهاتف',textController: phoneController,inputType: TextInputType.phone,),
                       ],
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        SelectChip(txt:'الجنس',textController: sexController,options: ['ذكر','انثى'],),
+                        SelectChip(txt:'الجنس',textController: sexController,options: const ['ذكر','انثى'],),
                         // FormChip(txt:'الجنس',textController: sexController,),
                         FormChip(txt:'العمر',textController: ageController,inputType: TextInputType.number,),
                       ],
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -161,7 +160,7 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                     //     FormChip(txt:'المستوى الدراسي'),
                     //   ],
                     // ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     GestureDetector(
                       onTap: (){
                         // if (_formKey.currentState!.validate()) {
@@ -184,11 +183,11 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                         ),
                               width: 100,
                               height: MediaQuery.of(context).size.height*0.1,
-                              child: Center(
+                              child: const Center(
                                 child: Text('حفظ الملف الشخصي'),
                               ),
                             ),
-                    ),SizedBox(height: 60),
+                    ),const SizedBox(height: 60),
                     
 
                   ],

@@ -29,7 +29,6 @@ class _IntroScreenState extends State<IntroScreen> {
         'assets/videos/intro.mp4',
       ),
     )..initialise();
-    print(controller.totalVideoLength);
     controller.addListener(() {
       if (controller.currentVideoPosition == controller.totalVideoLength) {
         // controller.videoState.
@@ -93,9 +92,7 @@ class _IntroScreenState extends State<IntroScreen> {
             right: 20,
             child: GestureDetector(
               onTap: () {
-                print(controller.videoState);
-                print(controller.videoState.index);
-                print(controller.videoState.name);
+              
         
                 controller.pause();
                 // controller.removeListener();

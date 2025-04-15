@@ -24,7 +24,6 @@ class _SelectProfileScreenState extends State<SelectProfileScreen> {
   @override
   void initState() {
     qrController=Provider.of<QrController>(context, listen: false);
-    // TODO: implement initState
     super.initState();
   }
 

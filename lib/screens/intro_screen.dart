@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:match/controllers/auth_controller.dart';
-import 'package:match/screens/auth/login/welcome_sreen.dart';
-import 'package:match/screens/numbers/numbers_menu.dart';
+import 'package:doudi/controllers/auth_controller.dart';
+import 'package:doudi/screens/auth/login/welcome_sreen.dart';
+import 'package:doudi/screens/numbers/numbers_menu.dart';
 import 'package:pod_player/pod_player.dart';
 import 'package:provider/provider.dart';
 // import 'package:video_player/video_player.dart';

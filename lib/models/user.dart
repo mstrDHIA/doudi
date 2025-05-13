@@ -1,4 +1,4 @@
-import 'package:match/models/profile.dart';
+import 'package:doudi/models/profile.dart';
 
 class User {
   int? id;

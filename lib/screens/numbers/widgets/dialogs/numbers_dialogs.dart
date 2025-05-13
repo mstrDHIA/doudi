@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:match/controllers/auth_controller.dart';
+import 'package:doudi/controllers/auth_controller.dart';
 
 class LogoutConfirmationDialog extends StatelessWidget {
   const LogoutConfirmationDialog({

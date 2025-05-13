@@ -1,4 +1,4 @@
-import 'package:match/network/apis.dart';
+import 'package:doudi/network/apis.dart';
 
 class AuthNetwork {
   Apis apis = Apis();

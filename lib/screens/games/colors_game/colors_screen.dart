@@ -1,8 +1,8 @@
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
-import 'package:match/controllers/colors_controller.dart';
-import 'package:match/controllers/menu_controller.dart';
-import 'package:match/screens/games/colors_game/widgets/colors_widgets.dart';
+import 'package:doudi/controllers/colors_controller.dart';
+import 'package:doudi/controllers/menu_controller.dart';
+import 'package:doudi/screens/games/colors_game/widgets/colors_widgets.dart';
 import 'package:provider/provider.dart';
 
 class ColorsGameScreen extends StatefulWidget{
@@ -68,6 +68,7 @@ class _ColorsGameScreenState extends State<ColorsGameScreen> {
               ],
             )
           ),
+          const Positioned(top: 30,right: 30,child:   Text("اربط الوان الدوائر بالوان الارقام",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),),
           Positioned(
                       top: 20,
                       left: 20,

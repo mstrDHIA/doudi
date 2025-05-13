@@ -1,13 +1,14 @@
 import 'dart:convert';
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:doudi/screens/youtube_player_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:match/controllers/auth_controller.dart';
-import 'package:match/controllers/progress_controller.dart';
-import 'package:match/screens/games/coloring_game/coloring_game_screen.dart';
-import 'package:match/screens/games/writing_game/writing_game_screen_3.dart';
-import 'package:match/screens/main_menu/main_menu_screen.dart';
-import 'package:match/screens/video/video_screen.dart';
+import 'package:doudi/controllers/auth_controller.dart';
+import 'package:doudi/controllers/progress_controller.dart';
+import 'package:doudi/screens/games/coloring_game/coloring_game_screen.dart';
+import 'package:doudi/screens/games/writing_game/writing_game_screen_3.dart';
+import 'package:doudi/screens/main_menu/main_menu_screen.dart';
+import 'package:doudi/screens/video/video_screen.dart';
 import 'package:mobile_device_identifier/mobile_device_identifier.dart';
 import 'package:provider/provider.dart';
 // import 'package:video_player/video_player.dart';
@@ -28,15 +29,22 @@ class QrController extends ChangeNotifier {
 
   qrCodeHandler({required qrData, required context, required barcode}) {
     Map<String, dynamic> data = jsonDecode(qrData);
-
+    print(Provider.of<ProgressController>(context, listen: false).currentNumber);
+    print(data['content']['number']);
     if (Provider.of<AuthController>(context, listen: false).isAuth) {
+      if(data['title']=='auth'){
+        errorHandling(context);
+      }
+      else if(data['title'] != 'progress') {
+        
+      
       if (data['content']['number'] <= Provider.of<ProgressController>(context, listen: false).currentNumber) {
         if (data['title'] == 'activity') {
           activityHandler(qrData: data['content'], context: context);
         } else if (data['title'] == 'story') {
           storyHandler(qrData: data['content'], context: context);
         }
-      } else {
+      }} else {
         if (data['title'] == 'progress') {
           progressHandler(qrData: data['content'], context: context);
         }
@@ -46,12 +54,59 @@ class QrController extends ChangeNotifier {
         authHandler(qrData: data['content'], context: context);
       }
       else{
-        SnackBar snackBar = const SnackBar(
-          content: Text('Please login first'),
+        SnackBar snackBar =  SnackBar(
+          content: Text('الرجاء تسجيل الدخول أولا',
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.white,
+            ),
+          ),
+          width: MediaQuery.of(context).size.width * 0.6,
+      
+      elevation: 2,
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      action: SnackBarAction(
+        label: 'حسنا',
+        onPressed: () {
+          // Navigator.pop(context);
+          // Some code to undo the change.
+        },
+      ),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     }
+  }
+
+
+  errorHandling(context){
+   final SnackBar snackBar =  SnackBar(
+    content: Text('انت مسجل دخولك',
+        style: const TextStyle(
+          fontSize: 16,
+          color: Colors.white,
+        ),
+      ),
+      backgroundColor: Colors.orange,
+      width: MediaQuery.of(context).size.width * 0.6,
+      
+      elevation: 2,
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      action: SnackBarAction(
+        label: 'حسنا',
+        onPressed: () {
+          // Navigator.pop(context);
+          // Some code to undo the change.
+        },
+      ),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   authHandler({required Map<String, dynamic> qrData, required context}) async {
@@ -112,9 +167,16 @@ class QrController extends ChangeNotifier {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => VideoScreen(
-                    videoPath: qrData['content'],
+              builder: (context) => YouTubePlayerScreen(
+                // videoId: "ylECTOM_Gak",
+                    videoId: qrData['content'],
                   )));
+      // Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //         builder: (context) => VideoScreen(
+      //               videoPath: qrData['content'],
+      //             )));
       // videoController = VideoPlayerController.asset(qrData['content'],)
       // ..initialize().then((_) {
 

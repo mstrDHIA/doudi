@@ -1,7 +1,7 @@
-name: match
+name: doudi
 description: "A new Flutter project."
 publish_to: 'none'
-version: 0.1.0
+version: 0.1.2+9
 
 environment:
   sdk: ^3.5.1
@@ -38,6 +38,7 @@ dependencies:
   # native_screenshot: ^1.0.0
   saver_gallery: ^4.0.0
   confetti: ^0.8.0
+  youtube_player_flutter: ^9.1.1
 
 
 dev_dependencies:

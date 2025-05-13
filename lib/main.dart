@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:match/controllers/auth_controller.dart';
-import 'package:match/controllers/click_controller.dart';
-import 'package:match/controllers/colors_controller.dart';
-import 'package:match/controllers/count_game_controller.dart';
-import 'package:match/controllers/match_controller.dart';
-import 'package:match/controllers/menu_controller.dart';
-import 'package:match/controllers/press_controller.dart';
-import 'package:match/controllers/progress_controller.dart';
-import 'package:match/controllers/puzzle_controller.dart';
-import 'package:match/controllers/qr_controller.dart';
-// import 'package:match/screens/numbers/numbers_menu.dart';
-// import 'package:match/screens/profile/add_profile.dart';
-// import 'package:match/screens/profile/profile_screen.dart';
-import 'package:match/screens/splash_screen.dart';
+import 'package:doudi/controllers/auth_controller.dart';
+import 'package:doudi/controllers/click_controller.dart';
+import 'package:doudi/controllers/colors_controller.dart';
+import 'package:doudi/controllers/count_game_controller.dart';
+import 'package:doudi/controllers/match_controller.dart';
+import 'package:doudi/controllers/menu_controller.dart';
+import 'package:doudi/controllers/press_controller.dart';
+import 'package:doudi/controllers/progress_controller.dart';
+import 'package:doudi/controllers/puzzle_controller.dart';
+import 'package:doudi/controllers/qr_controller.dart';
+// import 'package:doudi/screens/numbers/numbers_menu.dart';
+// import 'package:doudi/screens/profile/add_profile.dart';
+// import 'package:doudi/screens/profile/profile_screen.dart';
+import 'package:doudi/screens/splash_screen.dart';
+import 'package:doudi/screens/splash_screen2.dart';
 import 'package:provider/provider.dart';
-import 'package:match/utils/theme.dart'; // Import the theme
+import 'package:doudi/utils/theme.dart'; // Import the theme
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -70,7 +71,7 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: appTheme, // Use the theme
         home: 
-        const SplashScreen()
+        const SplashScreen2()
         // IntroScreen(),
         // AudioScreen(),
         // const 

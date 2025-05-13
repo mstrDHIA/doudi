@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:match/controllers/qr_controller.dart';
+import 'package:doudi/controllers/qr_controller.dart';
 // import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:provider/provider.dart';
 

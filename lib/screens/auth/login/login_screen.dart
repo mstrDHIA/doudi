@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:match/controllers/auth_controller.dart';
-import 'package:match/screens/numbers/numbers_menu.dart';
-import 'package:match/screens/profile/add_profile.dart';
-// import 'package:match/screens/auth/selet_profile.dart';
-// import 'package:match/screens/home/home_screen.dart';
-// import 'package:match/screens/numbers/numbers_menu.dart';
+import 'package:doudi/controllers/auth_controller.dart';
+import 'package:doudi/screens/numbers/numbers_menu.dart';
+import 'package:doudi/screens/profile/add_profile.dart';
+// import 'package:doudi/screens/auth/selet_profile.dart';
+// import 'package:doudi/screens/home/home_screen.dart';
+// import 'package:doudi/screens/numbers/numbers_menu.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -23,6 +23,17 @@ class _LoginScreenState extends State<LoginScreen> {
     authController=Provider.of<AuthController>(context,listen: false);
     super.initState();
   }
+
+  @override
+  void dispose() {
+    authController.isLoading=false;
+    usernameController.dispose();
+    passwordController.dispose();
+    authController.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

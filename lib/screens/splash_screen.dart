@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:match/controllers/auth_controller.dart';
-import 'package:match/controllers/progress_controller.dart';
-import 'package:match/screens/intro_screen.dart';
+import 'package:doudi/controllers/auth_controller.dart';
+import 'package:doudi/controllers/progress_controller.dart';
+import 'package:doudi/screens/intro_screen.dart';
 import 'package:mobile_device_identifier/mobile_device_identifier.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';

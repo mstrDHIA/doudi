@@ -3,7 +3,7 @@
 
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
-import 'package:match/controllers/menu_controller.dart';
+import 'package:doudi/controllers/menu_controller.dart';
 import 'package:provider/provider.dart';
 List<Map<String, dynamic>> acceptedImages = [
   {},

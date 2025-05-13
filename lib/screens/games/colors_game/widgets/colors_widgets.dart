@@ -1,7 +1,7 @@
 // import 'dart:math';
 
 // import 'package:flutter/material.dart';
-// import 'package:match/controllers/colors_controller.dart';
+// import 'package:doudi/controllers/colors_controller.dart';
 // import 'package:provider/provider.dart';
 // import 'package:stroke_text/stroke_text.dart';
 
@@ -86,7 +86,7 @@ import 'dart:math';
 
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
-import 'package:match/controllers/colors_controller.dart';
+import 'package:doudi/controllers/colors_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:stroke_text/stroke_text.dart';
 

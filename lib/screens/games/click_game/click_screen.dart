@@ -1,7 +1,8 @@
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
-import 'package:match/controllers/click_controller.dart';
-import 'package:match/controllers/menu_controller.dart';
-import 'package:match/screens/games/click_game/widgets/click_game_widgets.dart';
+import 'package:doudi/controllers/click_controller.dart';
+import 'package:doudi/controllers/menu_controller.dart';
+import 'package:doudi/screens/games/click_game/widgets/click_game_widgets.dart';
 import 'package:provider/provider.dart';
 
 class ClickGameScreen extends StatefulWidget{
@@ -14,7 +15,8 @@ class ClickGameScreen extends StatefulWidget{
 class _ClickGameScreenState extends State<ClickGameScreen> {
   late ClickController clickController;
     late MyMenuController menuController;
-
+  final ConfettiController _confettiController =
+      ConfettiController(duration: const Duration(seconds: 5));
   @override
   void initState() {
     clickController=Provider.of<ClickController>(context, listen: false);
@@ -58,7 +60,7 @@ class _ClickGameScreenState extends State<ClickGameScreen> {
                     ),
                     InkWell(
                       onTap: () {
-                        clickController.showResultOverlay(menuController.selectedNumber);
+                        clickController.showResultOverlay(menuController.selectedNumber,_confettiController);
                       },
                       child: NumberHolder(clickController: clickController,)),
           
@@ -92,16 +94,33 @@ class _ClickGameScreenState extends State<ClickGameScreen> {
                   ),
                 ),
               if (clickController.showOverlay&&!clickController.isSolved)
-                Container(
-                  color: Colors.red.withOpacity(0.5),
-                  child: const Center(
-                    child: Icon(
-                      Icons.cancel,
-                      color: Colors.white,
-                      size: 100,
-                    ),
-                  ),
-                ),
+                Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ConfettiWidget(
+                            confettiController: _confettiController,
+                            blastDirectionality: BlastDirectionality.explosive,
+                            
+                            shouldLoop: false,
+                            colors: const [Colors.blue, Colors.red, Colors.green, Colors.yellow],
+                          ),
+                                  GestureDetector(
+                                    onTap: () => Navigator.pop(context),
+                                    
+                                    child: Container(
+                                      height: MediaQuery.of(context).size.height,
+                                                      color: Colors.green.withOpacity(0.5),
+                                                      child: const Center(
+                                                        child: Icon(
+                                                          Icons.check_circle,
+                                                          color: Colors.white,
+                                                          size: 100,
+                                                        ),
+                                                      ),
+                                                    ),
+                                  ),
+                                ],
+                              ),
             ],
           );
         }

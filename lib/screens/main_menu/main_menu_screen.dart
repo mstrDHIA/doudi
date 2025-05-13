@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:match/screens/games/click_game/click_screen.dart';
-import 'package:match/screens/games/colors_game/colors_screen.dart';
-import 'package:match/screens/games/count_game/count_game_screen.dart';
-import 'package:match/screens/games/press_game/press_game_screen.dart';
-import 'package:match/screens/games/puzzle_game/puzzle_screen.dart';
+import 'package:doudi/screens/games/click_game/click_screen.dart';
+import 'package:doudi/screens/games/colors_game/colors_screen.dart';
+import 'package:doudi/screens/games/count_game/count_game_screen.dart';
+import 'package:doudi/screens/games/press_game/press_game_screen.dart';
+import 'package:doudi/screens/games/puzzle_game/puzzle_screen.dart';
 
 // ignore: must_be_immutable
 class MainMenuScreen extends StatelessWidget{

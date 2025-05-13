@@ -1,22 +1,30 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:match/models/profile.dart';
-import 'package:match/models/user.dart';
-import 'package:match/network/auth_network.dart';
-import 'package:match/screens/auth/login/welcome_sreen.dart';
-import 'package:match/screens/numbers/numbers_menu.dart';
-import 'package:match/screens/profile/add_profile.dart';
+import 'package:doudi/models/profile.dart';
+import 'package:doudi/models/user.dart';
+import 'package:doudi/network/auth_network.dart';
+import 'package:doudi/screens/auth/login/welcome_sreen.dart';
+import 'package:doudi/screens/numbers/numbers_menu.dart';
+import 'package:doudi/screens/profile/add_profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends ChangeNotifier{
   bool isAuth = false;
+  bool isLoading = false;
   bool hasProfile = false;
   late User currentUser;
   // bool get isAuth => _isAuth;
   AuthNetwork authNetwork = AuthNetwork();
   Future<void> login(String email, String password,context) async {
-    
+    try{
+      isLoading = true;
+    notifyListeners();
+    // print(object)
+    print(email)  ;
+    print(password);
     Response response = await authNetwork.login(email, password);
+    print(email)  ;
+    print(password);
     if(response.statusCode == 200){
       SharedPreferences prefs=await SharedPreferences.getInstance();
       isAuth = true;
@@ -26,11 +34,20 @@ class AuthController extends ChangeNotifier{
         Navigator.push(context, MaterialPageRoute(builder: (context)=> const NumbersMenuScreen()));
       }
       else{
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>  AddProfileScreen()));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> const NumbersMenuScreen()));
+
+        // Navigator.push(context, MaterialPageRoute(builder: (context)=>  AddProfileScreen()));
       }
-      
+      isLoading = false;
       notifyListeners();
     }
+
+    }catch(e){
+      isLoading = false;
+      notifyListeners();
+      print(e);
+    }
+    
     // Call the login network
     // If the login is successful
     // _isAuth = true;
@@ -52,15 +69,25 @@ class AuthController extends ChangeNotifier{
 
 
   Future<void> register(String deviceId, String password,context) async {
-    Response response = await authNetwork.register(deviceId, password,deviceId);
+    try{
+      isLoading = true;
+    notifyListeners();
+      Response response = await authNetwork.register(deviceId, password,deviceId);
     if(response.statusCode == 201){
       SharedPreferences prefs=await SharedPreferences.getInstance();
       isAuth = true;
       await prefs.setBool('isAuth', true);
       await prefs.setBool('hasProfile', false);
       Navigator.push(context, MaterialPageRoute(builder: (context)=> const NumbersMenuScreen()));
+      isLoading = false;
       notifyListeners();
     }
+    }catch(e){
+      isLoading = false;
+      notifyListeners();
+      print(e);
+    }
+    
 
     notifyListeners();
   }

@@ -1,4 +1,4 @@
-package com.techmind.match
+package com.techmind.doudi
 
 import io.flutter.embedding.android.FlutterActivity
 

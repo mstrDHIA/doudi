@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 
 class PressController extends ChangeNotifier{
@@ -18,7 +19,7 @@ class PressController extends ChangeNotifier{
     // notifyListeners();
   }
 
-  incrementNumber(context){
+  incrementNumber(context,ConfettiController confettiController) {
     if(isSolved==false){
           
     if(number==9){
@@ -27,6 +28,7 @@ class PressController extends ChangeNotifier{
     number++;
     if(number==targetNumber){
       isSolved=true;
+      confettiController.play();
     }
     notifyListeners();
   }

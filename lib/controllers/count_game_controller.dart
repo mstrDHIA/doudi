@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 
 class CountController extends ChangeNotifier{
@@ -26,9 +27,10 @@ class CountController extends ChangeNotifier{
     // return numbers;
   }
 
-  validateResult({required int number,required int targetNumber,required int index}) {
+  validateResult({required int number,required int targetNumber,required int index,required ConfettiController confettiController}) {
     if (targetNumber == number) {
       colors[index] = Colors.green;
+      confettiController.play();
       isSolved = true;
     } else {
       colors[index] = Colors.red;

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:pausable_timer/pausable_timer.dart';
 // import 'package:audioplayers/audioplayers.dart';
@@ -28,7 +29,7 @@ class ClickController extends ChangeNotifier{
   }
 
 
-    void showResultOverlay(selectedNumber) {
+    void showResultOverlay(selectedNumber,ConfettiController confettiController) {
     // print("clicked");
     _timer.pause();
     showOverlay = true;
@@ -36,9 +37,11 @@ class ClickController extends ChangeNotifier{
     notifyListeners();
     if(randomNumber==selectedNumber){
       isSolved=true;
+
     }
     if(isSolved){
       _playSound('assets/audio/correct.mp3');
+      confettiController.play();
       // showOverlay = false;
     _timer.pause();
       

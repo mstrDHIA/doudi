@@ -1,6 +1,7 @@
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
-import 'package:match/controllers/menu_controller.dart';
-import 'package:match/controllers/press_controller.dart';
+import 'package:doudi/controllers/menu_controller.dart';
+import 'package:doudi/controllers/press_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:stroke_text/stroke_text.dart';
 
@@ -16,6 +17,8 @@ class _PressGameScreenState extends State<PressGameScreen> {
   final int? number;
   late PressController pressController;
   late MyMenuController menuController;
+  final ConfettiController _confettiController =
+      ConfettiController(duration: const Duration(seconds: 5));
   String text='';
   _PressGameScreenState({required this.number});
   @override
@@ -75,7 +78,7 @@ class _PressGameScreenState extends State<PressGameScreen> {
         builder: (context,pressController,child) {
           return InkWell(
             onTap: () {
-              pressController.incrementNumber(context);
+              pressController.incrementNumber(context, _confettiController);
             },
             child: Stack(
               children: [
@@ -116,17 +119,33 @@ class _PressGameScreenState extends State<PressGameScreen> {
                     )),
                      Positioned(top: 20,right: 20,child:  Text(text,style: const TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),),
                     if(pressController.isSolved)
-                    Container(
-                  color: Colors.green.withOpacity(0.5),
-                  child: const Center(
-                    child: Icon(
-                      Icons.check_circle,
-                      color: Colors.white,
-                      size: 100,
-                    ),
-                  ),
-                ),
-              
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ConfettiWidget(
+                            confettiController: _confettiController,
+                            blastDirectionality: BlastDirectionality.explosive,
+                            
+                            shouldLoop: false,
+                            colors: const [Colors.blue, Colors.red, Colors.green, Colors.yellow],
+                          ),
+                                  GestureDetector(
+                                    onTap: () => Navigator.pop(context),
+                                    
+                                    child: Container(
+                                      height: MediaQuery.of(context).size.height,
+                                                      color: Colors.green.withOpacity(0.5),
+                                                      child: const Center(
+                                                        child: Icon(
+                                                          Icons.check_circle,
+                                                          color: Colors.white,
+                                                          size: 100,
+                                                        ),
+                                                      ),
+                                                    ),
+                                  ),
+                                ],
+                              ),
               ],
             ),
           );

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:match/controllers/menu_controller.dart';
-import 'package:match/controllers/qr_controller.dart';
-import 'package:match/screens/games/coloring_game/coloring_game_screen.dart';
-import 'package:match/screens/games/writing_game/writing_game_screen_3.dart';
-import 'package:match/screens/home/widgets/home_widgets.dart';
-import 'package:match/screens/main_menu/main_menu_screen.dart';
-import 'package:match/screens/qr/qr_screen.dart';
+import 'package:doudi/controllers/menu_controller.dart';
+import 'package:doudi/controllers/qr_controller.dart';
+import 'package:doudi/screens/games/coloring_game/coloring_game_screen.dart';
+import 'package:doudi/screens/games/writing_game/writing_game_screen_3.dart';
+import 'package:doudi/screens/home/widgets/home_widgets.dart';
+import 'package:doudi/screens/main_menu/main_menu_screen.dart';
+import 'package:doudi/screens/qr/qr_screen.dart';
+import 'package:doudi/screens/youtube_player_screen.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -62,10 +63,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 )),
               )),
           Positioned(
-              top: MediaQuery.of(context).size.height / 2 - 10,
-              left: MediaQuery.of(context).size.width / 30,
+            top: MediaQuery.of(context).size.height / 2 - 10,
+            left: MediaQuery.of(context).size.width / 30,
+            child: GestureDetector(
+              // onTap: () => Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) =>  YouTubePlayerScreen(videoId: 'iLnmTe5Q2Qw',))),
               child: Image.asset(
-                  "assets/images/number${menuController.selectedNumber}.png")),
+                    "assets/images/number${menuController.selectedNumber}.png"),
+            ),
+          ),
           //  Positioned(
           //                 top: MediaQuery.of(context).size.height/2-100,
           //                 left: MediaQuery.of(context).size.width/50,

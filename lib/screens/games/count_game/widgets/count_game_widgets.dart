@@ -1,5 +1,6 @@
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
-import 'package:match/controllers/count_game_controller.dart';
+import 'package:doudi/controllers/count_game_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:stroke_text/stroke_text.dart';
 
@@ -7,8 +8,9 @@ class AnswerBox extends StatefulWidget {
   final int number;
   final int targetNumber;
   final int index;
+  final ConfettiController confettiController;
   const AnswerBox({
-    super.key, required this.number, required this.targetNumber, required this.index,
+    super.key, required this.number, required this.targetNumber, required this.index, required this.confettiController,
   });
 
   @override
@@ -31,7 +33,7 @@ class _AnswerBoxState extends State<AnswerBox> {
         return GestureDetector(
           onTap: () {
             if(!clicked){
-            countController.validateResult(number: widget.number, targetNumber: widget.targetNumber,index: widget.index);
+            countController.validateResult(number: widget.number, targetNumber: widget.targetNumber,index: widget.index,confettiController: widget.confettiController);
             clicked=true;
             }
           },

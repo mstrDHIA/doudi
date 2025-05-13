@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:match/controllers/click_controller.dart';
+import 'package:doudi/controllers/click_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:stroke_text/stroke_text.dart';
 

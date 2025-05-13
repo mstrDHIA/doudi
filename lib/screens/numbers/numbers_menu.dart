@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:match/controllers/auth_controller.dart';
-import 'package:match/controllers/menu_controller.dart';
-import 'package:match/controllers/progress_controller.dart';
-import 'package:match/controllers/qr_controller.dart';
-import 'package:match/screens/numbers/widgets/dialogs/numbers_dialogs.dart';
-// import 'package:match/screens/home/home_screen.dart';
-import 'package:match/screens/numbers/widgets/numbers_widgets.dart';
-import 'package:match/screens/profile/profile_screen.dart';
+import 'package:doudi/controllers/auth_controller.dart';
+import 'package:doudi/controllers/menu_controller.dart';
+import 'package:doudi/controllers/progress_controller.dart';
+import 'package:doudi/controllers/qr_controller.dart';
+import 'package:doudi/screens/numbers/widgets/dialogs/numbers_dialogs.dart';
+// import 'package:doudi/screens/home/home_screen.dart';
+import 'package:doudi/screens/numbers/widgets/numbers_widgets.dart';
+import 'package:doudi/screens/profile/profile_screen.dart';
 import 'package:provider/provider.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:match/controllers/auth_controller.dart';
+import 'package:doudi/controllers/auth_controller.dart';
 // import 'package:flutter_inner_shadow/flutter_inner_shadow.dart';
-import 'package:match/screens/profile/widgets/profile_widgets.dart';
+import 'package:doudi/screens/profile/widgets/profile_widgets.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -66,8 +66,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      InfoChip(txt:'الاسم',info:authController.currentUser.profile!.firstName!),
-                      InfoChip(txt:'اللقب',info:authController.currentUser.profile!.lastName!),
+                      InfoChip(txt:'الاسم',info:authController.currentUser.profile!.firstName??""),
+                      InfoChip(txt:'اللقب',info:authController.currentUser.profile!.lastName??""),
                   
                     ],
                   ),
@@ -75,8 +75,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      InfoChip(txt:'البريد الالكتروني',info:authController.currentUser.profile!.email!),
-                      InfoChip(txt:'رقم الهاتف',info:authController.currentUser.profile!.phone.toString()),
+                      InfoChip(txt:'البريد الالكتروني',info:authController.currentUser.profile!.email??""),
+                      InfoChip(txt:'رقم الهاتف',info:authController.currentUser.profile!.phone??""),
                     ],
                   ),
                   const SizedBox(height: 5),
@@ -84,7 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      InfoChip(txt:'الجنس',info:authController.currentUser.profile!.phone.toString()),
+                      InfoChip(txt:'الجنس',info:authController.currentUser.profile!.sex??""),
                       InfoChip(txt:'العمر',info:authController.currentUser.profile!.age.toString()),
                     ],
                   ),
@@ -93,8 +93,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      InfoChip(txt:'العنوان',info:authController.currentUser.profile!.phone.toString()),
-                      InfoChip(txt:'المدينة',info:authController.currentUser.profile!.phone.toString()),
+                      InfoChip(txt:'العنوان',info:authController.currentUser.profile!.address??""),
+                      InfoChip(txt:'المدينة',info:authController.currentUser.profile!.city??""),
                     ],
                   ),
                   const SizedBox(height: 5),

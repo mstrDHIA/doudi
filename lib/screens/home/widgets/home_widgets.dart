@@ -1,6 +1,6 @@
 // import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
-import 'package:match/controllers/qr_controller.dart';
+import 'package:doudi/controllers/qr_controller.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
 class HomeItem extends StatelessWidget {

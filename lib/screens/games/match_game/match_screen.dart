@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:match/controllers/match_controller.dart';
-import 'package:match/screens/games/match_game/widgets/answer_widget.dart';
+import 'package:doudi/controllers/match_controller.dart';
+import 'package:doudi/screens/games/match_game/widgets/answer_widget.dart';
 import 'package:provider/provider.dart';
 
 class MatchScreen extends StatefulWidget{

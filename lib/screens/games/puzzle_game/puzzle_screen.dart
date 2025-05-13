@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:match/controllers/menu_controller.dart';
-import 'package:match/controllers/puzzle_controller.dart';
-import 'package:match/screens/games/puzzle_game/widgets/puzzle_widgets.dart';
+import 'package:doudi/controllers/menu_controller.dart';
+import 'package:doudi/controllers/puzzle_controller.dart';
+import 'package:doudi/screens/games/puzzle_game/widgets/puzzle_widgets.dart';
 import 'package:provider/provider.dart';
 
 class PuzzleScreen extends StatefulWidget {

@@ -1,7 +1,8 @@
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
-import 'package:match/controllers/count_game_controller.dart';
-import 'package:match/controllers/menu_controller.dart';
-import 'package:match/screens/games/count_game/widgets/count_game_widgets.dart';
+import 'package:doudi/controllers/count_game_controller.dart';
+import 'package:doudi/controllers/menu_controller.dart';
+import 'package:doudi/screens/games/count_game/widgets/count_game_widgets.dart';
 import 'package:provider/provider.dart';
 
 class CountGameScreen extends StatefulWidget {
@@ -14,7 +15,8 @@ class CountGameScreen extends StatefulWidget {
 class _CountGameScreenState extends State<CountGameScreen> {
   late CountController countController;
   late MyMenuController menuController;
-
+  final ConfettiController _confettiController =
+      ConfettiController(duration: const Duration(seconds: 5));
   @override
   void initState() {
     countController=Provider.of<CountController>(context, listen: false);
@@ -81,7 +83,7 @@ class _CountGameScreenState extends State<CountGameScreen> {
                                   for (int i = 0; i < 4; i++)
                                     Row(
                                       children: [
-                                        AnswerBox(index: i,number: countController.numbers[i],targetNumber: menuController.selectedNumber,),
+                                        AnswerBox(index: i,number: countController.numbers[i],targetNumber: menuController.selectedNumber,confettiController: _confettiController,),
                                         const SizedBox(width: 10,),
                                       ],
                                     ),
@@ -119,18 +121,32 @@ class _CountGameScreenState extends State<CountGameScreen> {
                                 ],
                               ),),
                               if(countController.isSolved)
-                              GestureDetector(
-                                onTap: () => Navigator.pop(context),
-                                child: Container(
-                                                  color: Colors.green.withOpacity(0.5),
-                                                  child: const Center(
-                                                    child: Icon(
-                                                      Icons.check_circle,
-                                                      color: Colors.white,
-                                                      size: 100,
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ConfettiWidget(
+                            confettiController: _confettiController,
+                            blastDirectionality: BlastDirectionality.explosive,
+                            
+                            shouldLoop: false,
+                            colors: const [Colors.blue, Colors.red, Colors.green, Colors.yellow],
+                          ),
+                                  GestureDetector(
+                                    onTap: () => Navigator.pop(context),
+                                    
+                                    child: Container(
+                                      height: MediaQuery.of(context).size.height,
+                                                      color: Colors.green.withOpacity(0.5),
+                                                      child: const Center(
+                                                        child: Icon(
+                                                          Icons.check_circle,
+                                                          color: Colors.white,
+                                                          size: 100,
+                                                        ),
+                                                      ),
                                                     ),
-                                                  ),
-                                                ),
+                                  ),
+                                ],
                               ),
             ],
           );

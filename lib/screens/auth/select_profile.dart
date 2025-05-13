@@ -1,12 +1,13 @@
 // import 'package:barcode_scan2/barcode_scan2.dart';
+import 'package:doudi/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:match/controllers/qr_controller.dart';
+import 'package:doudi/controllers/qr_controller.dart';
 // import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:match/screens/auth/login/login_screen.dart';
+import 'package:doudi/screens/auth/login/login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
-// import 'package:match/screens/home/home_screen.dart';
-// import 'package:match/screens/numbers/numbers_menu.dart';
+// import 'package:doudi/screens/home/home_screen.dart';
+// import 'package:doudi/screens/numbers/numbers_menu.dart';
 
 // ignore: must_be_immutable
 class SelectProfileScreen extends StatefulWidget {
@@ -19,17 +20,27 @@ class SelectProfileScreen extends StatefulWidget {
 
 class _SelectProfileScreenState extends State<SelectProfileScreen> {
   late QrController qrController;
-  List<String> profileOption=["parent","child","QRcode"];
+  late AuthController authController;
+  List<String> profileOption=[
+    // "parent","child",
+    "QRcode"];
 
   @override
   void initState() {
     qrController=Provider.of<QrController>(context, listen: false);
+    authController=Provider.of<AuthController>(context, listen: false);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.green[600],
+        // title: const Align(
+        //   alignment: Alignment.centerRight,
+        //   child:  Text('اختر ملفك الشخصي',style: TextStyle(color: Colors.white),)),
+      ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -72,75 +83,80 @@ class _SelectProfileScreenState extends State<SelectProfileScreen> {
                 ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    for (var i = 0; i < profileOption.length; i++)
-                      GestureDetector(
-                        onTap:() async {
-                          if(profileOption[i]=="child"){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
-                          }
-                          else if(profileOption[i]=="parent"){
-                            // Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
-                          }
-                          else if(profileOption[i]=="QRcode"){
-                            
-String? res = await SimpleBarcodeScanner.scanBarcode(
-                  context,
-                  barcodeAppBar: const BarcodeAppBar(
-                    appBarTitle: 'مسح الكود',
-                    centerTitle: false,
-                    enableBackButton: true,
-                    backButtonIcon: Icon(Icons.arrow_back_ios),
-                  ),
-                  isShowFlashIcon: true,
-                  delayMillis: 2000,
-                  cameraFace: CameraFace.back,
-                );
-                // setState(() {
-                 String result = res as String;
-                  qrController.qrCodeHandler(qrData: result, context: context, barcode: res);
-                 print(result);
-                // });
-                            // Navigator.push(context, MaterialPageRoute(builder: (context)=> QRScreen()));
-  //                            var result = await BarcodeScanner.scan(options: ScanOptions(
-  //                             restrictFormat: [BarcodeFormat.qr],
-                              
-  //                            ));
-  //                            print('aaaa');
-  //          print(result.type); // The result type (barcode, cancelled, failed)
-  // print(result.rawContent); // The barcode content
-  // print(result.format); // The barcode format (as enum)
-  // print(result.formatNote); // If a unknown format was scanned this field contains a note
-
-  // String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-  //                                                  "#ff6666", "Cancel", false, ScanMode.QR);
-                          }
-                        },
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Image.asset("assets/images/${profileOption[i]}.png"),
-                            // SizedBox(height: 10,),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                width: MediaQuery.sizeOf(context).width * 0.1,
-                          
-                                decoration: BoxDecoration(
-                                  color: Colors.green,
-                                  borderRadius: BorderRadius.circular(50),
-                                ),
-                                child: Padding(
+                Consumer<AuthController>(
+                  builder: (context,authController,child) {
+                    return (!authController.isLoading)?Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        for (var i = 0; i < profileOption.length; i++)
+                          GestureDetector(
+                            onTap:() async {
+                              // if(profileOption[i]=="child"){
+                              //   Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
+                              // }
+                              // else if(profileOption[i]=="parent"){
+                              //   // Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
+                              // }
+                              // else
+                               if(profileOption[i]=="QRcode"){
+                                
+                    String? res = await SimpleBarcodeScanner.scanBarcode(
+                      context,
+                      barcodeAppBar: const BarcodeAppBar(
+                        appBarTitle: 'مسح الكود',
+                        centerTitle: false,
+                        enableBackButton: true,
+                        backButtonIcon: Icon(Icons.arrow_back_ios),
+                      ),
+                      isShowFlashIcon: true,
+                      delayMillis: 2000,
+                      cameraFace: CameraFace.back,
+                    );
+                    // setState(() {
+                     String result = res as String;
+                      qrController.qrCodeHandler(qrData: result, context: context, barcode: res);
+                     print(result);
+                    // });
+                                // Navigator.push(context, MaterialPageRoute(builder: (context)=> QRScreen()));
+                      //                            var result = await BarcodeScanner.scan(options: ScanOptions(
+                      //                             restrictFormat: [BarcodeFormat.qr],
+                                  
+                      //                            ));
+                      //                            print('aaaa');
+                      //          print(result.type); // The result type (barcode, cancelled, failed)
+                      // print(result.rawContent); // The barcode content
+                      // print(result.format); // The barcode format (as enum)
+                      // print(result.formatNote); // If a unknown format was scanned this field contains a note
+                    
+                      // String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+                      //                                                  "#ff6666", "Cancel", false, ScanMode.QR);
+                              }
+                            },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Image.asset("assets/images/${profileOption[i]}.png"),
+                                // SizedBox(height: 10,),
+                                Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Center(child: Text(profileOption[i],style: const TextStyle(color: Colors.white),)),
-                                )),
+                                  child: Container(
+                                    width: MediaQuery.sizeOf(context).width * 0.1,
+                              
+                                    decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Center(child: Text(profileOption[i],style: const TextStyle(color: Colors.white),)),
+                                    )),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      )
-                  ],
+                          )
+                      ],
+                    ):CircularProgressIndicator();
+                  }
                 )
                   
               ],
